@@ -1,0 +1,89 @@
+version: "3.7"
+
+services:
+    # image project
+    app:
+        container_name: sgco-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+#       image: especializati/laravel9-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+        networks:
+            - sgco
+
+    # nginx
+    nginx:
+        container_name: sgco-nginx
+        image: nginx:alpine
+        restart: unless-stopped
+        ports:
+            - "8989:80"
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/:/etc/nginx/conf.d/
+        networks:
+            - sgco
+
+    # db postgres
+    postgres:
+        container_name: sgco-postgres
+        image: postgres
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "15432:5432"
+        volumes:
+            - ./docker/PostgreSQL/dbdata:/var/lib/postgresql/data
+        networks:
+            - sgco
+
+    # pgadmin
+    pgadmin:
+        image: dpage/pgadmin4
+        restart: unless-stopped
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "renatovieira70@icloud.com"
+            PGADMIN_DEFAULT_PASSWORD: ${DB_PASSWORD}
+        ports:
+            - "16543:80"
+        depends_on:
+            - postgres
+        networks:
+            - sgco
+
+    # queue
+    queue:
+        container_name: sgco-queue
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        command: "php artisan queue:work"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - redis
+            - app
+        networks:
+            - sgco
+
+    # redis
+    redis:
+        container_name: sgco-redis
+        image: redis:latest
+        restart: unless-stopped
+        networks:
+            - sgco
+
+networks:
+    sgco:
+        driver: bridge
