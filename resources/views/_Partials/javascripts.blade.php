@@ -123,11 +123,3 @@
         //$('.compe').mask('00/0000');
         $('.uf').mask('SS')
     </script>
-    <script type="text/javascript">
-        function lowerCase(input) {
-            input.value = input.value.toLowerCase();
-        }
-        function upperCase(input) {
-            input.value = input.value.toUpperCase();
-        }
-    </script>

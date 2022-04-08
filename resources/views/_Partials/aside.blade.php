@@ -38,7 +38,7 @@
                 <li class="nav-item">
                     <a href="{{ route('dashboard') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
+                        <p>{{ __('Dashboard') }}</p>
                     </a>
                 </li>
                 <!--<li class="nav-item">
@@ -66,7 +66,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
-                            Caixa de e-mail
+                            {{ __('Mailbox') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -74,19 +74,19 @@
                         <li class="nav-item">
                             <a href="../mailbox/mailbox.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Caixe de entrada</p>
+                                <p>{{ __('Inbox') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../mailbox/compose.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Novo e-mail</p>
+                                <p>{{ __('Compose') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../mailbox/read-mail.html" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Ler</p>
+                                <p>{{ __('Read') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -162,7 +162,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>
-                            Configurações
+                            {{ __('Settings') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -170,7 +170,7 @@
                         <li class="nav-item">
                             <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="fas fa-user-cog nav-icon"></i>
-                                <p>Usuários</p>
+                                <p>{{ __('Users') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -179,7 +179,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-archive"></i>
                         <p>
-                            Cadastros diversos
+                            {{ __('Miscellaneous records') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -187,7 +187,7 @@
                         <li class="nav-item">
                             <a href="{{ route('departments.index') }}" class="nav-link">
                                 <i class="fas fa-building nav-icon"></i>
-                                <p>Departamentos</p>
+                                <p>{{ __('Departments') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -195,7 +195,7 @@
                         <li class="nav-item">
                             <a href="{{ route('positions.index') }}" class="nav-link">
                                 <i class="fas fa-user-tie nav-icon"></i>
-                                <p>Cargos</p>
+                                <p>{{ __('Positions') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -205,7 +205,7 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file"></i>
-                        <p>Documentação</p>
+                        <p>{{ __('Documentation') }}</p>
                     </a>
                 </li>
             </ul>

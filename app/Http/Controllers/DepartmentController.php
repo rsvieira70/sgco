@@ -14,8 +14,8 @@ class DepartmentController extends Controller
     }
     public function index()
     {
-        $title = 'Relação de Departamentos';
-        $reference = 'departamento';
+        $title =  __('List of departments');
+        $reference = __('department');
         $userAuth = Auth()->User();
         $departments = Department::orderBy('description','asc')->get();
         return view('departments.index', [
@@ -28,8 +28,8 @@ class DepartmentController extends Controller
 
     public function create()
     {
-        $title = 'Cadastro de novo departamento';
-        $reference = 'departamento';
+        $title =  __('New department registration');
+        $reference = __('department');
         $userAuth = Auth()->User();
         return view('departments.create', [
             'title' => $title,
@@ -61,9 +61,9 @@ class DepartmentController extends Controller
     {
         $department = Department::find($id);
         if ($department) {
-            $title = 'Alteração de Departamento';
-            $reference = 'departamento';
-            $userAuth = Auth()->User();
+            $title =  __('Department update');
+            $reference = __('department');
+                $userAuth = Auth()->User();
             return view('departments.edit', [
                 'title' => $title,
                 'reference' => $reference,
@@ -96,7 +96,7 @@ class DepartmentController extends Controller
         db::beginTransaction();
         try {
             $department = Department::find($id);
-            $department->description = $data['description'];
+            //$department->description = $data['description'];
             $department->save();
 
             db::commit();
