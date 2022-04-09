@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/departments/{id}', [DepartmentController::class, 'show'])->name('departments.show');
     Route::get('/departments/{id}/edit', [DepartmentController::class, 'edit'])->name('departments.edit');
     Route::put('/departments/{id}', [DepartmentController::class, 'update'])->name('departments.update');
-    Route::put('/departments/{id}', [DepartmentController::class, 'suspend'])->name('departments.suspend');
+    Route::patch('/departments/{id}', [DepartmentController::class, 'suspend'])->name('departments.suspend');
     Route::delete('/departments/{id}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
 
     Route::get('/positions', [PositionController::class, 'index'])->name('positions.index');
@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/positions/{id}', [PositionController::class, 'show'])->name('positions.show');
     Route::get('/positions/{id}/edit', [PositionController::class, 'edit'])->name('positions.edit');
     Route::put('/positions/{id}', [PositionController::class, 'update'])->name('positions.update');
-    Route::put('/positions/{id}', [PositionController::class, 'suspend'])->name('positions.suspend');
+    Route::patch('/positions/{id}', [PositionController::class, 'suspend'])->name('positions.suspend');
     Route::delete('/positions/{id}', [PositionController::class, 'destroy'])->name('positions.destroy');
 });
 

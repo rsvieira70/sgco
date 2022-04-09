@@ -18,12 +18,7 @@ class DepartmentController extends Controller
         $reference = __('department');
         $userAuth = Auth()->User();
         $departments = Department::orderBy('description','asc')->get();
-        return view('departments.index', [
-            'title' => $title,
-            'reference' => $reference,
-            'userAuth' => $userAuth,
-            'departments' => $departments
-        ]);
+        return view('departments.index', compact('title', 'reference', 'userAuth', 'departments'));
     }
 
     public function create()
@@ -31,11 +26,7 @@ class DepartmentController extends Controller
         $title =  __('New department registration');
         $reference = __('department');
         $userAuth = Auth()->User();
-        return view('departments.create', [
-            'title' => $title,
-            'reference' => $reference,
-            'userAuth' => $userAuth
-        ]);
+        return view('departments.create', compact('title', 'reference', 'userAuth'));
     }
 
     public function store(DepartmentRequest $request)
@@ -45,7 +36,9 @@ class DepartmentController extends Controller
         try {
             Department::create($data);
             db::commit();
-            return redirect()->route('departments.index')->with('alert', 'store-ok');
+            $message = 'lala';
+
+            return redirect()->route('departments.index')->with('alert', 'store-ok', $message);
         } catch (\Exception $exception) {
             db::rollBack();
             return 'Mensagem: ' . $exception->getMessage();
@@ -63,13 +56,8 @@ class DepartmentController extends Controller
         if ($department) {
             $title =  __('Department update');
             $reference = __('department');
-                $userAuth = Auth()->User();
-            return view('departments.edit', [
-                'title' => $title,
-                'reference' => $reference,
-                'userAuth' => $userAuth,
-                'department' => $department
-            ]);
+            $userAuth = Auth()->User();
+            return view('departments.edit', compact('title', 'reference', 'userAuth', 'department'));
         }
         return redirect()->route('departments.index');
     }

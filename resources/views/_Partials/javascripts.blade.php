@@ -1,12 +1,13 @@
     <!-- REQUIRED SCRIPTS ---------------------------------------------->
     <!-- jQuery -->
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
+    
     <!-- Bootstrap -->
     <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('AdminLTE/dist/js/adminlte.js?v=3.2.0') }}"></script>
-    <!--    <script src="../../dist/js/demo.js"></script> --<
+    <!--    <script src="../../dist/js/demo.js"></script> -->
     <!-- dataTAbles ---------------------------------------------------->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
@@ -69,7 +70,7 @@
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Alterado!',
+                title: '{{$message}}',
                 text: '{{ $reference }} alterado com sucesso!',
                 showConfirmButton: false,
                 timer: 1500

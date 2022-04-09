@@ -14,28 +14,19 @@ class PositionController extends Controller
     }
     public function index()
     {
-        $title = 'Relação de cargos';
-        $reference = 'cargo';
+        $title = __('List of positions');;
+        $reference = __('position');;
         $userAuth = Auth()->User();
         $positions = Position::orderBy('description','asc')->get();
-        return view('positions.index', [
-            'title' => $title,
-            'reference' => $reference,
-            'userAuth' => $userAuth,
-            'positions' => $positions,
-        ]);
+        return view('positions.index', compact('title', 'reference', 'userAuth', 'positions'));
     }
 
     public function create()
     {
-        $title = 'Cadastro de novo cargo';
-        $reference = 'cargo';
+        $title =  __('New position registration');
+        $reference = __('position');
         $userAuth = Auth()->User();
-        return view('positions.create', [
-            'title' => $title,
-            'reference' => $reference,
-            'userAuth' => $userAuth
-        ]);
+        return view('positions.create', compact('title', 'reference', 'userAuth'));
     }
 
     public function store(PositionRequest $request)
@@ -61,15 +52,10 @@ class PositionController extends Controller
     {
         $position = Position::find($id);
         if ($position) {
-            $title = 'Alteração do cargo';
-            $reference = 'cargo';
+            $title =  __('Position update');
+            $reference = __('position');
             $userAuth = Auth()->User();
-            return view('positions.edit', [
-                'title' => $title,
-                'reference' => $reference,
-                'userAuth' => $userAuth,
-                'position' => $position
-            ]);
+            return view('positions.edit', compact('title', 'reference', 'userAuth', 'position'));
         }
         return redirect()->route('positions.index');
     }

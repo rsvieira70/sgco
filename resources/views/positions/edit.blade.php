@@ -1,18 +1,18 @@
-@extends('layouts.index')
+@extends('_Partials.index')
 @section('content')
-<form action="{{route('cargos.update', ['cargo'=>$cargo->id])}}" method="POST" class="form-horizontal">
+<form action="{{route('positions.update', $position->id)}}" method="POST" class="form-horizontal">
     @csrf
     @method('PUT')
-    <input type="hidden" name="id" value="{{$cargo->id}}">
+    <input type="hidden" name="id" value="{{$position->id}}">
     <div class="card">
         <div class="card-body">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-5">
                         <div class="form-group">
-                            <label>Cargo</label>
-                            <input type="text" id="descricao" name="descricao" value="{{$cargo->descricao}}" maxlength="50" class="form-control {{$errors->has('descricao') ? 'is-invalid' :''}}" placeholder="Cargo" autofocus>
-                            <div class="invalid-feedback">{{ $errors->first('descricao')  }} </div>
+                            <label>{{ __('Position') }}</label>
+                            <input type="text" id="description" name="description" value="{{$position->description}}" maxlength="50" class="form-control {{$errors->has('description') ? 'is-invalid' :''}}" placeholder={{ __('Position') }} autofocus>
+                            <div class="invalid-feedback">{{ $errors->first('description')  }} </div>
                         </div>
                     </div>
                 </div>
@@ -21,8 +21,8 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <a href="{{ route('cargos.index') }}" class="btn btb-sm btn-danger"><i class="fas fa-arrow-circle-left"></i> Voltar</a>
-            <button type="submit" class="btn btn-success float-right"><i class="fas fa-save"></i> Salvar</button>
+            <a href="{{ route('positions.index') }}" class="btn btb-sm btn-danger"><i class="fas fa-arrow-circle-left"></i> {{ __('Go back') }}</a>
+            <button type="submit" class="btn btn-success float-right"><i class="fas fa-save"></i> {{ __('Save') }}</button>
         </div>
     </div>
 </form>

@@ -723,6 +723,7 @@
     "Zimbabwe": "Zimbábue",
     "Zip / Postal Code": "CEP / Código Postal",
     "Åland Islands": "Ilhas Aland",
+
     "Portuguese - Brazil": "Portugues Brasil",
     "English": "Inglês",
     "German": "Alemão",
@@ -734,6 +735,9 @@
     "Compose": "Compor",
     "Read": "Ler",
     "Settings": "Configurações",
+    "Active": "Ativo",
+    "Suspend": "Suspender",
+    "Suspended": "Suspenso",
     "Users": "Usuários",
     "User": "Usuário",
     "Miscellaneous records": "Cadastro diversos",
@@ -743,14 +747,25 @@
     "Departments": "Departamentos",
     "Department": "Departamento",
     "department": "departamento",
+    "New department": "Novo Departamento",
     "List of positions": "Lista de cargos",
     "New position registration": "Cadastro de novo cargo",
     "Position update": "Atualização do cargo",
     "Positions": "Cargos",
     "Position": "Cargo",
     "position": "cargo",
-    "Documentations": "Dcocumentação",
-    "Version": "Versão"
+    "New position": "Novo Cargo",
+    "Documentations": "Documentação",
+    "Version": "Versão",
+    "New patients": "Novos pacientes",
+    "More information": "Mais informações",
+    "New orthodontic contracts": "Novos contratos ortodônticos",
+    "Invoices issued": "Notas fiscais emitidas",
+    "SMS balance": "Saldo SMS",
+    "Changed": "Alterado"
+
+
+
 
 
 }
