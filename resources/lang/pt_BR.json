@@ -754,6 +754,7 @@
     "Positions": "Cargos",
     "Position": "Cargo",
     "position": "cargo",
+    "Position successfully changed!": "Cargo alterado com sucesso!",
     "New position": "Novo Cargo",
     "Documentations": "Documentação",
     "Version": "Versão",
@@ -762,7 +763,17 @@
     "New orthodontic contracts": "Novos contratos ortodônticos",
     "Invoices issued": "Notas fiscais emitidas",
     "SMS balance": "Saldo SMS",
-    "Changed": "Alterado"
+    "Included": "Incluido",
+    "Changed": "Alterado",
+    "Excluded": "Excluido",
+    " successfully added!": " incluido com sucesso!",
+    " successfully changed!": " alterado com sucesso!",
+    " successfully deleted!": " deletado com sucesso!",
+    "Are you sure?": "Você tem certeza?",
+    "You will not be able to reverse this action!": "Você não será capaz de reverter esta ação!",
+    "This action can be reversed at any time!": "Esta ação pode ser revertida a qualquer momento!",
+    "Yes, delete it!": "Sim, exclua-o!",
+    "No, cancel!": "Não, cancele!"
 
 
 

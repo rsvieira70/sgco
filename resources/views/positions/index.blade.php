@@ -30,20 +30,20 @@
                     @endif
                     <td class="text-right">
                         @if($position->suspended == null)
-                            <form action="{{route('positions.suspend', [$position->id]) }}" class="d-inline formulario-eliminar" method="POST">
-                                @method ('PUT')
+                            <form action="{{route('positions.suspend', [$position->id]) }}" class="d-inline formSuspend" method="POST">
+                                @method ('PATCH')
                                 @csrf
                                 <button type="submit" class="btn btn-xs btn-warning"><i class="fas fa-lock"></i> {{ __('Suspend') }}</button>
                             </form>
                         @else
-                            <form action="{{route('positions.suspend', [$position->id]) }}" class="d-inline formulario-eliminar" method="POST">
-                                @method ('PUT')
+                            <form action="{{route('positions.suspend', [$position->id]) }}" class="d-inline formSuspend" method="POST">
+                                @method ('PATCH')
                                 @csrf
                                 <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-lock-open"></i> {{ __('Activate') }}</button>
                             </form>
                         @endif
                         <a href="{{ route('positions.edit', [$position->id]) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
-                        <form action="{{route('positions.destroy', [$position->id]) }}" class="d-inline formulario-eliminar" method="POST">
+                        <form action="{{route('positions.destroy', [$position->id]) }}" class="d-inline formDelete" method="POST">
                             @method ('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i> {{ __('Delete') }}</button>

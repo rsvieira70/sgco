@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\DepartmentRequest;
+use GrahamCampbell\ResultType\Success;
 
 class DepartmentController extends Controller
 {
@@ -15,7 +16,7 @@ class DepartmentController extends Controller
     public function index()
     {
         $title =  __('List of departments');
-        $reference = __('department');
+        $reference = __('Department');
         $userAuth = Auth()->User();
         $departments = Department::orderBy('description','asc')->get();
         return view('departments.index', compact('title', 'reference', 'userAuth', 'departments'));
@@ -36,9 +37,8 @@ class DepartmentController extends Controller
         try {
             Department::create($data);
             db::commit();
-            $message = 'lala';
 
-            return redirect()->route('departments.index')->with('alert', 'store-ok', $message);
+            return redirect()->route('departments.index')->with('alert', 'store-ok');
         } catch (\Exception $exception) {
             db::rollBack();
             return 'Mensagem: ' . $exception->getMessage();

@@ -46,18 +46,38 @@
     </script>
     <!-- sweetalert ---------------------------------------------------->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>;
+    
     <script>
-        $('.formulario-eliminar').submit(function(e) {
+        $('.formDelete').submit(function(e) {
             e.preventDefault();
             Swal.fire({
-                title: 'Você tem certeza?',
-                text: "Você não será capaz de reverter esta ação!",
+                title: '{{ $swalFormDeleteTitle }}',
+                text: '{{ $swalFormDeleteText }}',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sim, exclua-o!',
-                cancelButtonText: 'não, cancele!'
+                confirmButtonText: '{{ $swalFormDeleteConfirmButtonText }}',
+                cancelButtonText: '{{ $swalFormDeleteCancelButtonText }}'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        })
+    </script>
+    <script>
+        $('.formSuspend').submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '{{ $swalFormSuspendTitle }}',
+                text: '{{ $swalFormSuspendText }}',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ $swalFormSuspendConfirmButtonText }}',
+                cancelButtonText: '{{ $swalFormSuspendCancelButtonText }}'
             }).then((result) => {
                 if (result.isConfirmed) {
                     this.submit();
@@ -70,8 +90,8 @@
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: '{{$message}}',
-                text: '{{ $reference }} alterado com sucesso!',
+                title: '{{ $swalUpdateTitle }}!',
+                text: '{{ $reference }} {{ $swalUpdateText }}',
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -82,8 +102,8 @@
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Excluido!',
-                text: '{{ $reference }} excluido com sucesso!',
+                title: '{{ $swalDeleteTitle }}!',
+                text: '{{ $reference }} {{ $swalDeletedText }}',
                 showConfirmButton: false,
                 timer: 1500
             })
@@ -94,19 +114,8 @@
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: 'Incluido!',
-                text: '{{ $reference }} incluido com sucesso!',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        </script>
-    @endif
-    @if (session('alert') == 'erro')
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: '{{ $reference }} não foi encontrado!',
+                title: '{{ $swalIncludedTitle }}!',
+                text: '{{ $reference }} {{ $swalIncludedText }}',
                 showConfirmButton: false,
                 timer: 1500
             })

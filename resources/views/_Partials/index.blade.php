@@ -1,3 +1,24 @@
+<?php
+    $swalIncludedTitle = __('Included');
+    $swalIncludedText = __(' successfully added!');
+   
+    $swalUpdateTitle = __('Changed');
+    $swalUpdateText = __(' successfully changed!');
+   
+    $swalDeleteTitle = __('Excluded');
+    $swalDeleteText = __(' successfully deleted!');
+   
+    $swalFormDeleteTitle = __('Are you sure?');
+    $swalFormDeleteText = __('You will not be able to reverse this action!');
+    $swalFormDeleteConfirmButtonText = __('Yes, delete it!');
+    $swalFormDeleteCancelButtonText = __('No, cancel!');
+   
+    $swalFormSuspendTitle = __('Are you sure?');
+    $swalFormSuspendText = __('This action can be reversed at any time!');
+    $swalFormSuspendConfirmButtonText = __('Yes, delete it!');
+    $swalFormSuspendCancelButtonText = __('No, cancel!');
+    
+?>
 <!DOCTYPE html>
 <html lang="{{ env('locale') }}">
 @include('_Partials.head')
