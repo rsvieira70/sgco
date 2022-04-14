@@ -15,6 +15,7 @@ class DepartmentController extends Controller
     }
     public function index()
     {
+        abort(404);
         $title =  __('List of departments');
         $reference = __('Department');
         $userAuth = Auth()->User();

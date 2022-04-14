@@ -23,13 +23,13 @@ class TenantUnique implements Rule
                     ->where($attribute, ucfirst(strtolower($value)))
                     ->where('tenant_id', $tenant)
                     ->first();
-        if ($result && $result->{$this->column} == $this->columnValue)
+        if ($result && strtolower($result->{$this->column}) == strtolower($this->columnValue))
             return true;
         return is_null($result);
     }
 
     public function message()
     {
-        return 'O valor para :attribute já está em uso.';
+        return  __('The value entered for the :attribute field is already in use') ;
     }
 }

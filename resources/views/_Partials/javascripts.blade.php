@@ -103,7 +103,7 @@
                 position: 'top-end',
                 icon: 'success',
                 title: '{{ $swalDeleteTitle }}!',
-                text: '{{ $reference }} {{ $swalDeletedText }}',
+                text: '{{ $reference }} {{ $swalDeleteText }}',
                 showConfirmButton: false,
                 timer: 1500
             })

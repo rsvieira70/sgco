@@ -21,7 +21,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="{{ env('locale') }}">
-@include('_Partials.head')
+@includeIf('_Partials.head')
 
 <!--<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">-->
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">

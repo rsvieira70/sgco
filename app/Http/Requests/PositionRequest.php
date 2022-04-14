@@ -27,7 +27,7 @@ class PositionRequest extends FormRequest
     public function attributes()
     { {
             return [
-                'description' => 'descrição do cargo'
+                'description' =>  __('position') 
             ];
         }
     }

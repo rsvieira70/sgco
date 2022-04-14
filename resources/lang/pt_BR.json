@@ -773,8 +773,13 @@
     "You will not be able to reverse this action!": "Você não será capaz de reverter esta ação!",
     "This action can be reversed at any time!": "Esta ação pode ser revertida a qualquer momento!",
     "Yes, delete it!": "Sim, exclua-o!",
-    "No, cancel!": "Não, cancele!"
-
+    "No, cancel!": "Não, cancele!",
+    "Invalid CPF": "CPF inválido",
+    "The value entered for the :attribute field is already in use": "O valor informado para o campo :attribute já está em uso",
+    "Oops! Page not found.": "Ops! Página não encontrada.",
+    "We could not find the page you were looking for.": "Não foi possível encontrar a página que você estava procurando.",
+    "Meanwhile, you may": "Enquanto isso, você pode",
+    "return to dashboard": "retornar ao painel"
 
 
 

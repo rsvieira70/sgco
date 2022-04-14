@@ -22,7 +22,6 @@ class Department extends Model
     {
         return $this->belongsTo(User::class);
     }
-
     //mutators
     public function setDescriptionAttribute($value)
     {
