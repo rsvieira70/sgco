@@ -777,10 +777,26 @@
     "Invalid CPF": "CPF inválido",
     "The value entered for the :attribute field is already in use": "O valor informado para o campo :attribute já está em uso",
     "Oops! Page not found.": "Ops! Página não encontrada.",
+    "Oops! Authorization requirid.": "Ops! Autorização necessária.",
+    "Oops! This a forbidden area.": "Ops! Esta é uma área proibida.",
+    "Oops! Page expired.": "Ops! Página expirada.",
+    "Oops! Too Many Requests.": "Ops! Muitos pedidos.",
+    "Opps! Internal server error.": "Ops! Erro interno de servidor.",
+    "Opps! Service Unavailable.": "Ops! Serviço não disponivel.",
     "We could not find the page you were looking for.": "Não foi possível encontrar a página que você estava procurando.",
+    "The page could not be accessed, you need authorization to access it.": "Não foi possível acessar a página, você precisa de autorização para acessá-la.",
+    "Unable to access the page, this is a prohibited area.": "Não foi possível acessar a página, esta é uma área proibida.",
+    "Sorry, your session has expired. Please refresh and try again.": "Desculpe, sua sessão expirou. Atualize e tente novamente.",
+    "Unable to access the page, too Many Requests.": "Não foi possível acessar a página, muitos pedidos.",
+    "Unable to access the page, internal server error.": "Não foi possível acessar a página, erro interno de servidor.",
+    "Unable to access the page, service Unavailable.": "Não foi possível acessar a página, serviço não disponivel.",
     "Meanwhile, you may": "Enquanto isso, você pode",
-    "return to dashboard": "retornar ao painel"
-
+    "return to dashboard": "retornar ao painel",
+    "A system failure has occurred!": "Ocorreu uma falha no sistema!",
+    "Don't worry, we've already warned the developer.": "Não se preocupe, já avisamos o desenvolvedor",
+    "Opps! An internal error occurred.": "Ops! Ocorreu um erro interno.",
+    "Your request could not be executed!": "Sua solicitação não pôde ser executada!"
+    
 
 
 

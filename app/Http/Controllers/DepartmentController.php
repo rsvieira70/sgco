@@ -15,7 +15,6 @@ class DepartmentController extends Controller
     }
     public function index()
     {
-        abort(404);
         $title =  __('List of departments');
         $reference = __('Department');
         $userAuth = Auth()->User();
@@ -42,7 +41,9 @@ class DepartmentController extends Controller
             return redirect()->route('departments.index')->with('alert', 'store-ok');
         } catch (\Exception $exception) {
             db::rollBack();
-            return 'Mensagem: ' . $exception->getMessage();
+            $exception->getMessage();
+
+            return redirect()->route('departments.index', compact('Exception'))->with('alert', 'errors');
         }
     }
 
@@ -76,7 +77,9 @@ class DepartmentController extends Controller
             return redirect()->route('departments.index')->with('alert', 'update-ok');
         } catch (\Exception $exception) {
             db::rollBack();
-            return 'Mensagem: ' . $exception->getMessage();
+            $exception->getMessage();
+
+            return redirect()->route('departments.index', compact('Exception'))->with('alert', 'errors');
         }
     }
 
@@ -92,7 +95,9 @@ class DepartmentController extends Controller
             return redirect()->route('departments.index')->with('alert', 'update-ok');
         } catch (\Exception $exception) {
             db::rollBack();
-            return 'Mensagem: ' . $exception->getMessage();
+            $exception->getMessage();
+
+            return redirect()->route('departments.index', compact('Exception'))->with('alert', 'errors');
         }
     }
 
@@ -100,7 +105,7 @@ class DepartmentController extends Controller
     {
         db::beginTransaction();
         try {
-            $department = Department::find($id);
+            $department = Department::findOrFail($id);
             if ($department) {
                 $department->delete();
                 db::commit();
@@ -108,7 +113,9 @@ class DepartmentController extends Controller
             }
         } catch (\Exception $exception) {
             db::rollBack();
-            return 'Mensagem: ' . $exception->getMessage();
+            $exception->getMessage();
+            
+            
         }
     }
 }

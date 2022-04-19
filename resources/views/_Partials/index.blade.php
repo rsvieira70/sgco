@@ -17,7 +17,10 @@
     $swalFormSuspendText = __('This action can be reversed at any time!');
     $swalFormSuspendConfirmButtonText = __('Yes, delete it!');
     $swalFormSuspendCancelButtonText = __('No, cancel!');
-    
+
+    $swalErrorTitle = __('Opps! An internal error occurred.');
+    $swalErrorText = __('Your request could not be executed!');
+    $swalErrorfooter = __("Don't worry, we've already warned the developer.");
 ?>
 <!DOCTYPE html>
 <html lang="{{ env('locale') }}">

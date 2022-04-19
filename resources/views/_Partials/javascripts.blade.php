@@ -121,6 +121,16 @@
             })
         </script>
     @endif
+    @if (session('alert') == 'errors')
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '{{ $swalErrorTitle }}!',
+                text: '{{ $swalErrorText }}',
+                footer: '{{ $swalErrorfooter }}!'
+            })
+        </script>
+    @endif
     <!-- mask ---------------------------------------------------------->
     <script src="{{ asset('AdminLTE/plugins/jquery-mask/jquery.mask.min.js') }}"></script>
     <script>
