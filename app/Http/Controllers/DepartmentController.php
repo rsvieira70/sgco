@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\DepartmentRequest;
 use GrahamCampbell\ResultType\Success;
+use App\Notifications\systemErrorEmail;
 
 class DepartmentController extends Controller
 {
@@ -114,6 +117,10 @@ class DepartmentController extends Controller
         } catch (\Exception $exception) {
             db::rollBack();
             $exception->getMessage();
+            $usuarios = User::whereIn('id',['1'])->get();
+            Notification::send($usuarios, new systemErrorEmail($exception));
+
+
             
             
         }
