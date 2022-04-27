@@ -736,6 +736,7 @@
     "Read": "Ler",
     "Settings": "Configurações",
     "Active": "Ativo",
+    "Reactivate": "Reativar",
     "Suspend": "Suspender",
     "Suspended": "Suspenso",
     "Users": "Usuários",
@@ -795,7 +796,11 @@
     "A system failure has occurred!": "Ocorreu uma falha no sistema!",
     "Don't worry, we've already warned the developer.": "Não se preocupe, já avisamos o desenvolvedor",
     "Opps! An internal error occurred.": "Ops! Ocorreu um erro interno.",
-    "Your request could not be executed!": "Sua solicitação não pôde ser executada!"
+    "Your request could not be executed!": "Sua solicitação não pôde ser executada!",
+    "Failed to include": "Falar ao incluir",
+    "Failed to change": "Falar ao alterar",
+    "Failed to suspend": "Falar ao suspender",
+    "Failed to delete": "Falar ao excluir"
     
 
 

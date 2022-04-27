@@ -38,6 +38,7 @@ return new class extends Migration
             $table->string('municipal_registration',15)->nullable();
             $table->date('opening_date');
             $table->date('suspension_date')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
             $table->index('cnpj');
 

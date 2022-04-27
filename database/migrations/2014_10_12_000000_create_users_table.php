@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('name',50);
             $table->integer('department')->nullable();
             $table->integer('position')->nullable();
+            $table->decimal('user_type',1,0);
             $table->date('registration_date')->nullable();
             $table->date('suspension_date')->nullable();
             $table->string('email')->unique();

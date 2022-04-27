@@ -39,7 +39,7 @@
                             <form action="{{route('departments.suspend', [$department->id]) }}" class="d-inline formSuspend" method="POST">
                                 @method ('PATCH')
                                 @csrf
-                                <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-lock-open"></i> {{ __('Activate') }}</button>
+                                <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                             </form>
                         @endif
                         <a href="{{ route('departments.edit', [$department->id]) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>

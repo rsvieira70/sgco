@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'tenant_id' => 1,
             'name'  => 'Renato Soares Vieira',
             'email' => 'renatovieira70@icloud.com',
+            'user_type' => 1,
             'password' => '41772223',
         ]);
         User::create
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
             'tenant_id' => 2,
             'name'  => 'Renato Vieira',
             'email' => 'renatovieira71@icloud.com',
+            'user_type' => 2,
             'password' => '41772223',
         ]);
 

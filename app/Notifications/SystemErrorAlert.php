@@ -11,15 +11,17 @@ use Illuminate\Notifications\Notification;
 class SystemErrorAlert extends Notification implements ShouldQueue
 {
     use Queueable;
+    private $error;
     private $exception;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($exception)
+    public function __construct($error, $exception)
     {
-        //
+        $this->error = $error;
+        $this->exception = $exception;
     }
 
     /**
@@ -30,7 +32,7 @@ class SystemErrorAlert extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -42,11 +44,12 @@ class SystemErrorAlert extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject("Alerta de erro no sistema SGCO")
-                    ->line('The introduction to the notification.')
-                    ->line('Alerta: ' . $this->$exception)
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Alerta de erro no sistema SGCO')
+                    ->line('Ocorreu uma falha no sistema')
+                    ->line($this->error)
+                    ->line($this->exception)
+                    ->action('Acessar sistema', url('/'))
+                    ->line('Obrigado por utilizar a aplicação!');
     }
 
     /**
@@ -61,4 +64,17 @@ class SystemErrorAlert extends Notification implements ShouldQueue
             //
         ];
     }
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toDatabase($notifiable)
+    {
+        return [
+            $this->error, $this->exception
+        ];
+    }
+
 }

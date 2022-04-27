@@ -6,9 +6,10 @@ use App\Models\Department;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
-use App\Http\Requests\DepartmentRequest;
-use GrahamCampbell\ResultType\Success;
 use App\Notifications\systemErrorEmail;
+use App\Http\Requests\DepartmentRequest;
+use App\Notifications\SystemErrorAlert;
+use GrahamCampbell\ResultType\Success;
 
 class DepartmentController extends Controller
 {
@@ -43,10 +44,12 @@ class DepartmentController extends Controller
 
             return redirect()->route('departments.index')->with('alert', 'store-ok');
         } catch (\Exception $exception) {
+            $exception = $exception->getMessage();
             db::rollBack();
-            $exception->getMessage();
-
-            return redirect()->route('departments.index', compact('Exception'))->with('alert', 'errors');
+            $error = __('Failed to include') . ' '. __('department');
+            $users = User::whereIn('user_type',['1'])->get();
+            Notification::send($users, new SystemErrorAlert($error, $exception));
+            return redirect()->route('departments.create')->with('alert', 'errors');
         }
     }
 
@@ -79,10 +82,12 @@ class DepartmentController extends Controller
             db::commit();
             return redirect()->route('departments.index')->with('alert', 'update-ok');
         } catch (\Exception $exception) {
+            $exception = $exception->getMessage();
             db::rollBack();
-            $exception->getMessage();
-
-            return redirect()->route('departments.index', compact('Exception'))->with('alert', 'errors');
+            $error = __('Failed to change') . ' '. __('department') . ' -> ' . __('Key' ) . ' ' . $id;
+            $users = User::whereIn('user_type',['1'])->get();
+            Notification::send($users, new SystemErrorAlert($error, $exception));
+            return redirect()->route('departments.update')->with('alert', 'errors');
         }
     }
 
@@ -90,17 +95,23 @@ class DepartmentController extends Controller
     {
         db::beginTransaction();
         try {
-            $department = Department::find($id);
-            //$department->description = $data['description'];
+            $department = Department::findOrFail($id);
+            if($department->suspended == null){
+                $department->suspended = 1;
+            }else{
+                $department->suspended = null;
+            }
             $department->save();
 
             db::commit();
             return redirect()->route('departments.index')->with('alert', 'update-ok');
         } catch (\Exception $exception) {
+            $exception = $exception->getMessage();
             db::rollBack();
-            $exception->getMessage();
-
-            return redirect()->route('departments.index', compact('Exception'))->with('alert', 'errors');
+            $error = __('Failed to suspend') . ' '. __('department') . ' -> ' . __('Key' ) . ' ' . $id;
+            $users = User::whereIn('user_type',['1'])->get();
+            Notification::send($users, new SystemErrorAlert($error, $exception));
+            return redirect()->route('departments.index')->with('alert', 'errors');
         }
     }
 
@@ -115,14 +126,12 @@ class DepartmentController extends Controller
                 return redirect()->route('departments.index')->with('alert', 'destroy-ok');
             }
         } catch (\Exception $exception) {
+            $exception = $exception->getMessage();
             db::rollBack();
-            $exception->getMessage();
-            $usuarios = User::whereIn('id',['1'])->get();
-            Notification::send($usuarios, new systemErrorEmail($exception));
-
-
-            
-            
+            $error = __('Failed to delete') . ' '. __('department') . ' -> ' . __('Key' ) . ' ' . $id;
+            $users = User::whereIn('user_type',['1'])->get();
+            Notification::send($users, new SystemErrorAlert($error, $exception));
+            return redirect()->route('departments.index')->with('alert', 'errors');
         }
     }
 }
