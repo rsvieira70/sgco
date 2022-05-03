@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\hash;
 use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Models\Cargo;
-use App\Models\Departamento;
+use App\Models\Position;
+use App\Models\Department;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 
@@ -22,34 +22,26 @@ class UserController extends Controller
     }
     public function index()
     {
-        $title = 'Relação de usuários';
-        $referencia = 'usuário';
+        $title =  __('List of users');
+        $reference = __('User');
         $userAuth = Auth()->User();
-        $users = User::with(['profile', 'workuser'])->get();
-        $loggedId = intval(Auth::id());
-        return view('users.index', [
-            'title' => $title,
-            'referencia' => $referencia,
-            'userAuth' => $userAuth,
-            'users' => $users,
-            'loggedId' => $loggedId
-        ]);
+        $users = User::orderBy('name', 'asc')->get();
+        return view('users.index', compact('title', 'reference', 'userAuth', 'users'));
     }
     public function create()
     {
-        $title = 'Cadastro de novo usuário';
-        $referencia = 'usuário';
-        $cargos = Cargo::orderBy('descricao','asc')->get();
-        $departamentos = Departamento::orderBy('descricao','asc')->get();
+        $title =  __('New user registration');
+        $reference = __('user');
         $userAuth = Auth()->User();
-        return view('users.create', [
-            'title' => $title,
-            'referencia' => $referencia,
-            'departamentos' => $departamentos,
-            'cargos' => $cargos,
-            'userAuth' => $userAuth
-        ]);
+        $positions = Position::orderBy('description', 'asc')->get();
+        $departments = Department::orderBy('description', 'asc')->get();
+
+        return view('users.create', compact('title', 'reference', 'userAuth', 'positions', 'departments'));
     }
+
+
+
+
     public function store(Request $request)
     {
         $data = $request->all();
@@ -58,9 +50,7 @@ class UserController extends Controller
         db::beginTransaction();
         try {
             $user = User::create($data['user']);
-            $user->profile()->create(['nomesocial' => '']);
-            $user->workuser()->create($data['workuser']);
-        
+
             db::commit();
             return redirect()->route('users.index')->with('alert', 'store-ok');
         } catch (\Exception $exception) {
@@ -158,5 +148,4 @@ class UserController extends Controller
     {
         //
     }
-
 }
