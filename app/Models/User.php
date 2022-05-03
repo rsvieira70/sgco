@@ -17,14 +17,38 @@ class User extends Authenticatable
 
     protected $fillable = [
         'tenant_id',
+        'uuid',
         'name',
+      //'social_name',
+      //'nickname',
+      //'cpf',
+      //'birth',
+      //'image',
+        'user_type',
+      //'zip_code',
+      //'address',
+      //'number',
+      //'complement',
+      //'neighborhood',
+      //'city',
+      //'state',
+      //'ibge',
+      //'telephone',
+      //'cell_phone',
+      //'whatsapp',
+      //'facebook',
+      //'instagram',
+      //'twitter',
+      //'linkedin',
         'department',
         'position',
         'registration_date',
         'suspension_date',
+        'user_note',
+      //'profile_note',
         'email',
         'password',
-    ];
+        ];
 
     public static function boot(){
         parent::boot();
@@ -45,10 +69,6 @@ class User extends Authenticatable
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
-    }
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = Hash::make($value);
     }
     //
 

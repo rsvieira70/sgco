@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 
 class UsersTableSeeder extends Seeder
@@ -17,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'name'  => 'Renato Soares Vieira',
             'email' => 'renatovieira70@icloud.com',
             'user_type' => 1,
-            'password' => '41772223',
+            'password' => Hash::make('41772223'),
         ]);
         User::create
         ([
@@ -25,7 +26,7 @@ class UsersTableSeeder extends Seeder
             'name'  => 'Renato Vieira',
             'email' => 'renatovieira71@icloud.com',
             'user_type' => 2,
-            'password' => '41772223',
+            'password' => Hash::make('41772223'),
         ]);
 
     }
