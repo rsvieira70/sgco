@@ -1,29 +1,42 @@
 <?php
 
 namespace App\Models;
+
+use App\Tenant\Traits\TenantTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Profile extends Authenticatable
 {
+    use TenantTrait;
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'tenant_id',
-        'uuid',
-        'name',
-        'user_type',
-        'department',
-        'position',
-        'registration_date',
-        'user_note',
-        'email',
-        'password',
+        'social_name',
+        'nickname',
+        'cpf',
+        'birth',
+        'image',
+        'zip_code',
+        'address',
+        'number',
+        'complement',
+        'neighborhood',
+        'city',
+        'state',
+        'ibge',
+        'telephone',
+        'cell_phone',
+        'whatsapp',
+        'facebook',
+        'instagram',
+        'twitter',
+        'linkedin',
+        'profile_note',
         ];
 
     public static function boot(){

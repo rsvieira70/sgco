@@ -34,8 +34,8 @@ return new class extends Migration
             $table->string('instagram',80)->nullable();
             $table->string('twitter',80)->nullable();
             $table->string('linkedin',80)->nullable();
-            $table->integer('department')->nullable();
-            $table->integer('position')->nullable();
+            $table->integer('department_id')->nullable();
+            $table->integer('position_id')->nullable();
             $table->date('registration_date')->nullable();
             $table->date('suspension_date')->nullable();
             $table->longText('user_note')->nullable();
@@ -46,6 +46,8 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
             $table->index('cpf');
             $table->index('name');
             $table->index('social_name');

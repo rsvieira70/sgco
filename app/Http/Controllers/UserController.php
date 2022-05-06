@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\hash;
 use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Models\User;
+use Illuminate\Support\Facades\Notification;
+use App\Models\NewUser;
 use App\Models\Position;
 use App\Models\Department;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Notifications\SystemErrorAlert;
 
 
 class UserController extends Controller
@@ -25,7 +27,7 @@ class UserController extends Controller
         $title =  __('List of users');
         $reference = __('User');
         $userAuth = Auth()->User();
-        $users = User::orderBy('name', 'asc')->get();
+        $users = NewUser::orderBy('name', 'asc')->get();
         return view('users.index', compact('title', 'reference', 'userAuth', 'users'));
     }
     public function create()
@@ -38,33 +40,35 @@ class UserController extends Controller
 
         return view('users.create', compact('title', 'reference', 'userAuth', 'positions', 'departments'));
     }
-
-
-
-
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $data = $request->all();
-        $data['role'] = 'user';
-        dd($data);
+        $data = $request->validated();
         db::beginTransaction();
         try {
-            $user = User::create($data['user']);
-
+            NewUser::create($data);
             db::commit();
             return redirect()->route('users.index')->with('alert', 'store-ok');
         } catch (\Exception $exception) {
+            $exception = $exception->getMessage();
             db::rollBack();
-            return 'Mensagem: ' . $exception->getMessage();
+            $error = __('Failed to include') . ' '. __('user');
+            $users = NewUser::whereIn('user_type',['1'])->get();
+            Notification::send($users, new SystemErrorAlert($error, $exception));
+            return redirect()->route('users.create')->with('alert', 'errors');
         }
     }
+
+
+
+
+
     public function show($id)
     {
         //
     }
     public function edit($id)
     {
-        $user = User::find($id);
+        $user = NewUser::find($id);
         if ($user) {
             $title = 'Alteração de usuário';
             $referencia = 'usuário';
@@ -80,7 +84,7 @@ class UserController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
+        $user = NewUser::find($id);
         if ($user) {
             $data = $request->only([
                 'name',
@@ -102,7 +106,7 @@ class UserController extends Controller
             );
             $user->name = $data['name'];
             if ($user->email != $data['email']) {
-                $hasEmail = User::where('email', $data['email'])->get();
+                $hasEmail = NewUser::where('email', $data['email'])->get();
                 if (count($hasEmail) === 0) {
                     $user->email = $data['email'];
                 } else {
@@ -139,7 +143,7 @@ class UserController extends Controller
     {
         $loggedId = intval(Auth::id());
         if ($loggedId !== intval($id)) {
-            $user = User::find($id);
+            $user = NewUser::find($id);
             $user->delete();
         }
         return redirect()->route('users.index')->with('alert', 'destroy-ok');

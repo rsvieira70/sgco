@@ -797,10 +797,10 @@
     "Don't worry, we've already warned the developer.": "Não se preocupe, já avisamos o desenvolvedor",
     "Opps! An internal error occurred.": "Ops! Ocorreu um erro interno.",
     "Your request could not be executed!": "Sua solicitação não pôde ser executada!",
-    "Failed to include": "Falar ao incluir",
-    "Failed to change": "Falar ao alterar",
-    "Failed to suspend": "Falar ao suspender",
-    "Failed to delete": "Falar ao excluir",
+    "Failed to include": "Falha ao incluir",
+    "Failed to change": "Falha ao alterar",
+    "Failed to suspend": "Falha ao suspender",
+    "Failed to delete": "Falha ao excluir",
     "List of users": "Lista de usuários"
     
 
