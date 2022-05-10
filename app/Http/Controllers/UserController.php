@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\hash;
 use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 use App\Models\NewUser;
 use App\Models\Position;
 use App\Models\Department;
@@ -43,6 +43,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $data = $request->validated();
+        $data['password'] = Hash::make($data['password']);
         db::beginTransaction();
         try {
             NewUser::create($data);
@@ -57,11 +58,6 @@ class UserController extends Controller
             return redirect()->route('users.create')->with('alert', 'errors');
         }
     }
-
-
-
-
-
     public function show($id)
     {
         //
@@ -70,18 +66,17 @@ class UserController extends Controller
     {
         $user = NewUser::find($id);
         if ($user) {
-            $title = 'Alteração de usuário';
-            $referencia = 'usuário';
+            $title =  __('User update');
+            $reference = __('user');
             $userAuth = Auth()->User();
-            return view('users.edit', [
-                'title' => $title,
-                'referencia' => $referencia,
-                'userAuth' => $userAuth,
-                'user' => $user
-            ]);
+            $positions = Position::orderBy('description', 'asc')->get();
+            $departments = Department::orderBy('description', 'asc')->get();
+    
+                return view('users.edit', compact('title', 'reference', 'userAuth', 'user', 'positions', 'departments'));
         }
         return redirect()->route('users.index');
     }
+
     public function update(Request $request, $id)
     {
         $user = NewUser::find($id);

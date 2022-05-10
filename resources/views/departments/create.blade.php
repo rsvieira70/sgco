@@ -10,7 +10,7 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label>{{ __('Department') }}</label>
-                            <input type="text" id="description"  name="description" value="{{old('description', null)}}" maxlength="50" class="form-control {{$errors->has('description') ? 'is-invalid' :''}}" placeholder={{ __('Department') }} autofocus>
+                            <input type="text" id="description"  name="description" value="{{old('description', null)}}" maxlength="50" class="form-control {{$errors->has('description') ? 'is-invalid' :''}}" required placeholder={{ __('Department') }} autofocus>
                             <div class="invalid-feedback">{{ $errors->first('description') }} </div>
                         </div>
                     </div>
