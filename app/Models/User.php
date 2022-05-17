@@ -18,8 +18,8 @@ class User extends Authenticatable
         'uuid',
         'name',
         'user_type',
-        'department',
-        'position',
+        'department_id',
+        'position_id',
         'registration_date',
         'user_note',
         'email',
@@ -57,11 +57,11 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tenant::class);
     }
-    public function departments()
+    public function department()
     {
         return $this->belongsTo(Department::class);
     }
-    public function positions()
+    public function position()
     {
         return $this->belongsTo(Position::class);
     }

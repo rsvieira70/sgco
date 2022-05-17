@@ -31,13 +31,26 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/positions/{id}', [PositionController::class, 'update'])->name('positions.update');
     Route::patch('/positions/{id}', [PositionController::class, 'suspend'])->name('positions.suspend');
     Route::delete('/positions/{id}', [PositionController::class, 'destroy'])->name('positions.destroy');
+
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::patch('/users/{id}', [UserController::class, 'suspend'])->name('users.suspend');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/profiles/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
+    Route::put('/profiles/update', [ProfileController::class, 'update'])->name('profiles.update');
+
+
 });
 
-//Route::resource('users', UserController::class);
 Route::resources([
-    'users' => UserController::class,
-    'profiles' => ProfilesController::class,
+//    'users' => UserController::class,
+    
 ]);
 
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-//Route::put('/profilesave', [ProfileController::class, 'save'])->name('profile.save');
+
+

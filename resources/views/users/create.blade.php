@@ -13,7 +13,7 @@
                                     <div class="form-group">
                                         <label for="name">{{ __('Name') }}</label>
                                         <input type="text" id="name" name="name" value="{{ old('name', null) }}"
-                                            maxlength="60"
+                                            maxlength="50"
                                             class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
                                             placeholder={{ __('Name') }} required autofocus>
                                         <div class="invalid-feedback">{{ $errors->first('name') }} </div>
@@ -24,8 +24,8 @@
                                 <div class="col-sm-3">
                                     <label for="department_id">{{ __('Department') }}</label>
                                     <select class="custom-select" id="department_id" name="department_id"
-                                        class="form-control @error('department_id') is-invalid @enderror" required>
-                                        <option value='' disabled selected>Selecione um departamento</option>
+                                        class="form-control @error('department_id') is-invalid @enderror" >
+                                        <option value='' disabled selected>{{ __('Select a department') }}</option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}"
                                                 {{ old('department_id', $department->department->id ?? '') == $department->id ? 'selected' : '' }}>
@@ -40,7 +40,7 @@
                                     <div class="input-field">
                                         <select class="custom-select" id="position_id" name="position_id"
                                             class="form-control @error('position_id') is-invalid @enderror" required>
-                                            <option value='' disabled selected>Selecione um cargo</option>
+                                            <option value='' disabled selected>{{ __('Select a position') }}</option>
                                             @foreach ($positions as $position)
                                                 <option value="{{ $position->id }}"
                                                     {{ old('position_id', $position->position->id ?? '') == $position->id ? 'selected' : '' }}>
@@ -68,7 +68,7 @@
                                     <div class="input-field">
                                         <select class="custom-select" id="user_type" name="user_type"
                                             class="form-control @error('user_type') is-invalid @enderror" required>
-                                            <option value='' disabled selected>Selecione tipo de usuário</option>
+                                            <option value='' disabled selected>{{ __('Select a user type') }}</option>
                                             <option value="2" {{ old('user_type') == 2 ? 'selected' : '' }}>
                                                 {{ __('Administrator') }}
                                             <option value="3" {{ old('user_type') == 3 ? 'selected' : '' }}>
@@ -110,10 +110,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="user_note">{{ __('Observation') }}</label>
-                                        <textarea type="text" id="user_note" name="user_note" value="{{ old('user_note', null) }}"
-                                            class="form-control @error('user_note') is-invalid @enderror" rows="4"
-                                            style="height: 30mm"></textarea>
+                                        <label for="user_note">{{ __('Note') }}</label>
+                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4" style="height: 30mm">{{old('user_note',null)}}</textarea>
                                         <div class="invalid-feedback">{{ $errors->first('user_note') }} </div>
                                     </div>
                                 </div>

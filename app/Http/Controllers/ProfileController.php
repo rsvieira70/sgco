@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\hash;
-use Illuminate\support\Facades\Auth;
+use App\Models\Profile;
 use App\Models\User;
-use App\Http\Controllers\Controller;
+use Illuminate\support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\systemErrorEmail;
+use App\Http\Requests\ProfileRequest;
+use App\Notifications\SystemErrorAlert;
+use GrahamCampbell\ResultType\Success;
 
 class ProfileController extends Controller
 {
@@ -15,78 +18,41 @@ class ProfileController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+
+
+    public function edit()
     {
-        $title = 'Perfil do usuário';
-        $referencia = 'usuário';
-        $userAuth = Auth()->User();
-        $loggedId = intval(Auth::id());
-        $user = User::find($loggedId);
-        if ($user) {
-            return view('profile.index', [
-                'title' => $title,
-                'referencia' => $referencia,
-                'userAuth' => $userAuth,
-                'user' => $user
-            ]);
+        $id = Auth::user()->id;
+        $profile = Profile::find($id);
+        if ($profile) {
+            $title =  __('Profile');
+            $reference = __('profile');
+            $userAuth = Auth()->User();
+            return view('profiles.edit', compact('title', 'reference', 'userAuth', 'profile'));
         }
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
-    public function save(Request $request)
+
+    public function update(ProfileRequest $request)
     {
-        $loggedId = intval(Auth::id());
-        $user = User::find($loggedId);
-        if ($user) {
-            $data = $request->only([
-                'name',
-                'email',
-                'password',
-                'password_confirmation'
-            ]);
-            $validator = Validator::make(
-                $data,
-                [
-                    'name' => ['required', 'string', 'max:50'],
-                    'email' => ['required', 'string', 'email:rfc,dns', 'max:100']
-                ],
-                [],
-                [
-                    'name' => 'Nome',
-                    'email' => 'E-mail'
-                ]
-            );
-            $user->name = ucwords(strtolower($data['name']));
-            if ($user->email != $data['email']) {
-                $hasEmail = User::where('email', $data['email'])->get();
-                if (count($hasEmail) === 0) {
-                    $user->email = strtolower($data['email']);
-                } else {
-                    $validator->errors()->add('email', __('validation.unique', ['attribute' => 'E-mail']));
-                }
-            }
-            if (!empty($data['password'])) {
-                if (strlen($data['password']) >= 4) {
-                    if ($data['password'] === $data['password_confirmation']) {
-                        $user->password = Hash::make($data['password']);
-                    } else {
-                        $validator->errors()->add('password', __('validation.confirmed', [
-                            'attribute' => 'Senha',
-                        ]));
-                    }
-                } else {
-                    $validator->errors()->add('password', __('validation.min.string', [
-                        'attribute' => 'Senha',
-                        'min' => 4
-                    ]));
-                }
-            }
-            if (count($validator->errors()) > 0) {
-                return redirect()->route('profile', ['user' => $loggedId])->withErrors($validator);
-            }
-            $user->save();
-            return redirect()->route('profile')->with('alert', 'ok');
-        } else {
-            return redirect()->route('profile')->with('alert', 'erro');
+        $data = $request->validated();
+        db::beginTransaction();
+        try {
+            $id = Auth::user()->id;
+            $profile = Profile::find($id);
+            $profile->description = $data['description'];
+            $profile->save();
+
+            db::commit();
+            return redirect()->route('dashboard')->with('alert', 'update-ok');
+        } catch (\Exception $exception) {
+            $exception = $exception->getMessage();
+            db::rollBack();
+            $error = __('Failed to change') . ' '. __('profile') . ' -> ' . __('Key' ) . ' ' . $id;
+            $users = User::whereIn('user_type',['1'])->get();
+            Notification::send($users, new SystemErrorAlert($error, $exception));
+            return redirect()->route('profiles.edit')->with('alert', 'errors');
         }
     }
+
 }

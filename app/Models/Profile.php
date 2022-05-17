@@ -5,15 +5,16 @@ namespace App\Models;
 use App\Tenant\Traits\TenantTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
-class Profile extends Authenticatable
+class Profile extends Model
 {
+    protected $table = 'users';
     use TenantTrait;
-    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'social_name',
@@ -46,10 +47,6 @@ class Profile extends Authenticatable
         });
     }
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
     //mutators
     public function setNameAttribute($value)
     {
@@ -60,10 +57,6 @@ class Profile extends Authenticatable
         $this->attributes['email'] = strtolower($value);
     }
     //
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
     //relationships
     public function tenant()

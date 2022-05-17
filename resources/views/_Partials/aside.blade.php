@@ -14,7 +14,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="{{ route('profile') }}" class="d-block">{{ $userAuth->name }}</a>
+                <a href="{{ route('profiles.edit') }}" class="d-block">{{ $userAuth->name }}</a>
             </div>
         </div>
         <!-- SidebarSearch Form

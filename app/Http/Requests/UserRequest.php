@@ -16,11 +16,10 @@ class UserRequest extends FormRequest
         return [
             'name' =>  ['required', 'max:60' ],
             'user_type' => ['required'],
-            'department_id' => ['required', 'min:1'],
-            'position_id' => ['required', 'min:1'],
+            'department_id' => [ 'required', 'min:1'],
             'position_id' => ['required', 'min:1'],
             'registration_date' => ['required', 'date' ],
-            'email' => ['required', 'max:255', 'email','unique:users,email'],
+            'email' => ['max:255', 'email',"unique:users,email,{$this->id}"],
             'password' => ['required', 'min:8', 'confirmed'],
             'user_note' => ['nullable', 'string']
         ];
@@ -30,14 +29,14 @@ class UserRequest extends FormRequest
     {
         {
             return[
-                'name' => 'nome completo',
-                'user_type' => 'tipo de usuário',
-                'department_id' => 'departamento',
-                'position_id' => 'cargo',
-                'registration_date' => 'data de registro',
-                'email' => 'e-mail',
-                'password' => 'senha de acesso',
-                'user_note' => 'observação'
+                'name' => __('Name'),
+                'user_type' => __('User type'),
+                'department_id' => __('Department'),
+                'position_id' => __('Position'),
+                'registration_date' => __('Registration date'),
+                'email' => __('Email'),
+                'password' => __('Password'),
+                'user_note' => __('Note')
             ];
         }
     }

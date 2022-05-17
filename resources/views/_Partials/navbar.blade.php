@@ -200,7 +200,7 @@
                 </li>   -->
 
                 <li class="user-footer">
-                    <a href="{{ route('profile') }}" class="btn btn-primary btn-flat">{{ __('Profile') }}</a>
+                    <a href="{{ route('profiles.edit') }}" class="btn btn-primary btn-flat">{{ __('Profile') }}</a>
                     <a href="{{ route('logout') }} " class="btn btn-danger btn-flat float-right"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Log Out') }}</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST"

@@ -12,7 +12,7 @@
                         <th class="text-center">{{ __('Code') }}</th>
                         <th cçass="text-center">{{ __('Photo') }}</th>
                         <th class="text-left">{{ __('Name') }}</th>
-                        <th class="text-left">{{ __('mail') }}</th>
+                        <th class="text-left">{{ __('Email') }}</th>
                         <th class="text-center">{{ __('Status') }}</th>
                         <th class="text-center">{{ __('Action') }}</th>
                     </tr>
@@ -32,19 +32,19 @@
                                     @break
 
                                     @case (1)
-                                        <small>Master</small>
+                                        <small>{{ __('Master') }}</small>
                                     @break
 
                                     @case (2)
-                                        <small>Administrador</small>
+                                        <small>{{ __('Administrator') }}</small>
                                     @break
 
                                     @case (3)
-                                        <small>Usuário</small>
+                                        <small>{{ __('User') }}</small>
                                     @break
 
                                     @case (4)
-                                        <small>Paciente</small>
+                                        <small>{{ __('Patient') }}</small>
                                     @break
                                 @endswitch
                             </td>
@@ -62,35 +62,29 @@
                                     </span>
                                 </td>
                             @endif
-                            @if ($user->user_type != 1 || ($userAuth->user_type = 1))
+                            @if (($user->user_type != 1) || ($userAuth->user_type == 1))
                                 <td class="text-right">
                                     @if ($user->suspension_date == null)
-                                        <a href="{{ route('users.show', ['user' => $user->id]) }}"
-                                            class="btn btn-xs btn-primary "><i class="far fa-eye"></i>
-                                            {{ __('View') }}</a>
-                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}"
-                                            class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>
-                                            {{ __('Edit') }}</a>
-                                        @if ($userAuth !== intval($user->id))
-                                            <form action="{{ route('users.destroy', ['user' => $user->id]) }}"
-                                                class="d-inline formulario-eliminar" method="POST">
-                                                @method ('DELETE')
+                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
+                                        @if ($userAuth->user_type == 1 ) 
+                                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
+                                        @endif    
+                                        @if ($user->user_type != 1 )
+                                            <form action="{{ route('users.suspend', $user->id) }}" class="d-inline formsuspend" method="POST">
+                                                @method ('PATCH')
                                                 @csrf
-                                                <button type="submit" class="btn btn-xs btn-warning"> <i
-                                                        class="fas fa-user-lock"></i>
-                                                    {{ __('Suspend') }}</button>
+                                                <button type="submit" class="btn btn-xs btn-warning"> <i class="fas fa-user-lock"></i> {{ __('Suspend') }}</button>
                                             </form>
                                         @endif
                                     @else
-                                        <form action="{{ route('users.destroy', ['user' => $user->id]) }}"
-                                            class="d-inline formulario-eliminar" method="POST">
-                                            @method ('DELETE')
+                                        <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
+                                        <form action="{{ route('users.suspend', $user->id) }}" class="d-inline formsuspend" method="POST">
+                                            @method ('PATCH')
                                             @csrf
-                                            <button type="submit" class="btn btn-xs btn-success"><i
-                                                    class="fas fa-user-check"></i>
-                                                {{ __('Reactivate') }}</button>
+                                            <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
                                         </form>
-                                        <form action="{{ route('users.destroy', ['user' => $user->id]) }}"
+                                        <!--
+                                        <form action="{{ route('users.destroy', $user->id) }}"
                                             class="d-inline formulario-eliminar" method="POST">
                                             @method ('DELETE')
                                             @csrf
@@ -98,9 +92,10 @@
                                                     class="fas fa-trash"></i>
                                                 {{ __('Delete') }}</button>
                                         </form>
+                                    -->
                                     @endif
-                                    <!-- <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-primary "><i class="fas fa-id-card"></i> Perfil</a>
-                                                                        <a href="{{ route('users.edit', ['user' => $user->id]) }}" class="btn btn-xs btn-primary "><i class="fas fa-tasks"></i> Permissões</a>
+                                    <!-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary "><i class="fas fa-id-card"></i> Perfil</a>
+                                                                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary "><i class="fas fa-tasks"></i> Permissões</a>
                                                                     -->
                                 </td>
                             @endif
