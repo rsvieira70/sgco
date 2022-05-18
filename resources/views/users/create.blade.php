@@ -14,8 +14,8 @@
                                         <label for="name">{{ __('Name') }}</label>
                                         <input type="text" id="name" name="name" value="{{ old('name', null) }}"
                                             maxlength="50"
-                                            class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                            placeholder={{ __('Name') }} required autofocus>
+                                            class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required
+                                            autofocus>
                                         <div class="invalid-feedback">{{ $errors->first('name') }} </div>
                                     </div>
                                 </div>
@@ -24,7 +24,7 @@
                                 <div class="col-sm-3">
                                     <label for="department_id">{{ __('Department') }}</label>
                                     <select class="custom-select" id="department_id" name="department_id"
-                                        class="form-control @error('department_id') is-invalid @enderror" >
+                                        class="form-control @error('department_id') is-invalid @enderror">
                                         <option value='' disabled selected>{{ __('Select a department') }}</option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}"
@@ -56,8 +56,7 @@
                                         <div class="input-group">
                                             <input type="date" id="registration_date" name="registration_date"
                                                 value="{{ old('registration_date', null) }}"
-                                                class="form-control data @error('registration_date') is-invalid @enderror"
-                                                required placeholder={{ __('Registration date') }}>
+                                                class="form-control data @error('registration_date') is-invalid @enderror">
                                             <div class="invalid-feedback">{{ $errors->first('registration_date') }}
                                             </div>
                                         </div>
@@ -82,8 +81,7 @@
                                     <div class="form-group">
                                         <label for="email">{{ __('Email') }}</label>
                                         <input type="email" id="email" name="email" value="{{ old('email', null) }}"
-                                            maxlength="255" class="form-control @error('email') is-invalid @enderror"
-                                            required placeholder={{ __('Email') }}>
+                                            maxlength="255" class="form-control @error('email') is-invalid @enderror">
                                         <div class="invalid-feedback">{{ $errors->first('email') }} </div>
                                     </div>
                                 </div>
@@ -91,8 +89,7 @@
                                     <div class="form-group">
                                         <label for="password">{{ __('Password') }}</label>
                                         <input type="password" id="password" name="password" maxlength="255"
-                                            class="form-control @error('password') is-invalid @enderror" required
-                                            placeholder={{ __('Password') }}>
+                                            class="form-control @error('password') is-invalid @enderror" required>
                                         <div class="invalid-feedback">{{ $errors->first('password') }} </div>
                                     </div>
                                 </div>
@@ -101,8 +98,7 @@
                                         <label for="password_confirmation">{{ __('Confirm Password') }}</label>
                                         <input type="password" id="password_confirmation" name="password_confirmation"
                                             maxlength="255"
-                                            class="form-control @error('password_confirmation') is-invalid @enderror"
-                                            required placeholder={{ __('Confirm Password') }}>
+                                            class="form-control @error('password_confirmation') is-invalid @enderror">
                                         <div class="invalid-feedback">{{ $errors->first('password') }} </div>
                                     </div>
                                 </div>
@@ -111,7 +107,8 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="user_note">{{ __('Note') }}</label>
-                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4" style="height: 30mm">{{old('user_note',null)}}</textarea>
+                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4"
+                                            style="height: 30mm">{{ old('user_note', null) }}</textarea>
                                         <div class="invalid-feedback">{{ $errors->first('user_note') }} </div>
                                     </div>
                                 </div>

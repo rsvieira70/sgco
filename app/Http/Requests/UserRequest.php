@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\FullName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -14,7 +15,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' =>  ['required', 'max:60' ],
+            'name' =>  ['required', 'max:50', new FullName ],
             'user_type' => ['required'],
             'department_id' => [ 'required', 'min:1'],
             'position_id' => ['required', 'min:1'],

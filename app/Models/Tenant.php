@@ -50,6 +50,9 @@ class Tenant extends Model
     public function users() {
         return $this->hasMany(User::class);
     }
+    public function profiles() {
+        return $this->hasMany(Profile::class);
+    }
     public function departments()
     {
         return $this->hasMany(Department::class);

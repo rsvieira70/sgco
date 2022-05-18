@@ -13,7 +13,7 @@ use App\Models\Department;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Notifications\SystemErrorAlert;
-
+use App\Rules\FullName;
 
 class UserController extends Controller
 {
@@ -101,7 +101,7 @@ class UserController extends Controller
                 $validator = Validator::make(
                     $data,
                     [
-                        'name' => ['required', 'string', 'max:60'],
+                        'name' => ['required', 'string', 'max:60', new FullName],
                         'email' => ['required', 'string', 'email', 'max:100', "unique:users,email,{$id}"],
                         'user_note' => ['nullable', 'string'],
                         'user_type' => ['required'],
@@ -131,7 +131,7 @@ class UserController extends Controller
                 $validator = Validator::make(
                     $data,
                     [
-                        'name' => ['required', 'string', 'max:60'],
+                        'name' => ['required', 'string', 'max:60', new FullName()],
                         'email' => ['required', 'string', 'email', 'max:100', "unique:users,email,{$id}"],
                         'user_note' => ['nullable', 'string'],
                     ],

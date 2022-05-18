@@ -83,9 +83,9 @@
                                 <div class="card-body">
                                     <b> {{ __('Name') }}:</b> {{ $user->name }}<br>
                                     <b> {{ __('Social name') }}:</b> {{ $user->social_name }} <br>
-                                    <b> {{ __('Nick name') }}:</b> {{ $user->nickname }}<br>
+                                    <b> {{ __('Nickname') }}:</b> {{ $user->nickname }}<br>
                                     <b>{{ __('Birth') }}:</b> {{ date('d/m/Y', strtotime($user->birth)) }}<br>
-                                    <b>{{ __('CPF') }}:</b> {{ $user->cpf }}  
+                                    <b>{{ __('Social security number') }}:</b> {{ $user->social_security_number }}  
                                 </div>
                             </div>
                         </div>
@@ -127,6 +127,7 @@
                                                     <i class="fas fa-phone-square-alt"></i> {{ $user->telephone }}<br>
                                                     <i class="fas fa-mobile-alt"></i> {{ $user->cell_phone }}<br>
                                                     <i class="fab fa-whatsapp-square"></i> {{ $user->whatsapp }}<br>
+                                                    <i class="fab fa-telegram"></i> {{ $user->telegram }}<br>
                                                 </div>
                                                 <div class="col-sm-4 invoice-col">
                                                     <strong>{{ __('Social media') }}</strong><br>

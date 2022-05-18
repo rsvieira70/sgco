@@ -28,7 +28,8 @@ class ProfileController extends Controller
             $title =  __('Profile');
             $reference = __('profile');
             $userAuth = Auth()->User();
-            return view('profiles.edit', compact('title', 'reference', 'userAuth', 'profile'));
+            $loggedId = intval(Auth::id());
+            return view('profiles.edit', compact('title', 'reference', 'userAuth', 'loggedId', 'profile'));
         }
         return redirect()->route('dashboard');
     }

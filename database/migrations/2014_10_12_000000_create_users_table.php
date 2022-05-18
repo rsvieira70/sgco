@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('name',50);
             $table->string('social_name',50)->nullable();
             $table->string('nickname',30)->nullable();
-            $table->decimal('cpf',12,0)->nullable();
+            $table->string('social_security_number',20)->nullable();
             $table->date('birth')->nullable();
             $table->string('image',80)->nullable();
             $table->decimal('user_type',1,0);  //1-Master 2-Administrator 3-Users = 4-Patients
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->decimal('telephone',10,0)->nullable();
             $table->decimal('cell_phone',11,0)->nullable();
             $table->decimal('whatsapp',11,0)->nullable();
+            $table->decimal('telegram',11,0)->nullable();
             $table->string('facebook',80)->nullable();
             $table->string('instagram',80)->nullable();
             $table->string('twitter',80)->nullable();

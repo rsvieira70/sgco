@@ -19,7 +19,7 @@ class Profile extends Model
     protected $fillable = [
         'social_name',
         'nickname',
-        'cpf',
+        'social_security_number',
         'birth',
         'image',
         'zip_code',
@@ -33,6 +33,7 @@ class Profile extends Model
         'telephone',
         'cell_phone',
         'whatsapp',
+        'telegram',
         'facebook',
         'instagram',
         'twitter',
@@ -52,6 +53,50 @@ class Profile extends Model
     {
         $this->attributes['name'] = ucwords(strtolower($value));
     }
+    public function setSocialNameAttribute($value)
+    {
+        $this->attributes['social_name'] = ucwords(strtolower($value));
+    }
+    public function setNickNameAttribute($value)
+    {
+        $this->attributes['nickname'] = ucwords(strtolower($value));
+    }
+    public function setAddressAttribute($value)
+    {
+        $this->attributes['Address'] = ucwords(strtolower($value));
+    }
+    public function setComplementAttribute($value)
+    {
+        $this->attributes['complement'] = ucwords(strtolower($value));
+    }
+    public function setNeighborhoodAttribute($value)
+    {
+        $this->attributes['neighborhood'] = ucwords(strtolower($value));
+    }
+    public function setCityAttribute($value)
+    {
+        $this->attributes['city'] = ucwords(strtolower($value));
+    }
+    public function setStateAttribute($value)
+    {
+        $this->attributes['state'] = strtoupper($value);
+    }
+    public function setFacebookAttribute($value)
+    {
+        $this->attributes['facebook'] = strtolower($value);
+    }
+    public function setInstagramAttribute($value)
+    {
+        $this->attributes['instagram'] = strtolower($value);
+    }
+    public function setTwitterAttribute($value)
+    {
+        $this->attributes['twitter'] = strtolower($value);
+    }
+    public function setLinkedInlAttribute($value)
+    {
+        $this->attributes['linkedin'] = strtolower($value);
+    }
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
@@ -62,14 +107,6 @@ class Profile extends Model
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
-    }
-    public function departments()
-    {
-        return $this->belongsTo(Department::class);
-    }
-    public function positions()
-    {
-        return $this->belongsTo(Position::class);
     }
 
 }

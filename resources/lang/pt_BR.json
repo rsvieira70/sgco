@@ -819,7 +819,7 @@
     "User active": "Usuário ativo",
     "About me": "Sobre mim",
     "Social name": "Nome social",
-    "Nick name": "Apelido",
+    "Nickname": "Apelido",
     "Birth": "Nascimento",
     "Correspondence": "Correspondêcia",
     "Informations": "Informações",
@@ -831,7 +831,14 @@
     "Neighborhood": "Bairro",
     "State": "Estado",
     "Telephone": "Telefone",
-    "Cell phone": "Celular"
+    "Cell phone": "Celular",
+    "Complement": "Complemento",
+    "Number": "Número",
+    "Social security number": "CPF",
+    "Invalid Social security number": "CPF inválido",
+    "Please enter full name": "Por favor, insira o nome completo",
+    "Leave blank to keep the current password": "Deixe em branco para manter a senha atual"
+
     
 
 
