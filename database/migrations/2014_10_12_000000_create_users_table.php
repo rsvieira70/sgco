@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nickname',30)->nullable();
             $table->string('social_security_number',20)->nullable();
             $table->date('birth')->nullable();
-            $table->string('image',80)->nullable();
+            $table->string('image')->nullable();
             $table->decimal('user_type',1,0);  //1-Master 2-Administrator 3-Users = 4-Patients
             $table->decimal('zip_code', 8,0)->nullable(); 
             $table->string('address',70)->nullable();

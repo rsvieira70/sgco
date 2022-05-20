@@ -38,9 +38,21 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $data = $request->validated();
-
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $name = uniqid(date('HisYmd'));
+            $extension = $request->image->extension();
+            $nameImage = "{$name}.{$extension}";
+            $data['image'] = $nameImage;
+            $upload = $request->image->storeAs('users', $nameImage);
+            
+            if (!$upload)
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+        }
         db::beginTransaction();
-                try {
+        try {
             $id = Auth::user()->id;
             $profile = Profile::find($id);
             $profile->name = $data['name'];
@@ -48,6 +60,7 @@ class ProfileController extends Controller
             $profile->nickname = $data['nickname'];
             $profile->social_security_number = $data['social_security_number'];
             $profile->birth = $data['birth'];
+            $profile->image = $data['image'];
             $profile->zip_code = $data['zip_code'];
             $profile->address = $data['address'];
             $profile->house_number = $data['house_number'];
@@ -75,8 +88,8 @@ class ProfileController extends Controller
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to change') . ' '. __('profile') . ' -> ' . __('Key' ) . ' ' . $id;
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to change') . ' ' . __('profile') . ' -> ' . __('Key') . ' ' . $id;
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
             return redirect()->route('profiles.edit')->with('alert', 'errors');
         }

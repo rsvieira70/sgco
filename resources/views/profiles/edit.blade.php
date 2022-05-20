@@ -77,7 +77,7 @@
                                         <label for="image">{{ __('Photo') }}</label>
                                         <input type="file" id="image" name="image"
                                             value="{{ old('image', $profile->image, null) }}"
-                                            class="form-control @error('birth') is-invalid @enderror" required>
+                                            class="form-control @error('image') is-invalid @enderror">
                                         <div class="invalid-feedback">{{ $errors->first('image') }}
                                         </div>
                                     </div>
@@ -148,7 +148,7 @@
                                         <label for="city">{{ __('City') }}</label>
                                         <input type="text" id="city" name="city"
                                             value="{{ old('city', $profile->city, null) }}" maxlength="50"
-                                            class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}"  disabled>
+                                            class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}"  readonly>
                                         <div class="invalid-feedback">{{ $errors->first('city') }} </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                                         <input type="text" id="state" name="state"
                                             value="{{ old('state', $profile->state, null) }}" maxlength="2"
                                             class="form-control {{ $errors->has('state') ? 'is-invalid' : '' }}"
-                                            disabled>
+                                            readonly>
                                         <div class="invalid-feedback">{{ $errors->first('state') }} </div>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                                         <label for="ibge">{{ __('IBGE') }}</label>
                                         <input type="text" id="ibge" name="ibge"
                                             value="{{ old('ibge', $profile->ibge, null) }}" maxlength="7"
-                                            class="form-control {{ $errors->has('ibge') ? 'is-invalid' : '' }}" disabled>
+                                            class="form-control {{ $errors->has('ibge') ? 'is-invalid' : '' }}" readonly>
                                         <div class="invalid-feedback">{{ $errors->first('ibge') }} </div>
                                     </div>
                                 </div>
