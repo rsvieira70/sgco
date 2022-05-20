@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('image',80)->nullable();
             $table->decimal('zip_code', 8,0);
             $table->string('address',70);
-            $table->string('number',10);
+            $table->string('house_number',10);
             $table->string('complement',30)->nullable();
             $table->string('neighborhood',30);
             $table->string('city',50);

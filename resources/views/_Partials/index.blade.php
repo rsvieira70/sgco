@@ -15,7 +15,7 @@
    
     $swalFormSuspendTitle = __('Are you sure?');
     $swalFormSuspendText = __('This action can be reversed at any time!');
-    $swalFormSuspendConfirmButtonText = __('Yes, delete it!');
+    $swalFormSuspendConfirmButtonText = __('Yes, suspend it!');
     $swalFormSuspendCancelButtonText = __('No, cancel!');
 
     $swalErrorTitle = __('Opps! An internal error occurred.');

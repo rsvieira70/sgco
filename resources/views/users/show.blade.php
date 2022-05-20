@@ -116,7 +116,7 @@
                                             <div class="row invoice-info">
                                                 <div class="col-sm-4 invoice-col">
                                                     <strong>{{ __('Address') }}</strong><br>
-                                                    {{ $user->address }} {{ $user->number }}
+                                                    {{ $user->address }} {{ $user->house_number }}
                                                     {{ $user->complement }} <br>
                                                     {{ $user->neighborhood }} <br>
                                                     {{ $user->city }} {{ $user->state }} {{ $user->zip_code }}<br>

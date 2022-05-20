@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('user_type',1,0);  //1-Master 2-Administrator 3-Users = 4-Patients
             $table->decimal('zip_code', 8,0)->nullable(); 
             $table->string('address',70)->nullable();
-            $table->string('number',10)->nullable();
+            $table->string('house_number',10)->nullable();
             $table->string('complement',30)->nullable();
             $table->string('neighborhood',30)->nullable();
             $table->string('city',50)->nullable();
@@ -49,7 +49,7 @@ return new class extends Migration
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
-            $table->index('cpf');
+            $table->index('social_security_number');
             $table->index('name');
             $table->index('social_name');
             $table->index('nickname');

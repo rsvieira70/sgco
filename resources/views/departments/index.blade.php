@@ -1,4 +1,8 @@
 @extends('_Partials.index')
+@section('head-complement')
+    <!-- dataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
+@endsection
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -56,3 +60,8 @@
     </div>
 </div>
 @endsection;
+@section('java-complement')
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('jquery/jquery-datatable/jquery.simple.datatable.js') }}"></script>
+@endsection

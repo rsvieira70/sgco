@@ -1,4 +1,6 @@
 @extends('_Partials.index')
+@section('head-complement')
+@endsection
 @section('content')
     <div class="row">
         <div class="col-lg-3 col-6">
@@ -50,4 +52,6 @@
             </div>
         </div>
     </div>
+@endsection
+@section('java-complement')
 @endsection

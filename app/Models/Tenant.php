@@ -18,7 +18,7 @@ class Tenant extends Model
         'image',
         'zip_code',
         'address',
-        'number',
+        'house_number',
         'complement',
         'neighborhood',
         'city',

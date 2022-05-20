@@ -17,6 +17,7 @@ class Profile extends Model
     use TenantTrait;
 
     protected $fillable = [
+        'name',
         'social_name',
         'nickname',
         'social_security_number',
@@ -24,7 +25,7 @@ class Profile extends Model
         'image',
         'zip_code',
         'address',
-        'number',
+        'house_number',
         'complement',
         'neighborhood',
         'city',
@@ -61,9 +62,19 @@ class Profile extends Model
     {
         $this->attributes['nickname'] = ucwords(strtolower($value));
     }
+    
+    public function setSocialSecurityNumberAttribute($value)
+    {
+        $this->attributes['social_security_number'] = preg_replace("/\D/","", $value);
+    }
+    public function setZipCodeAttribute($value)
+    {
+        $this->attributes['zip_code'] = preg_replace("/\D/","", $value);
+    }
+    
     public function setAddressAttribute($value)
     {
-        $this->attributes['Address'] = ucwords(strtolower($value));
+        $this->attributes['address'] = ucwords(strtolower($value));
     }
     public function setComplementAttribute($value)
     {
@@ -81,6 +92,25 @@ class Profile extends Model
     {
         $this->attributes['state'] = strtoupper($value);
     }
+    public function setTelephoneAttribute($value)
+    {
+        $this->attributes['telephone'] = preg_replace("/\D/","", $value);
+    }
+    public function setCellPhoneAttribute($value)
+    {
+        $this->attributes['cell_phone'] = preg_replace("/\D/","", $value);
+    }
+    public function setWhatsAppAttribute($value)
+    {
+        $this->attributes['whatsapp'] = preg_replace("/\D/","", $value);
+    }
+    public function setTelegramAttribute($value)
+    {
+        $this->attributes['telegram'] = preg_replace("/\D/","", $value);
+    }
+
+
+
     public function setFacebookAttribute($value)
     {
         $this->attributes['facebook'] = strtolower($value);

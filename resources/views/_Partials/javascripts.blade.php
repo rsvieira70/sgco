@@ -1,49 +1,9 @@
-    <!-- REQUIRED SCRIPTS ---------------------------------------------->
-    <!-- jQuery -->
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
-
-    <!-- Bootstrap -->
     <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    <!-- AdminLTE App -->
     <script src="{{ asset('AdminLTE/dist/js/adminlte.js?v=3.2.0') }}"></script>
-    <!--    <script src="../../dist/js/demo.js"></script> -->
-    <!-- dataTAbles ---------------------------------------------------->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#datatable').DataTable({
-                //              dom: 'Bfrtip',
-                //              buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
-                "language": {
-                    "search": "Buscar",
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
-                    "zeroRecords": "Nada encontrado",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "Nenhum registro disponível",
-                    "infoFiltered": "(filtrado de _MAX_ registros no total)",
-                    "decimal": ",",
-                    "thousands": ".",
-                    "paginate": {
-                        "previous": "Anterior",
-                        "next": "Seguinte",
-                        "first": "Primeira",
-                        "last": "Última"
-                    }
-                }
-            });
-        });
-    </script>
+    @yield("java-complement")
+
     <!-- sweetalert ---------------------------------------------------->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>;
 
@@ -131,6 +91,3 @@
             })
         </script>
     @endif
-    <!-- mask ---------------------------------------------------------->
-    <script src="{{ asset('jquery/jquery-mask/jquery.mask.min.js') }}"></script>
-    <script src="{{ asset('jquery/jquery-mask/jquery.mask.js') }}"></script>

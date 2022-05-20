@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Hash;
 use App\Notifications\systemErrorEmail;
 use App\Http\Requests\ProfileRequest;
 use App\Notifications\SystemErrorAlert;
@@ -37,13 +38,38 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         $data = $request->validated();
+
         db::beginTransaction();
-        try {
+                try {
             $id = Auth::user()->id;
             $profile = Profile::find($id);
-            $profile->description = $data['description'];
+            $profile->name = $data['name'];
+            $profile->social_name = $data['social_name'];
+            $profile->nickname = $data['nickname'];
+            $profile->social_security_number = $data['social_security_number'];
+            $profile->birth = $data['birth'];
+            $profile->zip_code = $data['zip_code'];
+            $profile->address = $data['address'];
+            $profile->house_number = $data['house_number'];
+            $profile->complement = $data['complement'];
+            $profile->neighborhood = $data['neighborhood'];
+            $profile->city = $data['city'];
+            $profile->state = $data['state'];
+            $profile->ibge = $data['ibge'];
+            $profile->telephone = $data['telephone'];
+            $profile->cell_phone = $data['cell_phone'];
+            $profile->whatsapp = $data['whatsapp'];
+            $profile->telegram = $data['telegram'];
+            $profile->facebook = $data['facebook'];
+            $profile->instagram = $data['instagram'];
+            $profile->twitter = $data['twitter'];
+            $profile->linkedin = $data['linkedin'];
+            $profile->email = $data['email'];
+            if (!empty($data['password'])) {
+                $profile->password = Hash::make($data['password']);
+            };
+            $profile->profile_note = $data['profile_note'];
             $profile->save();
-
             db::commit();
             return redirect()->route('dashboard')->with('alert', 'update-ok');
         } catch (\Exception $exception) {
@@ -55,5 +81,4 @@ class ProfileController extends Controller
             return redirect()->route('profiles.edit')->with('alert', 'errors');
         }
     }
-
 }

@@ -1,6 +1,8 @@
 @extends('_Partials.index')
+@section('head-complement')
+@endsection
 @section('content')
-    <form action="{{ route('profiles.update', $profile->id) }}" method="POST" class="form-horizontal">
+    <form action="{{ route('profiles.update', $profile->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="card">
@@ -9,7 +11,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
-                                <input type="hidden" name="id" value="{{$loggedId}}">
+                                <input type="hidden" name="id" value="{{ $loggedId }}">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="name">{{ __('Name') }}</label>
@@ -49,7 +51,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                                             </div>
-                                            <input type="text" id="social_security_number" name="social_security_number"
+                                            <input type="text" id="cpfsocial_security_number"
+                                                name="social_security_number"
                                                 value="{{ old('social_security_number', $profile->social_security_number, null) }}"
                                                 maxlength="11"
                                                 class="form-control {{ $errors->has('social_security_number') ? 'is-invalid' : '' }}"
@@ -66,6 +69,16 @@
                                             value="{{ old('birth', $profile->birth, null) }}"
                                             class="form-control @error('birth') is-invalid @enderror" required>
                                         <div class="invalid-feedback">{{ $errors->first('birth') }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label for="image">{{ __('Photo') }}</label>
+                                        <input type="file" id="image" name="image"
+                                            value="{{ old('image', $profile->image, null) }}"
+                                            class="form-control @error('birth') is-invalid @enderror" required>
+                                        <div class="invalid-feedback">{{ $errors->first('image') }}
                                         </div>
                                     </div>
                                 </div>
@@ -98,12 +111,13 @@
                                 </div>
                                 <div class="col-sm-1">
                                     <div class="form-group">
-                                        <label for="number">{{ __('Number') }}</label>
-                                        <input type="text" id="number" name="number"
-                                            value="{{ old('number', $profile->number, null) }}" maxlength="10"
-                                            class="form-control {{ $errors->has('number') ? 'is-invalid' : '' }}"
+                                        <label for="house_number">{{ __('Number') }}</label>
+                                        <input type="text" id="house_number" name="house_number"
+                                            value="{{ old('house_number', $profile->house_number, null) }}"
+                                            maxlength="10"
+                                            class="form-control {{ $errors->has('house_number') ? 'is-invalid' : '' }}"
                                             data-mask='0000000000' data-mask-reverse="true" required>
-                                        <div class="invalid-feedback">{{ $errors->first('number') }} </div>
+                                        <div class="invalid-feedback">{{ $errors->first('house_number') }} </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -132,9 +146,9 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="city">{{ __('City') }}</label>
-                                        <input type="text" id="number" name="city"
+                                        <input type="text" id="city" name="city"
                                             value="{{ old('city', $profile->city, null) }}" maxlength="50"
-                                            class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" required>
+                                            class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}"  disabled>
                                         <div class="invalid-feedback">{{ $errors->first('city') }} </div>
                                     </div>
                                 </div>
@@ -144,7 +158,7 @@
                                         <input type="text" id="state" name="state"
                                             value="{{ old('state', $profile->state, null) }}" maxlength="2"
                                             class="form-control {{ $errors->has('state') ? 'is-invalid' : '' }}"
-                                            required>
+                                            disabled>
                                         <div class="invalid-feedback">{{ $errors->first('state') }} </div>
                                     </div>
                                 </div>
@@ -153,7 +167,7 @@
                                         <label for="ibge">{{ __('IBGE') }}</label>
                                         <input type="text" id="ibge" name="ibge"
                                             value="{{ old('ibge', $profile->ibge, null) }}" maxlength="7"
-                                            class="form-control {{ $errors->has('ibge') ? 'is-invalid' : '' }}">
+                                            class="form-control {{ $errors->has('ibge') ? 'is-invalid' : '' }}" disabled>
                                         <div class="invalid-feedback">{{ $errors->first('ibge') }} </div>
                                     </div>
                                 </div>
@@ -167,7 +181,7 @@
                                                 <span class="input-group-text"><i
                                                         class="fas fa-phone-square-alt"></i></span>
                                             </div>
-                                            <input type="text" id="telephone" name="Telephone"
+                                            <input type="text" id="telephone" name="telephone"
                                                 value="{{ old('telephone', $profile->telephone, null) }}" maxlength="10"
                                                 class="form-control {{ $errors->has('telephone') ? 'is-invalid' : '' }}"
                                                 data-mask="(00) 0000.0000">
@@ -201,7 +215,7 @@
                                             <input type="text" id="whatsapp" name="whatsapp"
                                                 value="{{ old('whatsapp', $profile->whatsapp, null) }}" maxlength="11"
                                                 class="form-control {{ $errors->has('whatsapp') ? 'is-invalid' : '' }}"
-                                                data-mask="(00) 00000.0000" required>
+                                                data-mask="(00) 00000.0000">
                                             <div class="invalid-feedback">{{ $errors->first('whatsapp') }} </div>
                                         </div>
                                     </div>
@@ -216,7 +230,7 @@
                                             <input type="text" id="telegram" name="telegram"
                                                 value="{{ old('telegram', $profile->telegram, null) }}" maxlength="11"
                                                 class="form-control {{ $errors->has('telegram') ? 'is-invalid' : '' }}"
-                                                data-mask="(00) 00000.0000" required>
+                                                data-mask="(00) 00000.0000">
                                             <div class="invalid-feedback">{{ $errors->first('telegram') }} </div>
                                         </div>
                                     </div>
@@ -234,7 +248,6 @@
                                             <input type="text" id="facebook" name="facebook"
                                                 value="{{ old('facebook', $profile->facebook, null) }}" maxlength="80"
                                                 class="form-control {{ $errors->has('facebook') ? 'is-invalid' : '' }}">
-
                                             <div class="invalid-feedback">{{ $errors->first('facebook') }} </div>
                                         </div>
                                     </div>
@@ -318,7 +331,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="profile_note">{{ __('Note') }}</label>
-                                        <textarea name="orofile_note" class="form-control @error('profile_note') is-invalid @enderror" rows="4"
+                                        <textarea name="profile_note" class="form-control @error('profile_note') is-invalid @enderror" rows="4"
                                             style="height: 30mm">{{ old('profile_note', $profile->profile_note, null) }}</textarea>
                                     </div>
                                 </div>
@@ -339,3 +352,8 @@
         </div>
     </form>
 @endsection;
+@section('java-complement')
+    <script src="{{ asset('jquery/jquery-mask/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('jquery/jquery-mask/jquery.mask.js') }}"></script>
+    <script src="{{ asset('jquery/jquery-zipcode/jquery.zipcode.js') }}"></script>
+@endsection
