@@ -25,12 +25,11 @@ $(document).ready(function () {
                         $("#city").val(data.localidade);
                         $("#state").val(data.uf);
                         $("#ibge").val(data.ibge);
-                        $( "#number" ).focus();
+                        $("#number").focus();
                     } //end if.
                     else {
                         clear_form_zip_code();
                         alert("CEP não encontrado.");
-                    }
                 });
             } //end if.
             else {
@@ -40,6 +39,7 @@ $(document).ready(function () {
         } //end if.
         else {
             clear_form_zip_code();
+            alert("CEP em branco.");
         }
     });
 });

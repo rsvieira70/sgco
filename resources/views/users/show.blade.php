@@ -41,9 +41,14 @@
                                             @break
                                         @endswitch
                                     </div>
+                                    @php
+                                        $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
+                                        if ($user->image) {
+                                            $pathImage = url("storage/tenants/{$user->Tenant->uuid}/users/{$user->image}");
+                                        }
+                                    @endphp
                                     <div class="text-center">
-                                        <img class="profile-user-img img-fluid img-circle"
-                                            src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}"
+                                        <img class="profile-user-img img-fluid img-circle" src="{{ $pathImage }}"
                                             alt="User profile picture">
                                     </div>
                                     <h3 class="profile-username text-center">{{ $user->name }}</h3>
@@ -55,7 +60,8 @@
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
                                             @if ($user->department_id != null)
-                                                <b>{{ __('Department') }}:</b> {{ $user->department->description }}<br>
+                                                <b>{{ __('Department') }}:</b>
+                                                {{ $user->department->description }}<br>
                                             @endif
                                             <b>{{ __('Registration date') }}:</b>
                                             {{ date('d/m/Y', strtotime($user->registration_date)) }}<br>
@@ -64,13 +70,13 @@
                                     </ul>
                                     @if ($user->suspension_date !== null)
                                         <div class="alert alert-danger alert-dismissible">
-                                            <h5><i class="icon fas fa-ban"></i> {{__('Alert')}}!</h5>
+                                            <h5><i class="icon fas fa-ban"></i> {{ __('Alert') }}!</h5>
                                             {{ __('User suspended in') }}
                                             {{ date('d/m/Y', strtotime($user->suspension_date)) }}
                                         </div>
                                     @else
                                         <div class="alert alert-success alert-dismissible">
-                                            <h5><i class="icon fas fa-check"></i> {{__('Alert')}}!</h5>
+                                            <h5><i class="icon fas fa-check"></i> {{ __('Alert') }}!</h5>
                                             {{ __('User active') }}
                                         </div>
                                     @endif
@@ -85,7 +91,7 @@
                                     <b> {{ __('Social name') }}:</b> {{ $user->social_name }} <br>
                                     <b> {{ __('Nickname') }}:</b> {{ $user->nickname }}<br>
                                     <b>{{ __('Birth') }}:</b> {{ date('d/m/Y', strtotime($user->birth)) }}<br>
-                                    <b>{{ __('Social security number') }}:</b> {{ $user->social_security_number }}  
+                                    <b>{{ __('Social security number') }}:</b> {{ $user->social_security_number }}
                                 </div>
                             </div>
                         </div>
@@ -96,11 +102,11 @@
                                         <li class="nav-item"><a class="nav-link active" href="#information"
                                                 data-toggle="tab">{{ __('Informations') }}</a></li>
                                         <!--
-                                        <li class="nav-item"><a class="nav-link" href="#timeline"
-                                                data-toggle="tab">{{ __('Timeline') }}</a></li>
-                                                                <li class="nav-item"><a class="nav-link" href="#settings"
-                                                                        data-toggle="tab">{{ __('Settings') }}</a></li>
-                                                                -->
+                                                                            <li class="nav-item"><a class="nav-link" href="#timeline"
+                                                                                    data-toggle="tab">{{ __('Timeline') }}</a></li>
+                                                                                                    <li class="nav-item"><a class="nav-link" href="#settings"
+                                                                                                            data-toggle="tab">{{ __('Settings') }}</a></li>
+                                                                                                    -->
                                     </ul>
                                 </div>
                                 <div class="card-body">

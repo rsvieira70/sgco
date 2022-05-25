@@ -9,9 +9,16 @@
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            @php
+            $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
+            if ($userAuth->image) {
+                $pathImage = url("storage/tenants/{$userAuth->Tenant->uuid}/users/{$userAuth->image}");
+            }
+        @endphp
+
             <div class="image">
-                <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}" class="img-circle elevation-2"
-                    alt="User Image">
+                <img src="{{ $pathImage }}" class="img-circle elevation-2"
+                    alt={{ __('User Image') }}>
             </div>
             <div class="info">
                 <a href="{{ route('profiles.edit') }}" class="d-block">{{ $userAuth->name }}</a>

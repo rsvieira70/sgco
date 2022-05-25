@@ -2,7 +2,8 @@
 @section('head-complement')
 @endsection
 @section('content')
-    <form action="{{ route('profiles.update', $profile->id) }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+    <form action="{{ route('profiles.update', $profile->id) }}" method="POST" class="form-horizontal"
+        enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="card">
@@ -51,8 +52,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                                             </div>
-                                            <input type="text" id="cpfsocial_security_number"
-                                                name="social_security_number"
+                                            <input type="text" id="cpfsocial_security_number" name="social_security_number"
                                                 value="{{ old('social_security_number', $profile->social_security_number, null) }}"
                                                 maxlength="11"
                                                 class="form-control {{ $errors->has('social_security_number') ? 'is-invalid' : '' }}"
@@ -80,6 +80,9 @@
                                             class="form-control @error('image') is-invalid @enderror">
                                         <div class="invalid-feedback">{{ $errors->first('image') }}
                                         </div>
+                                        <p class="text-danger"><i class="fas fa-hand-point-right"></i>
+                                            {{ __('Choose a file only if you want to include or change your profile picture') }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +151,7 @@
                                         <label for="city">{{ __('City') }}</label>
                                         <input type="text" id="city" name="city"
                                             value="{{ old('city', $profile->city, null) }}" maxlength="50"
-                                            class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}"  readonly>
+                                            class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" readonly>
                                         <div class="invalid-feedback">{{ $errors->first('city') }} </div>
                                     </div>
                                 </div>
@@ -356,4 +359,6 @@
     <script src="{{ asset('jquery/jquery-mask/jquery.mask.min.js') }}"></script>
     <script src="{{ asset('jquery/jquery-mask/jquery.mask.js') }}"></script>
     <script src="{{ asset('jquery/jquery-zipcode/jquery.zipcode.js') }}"></script>
+    <script src="{{ asset('jquery/jquery-copy-fields/jquery-copy-fields-names.js') }}"></script>
+    <script src="{{ asset('jquery/jquery-copy-fields/jquery-copy-fields-phones.js') }}"></script>
 @endsection

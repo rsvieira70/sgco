@@ -48,8 +48,13 @@ class Profile extends Model
             $model->uuid = Str::uuid();
         });
     }
-
-    //mutators
+    //accessor get
+    public function getSocialsecuritynumberAttribute()
+    {
+        $social_security_number = $this->attributes['social_security_number'];
+        return substr($social_security_number, 0, 3) . '.' . substr($social_security_number, 3, 3) . '.' . substr($social_security_number, 6, 3) . '-' . substr($social_security_number, 9, 2);
+    }         
+    //mutators set
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucwords(strtolower($value));
@@ -108,8 +113,6 @@ class Profile extends Model
     {
         $this->attributes['telegram'] = preg_replace("/\D/","", $value);
     }
-
-
 
     public function setFacebookAttribute($value)
     {

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('city',50)->nullable();
             $table->string('state',2)->nullable();
             $table->decimal('ibge',7,0)->nullable();
-            $table->decimal('telephone',10,0)->nullable();
+            $table->decimal('telephone',10, 0)->nullable();
             $table->decimal('cell_phone',11,0)->nullable();
             $table->decimal('whatsapp',11,0)->nullable();
             $table->decimal('telegram',11,0)->nullable();

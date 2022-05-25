@@ -12,7 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     protected $fillable = [
         'tenant_id',
         'uuid',
@@ -37,7 +36,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    //mutators
+    //mutators set
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucwords(strtolower($value));

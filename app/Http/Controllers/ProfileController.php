@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
@@ -8,10 +7,8 @@ use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Hash;
-use App\Notifications\systemErrorEmail;
 use App\Http\Requests\ProfileRequest;
 use App\Notifications\SystemErrorAlert;
-use GrahamCampbell\ResultType\Success;
 
 class ProfileController extends Controller
 {
@@ -60,7 +57,9 @@ class ProfileController extends Controller
             $profile->nickname = $data['nickname'];
             $profile->social_security_number = $data['social_security_number'];
             $profile->birth = $data['birth'];
-            $profile->image = $data['image'];
+            if (!empty($data['image'])) {
+                $profile->image = $data['image'];
+            };
             $profile->zip_code = $data['zip_code'];
             $profile->address = $data['address'];
             $profile->house_number = $data['house_number'];

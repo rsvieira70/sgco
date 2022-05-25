@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use App\Class\Useful;
 use App\Models\NewUser;
 use App\Models\Position;
 use App\Models\Department;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Notifications\SystemErrorAlert;
 use App\Rules\FullName;
+
 
 class UserController extends Controller
 {
@@ -58,8 +60,16 @@ class UserController extends Controller
     }
     public function show($id)
     {
-        $user = NewUser::with(['Department', 'Position'])->find($id);
+        $user = NewUser::with(['Department', 'Position', 'Tenant'])->find($id);
+        
         if ($user) {
+            $user->social_security_number = Useful::class::cpf($user->social_security_number);
+            $user->zip_code = Useful::class::zip_code($user->zip_code);
+            $user->telephone = Useful::class::phone($user->telephone);
+            $user->cell_phone = Useful::class::phone($user->cell_phone);
+            $user->whatsapp = Useful::class::phone($user->whatsapp);
+            $user->telegram = Useful::class::phone($user->telegram);
+
             $title =  __('User show');
             $reference = __('user');
             $userAuth = Auth()->User();

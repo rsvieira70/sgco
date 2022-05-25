@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
-  use TenantTrait;
-  use HasFactory;
+    use TenantTrait;
+    use HasFactory;
     protected $fillable = [
         'description', 'suspended'
     ];

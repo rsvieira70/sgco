@@ -1,6 +1,7 @@
 <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="{{ asset('AdminLTE/dist/img/sgcoLogo.png') }}" alt="sgcoLogo" height="60" width="60">
-</div> 
+    <img class="animation__wobble" src="{{ asset('AdminLTE/dist/img/sgcoLogo.png') }}" alt="sgcoLogo" height="60"
+        width="60">
+</div>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light ">
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -76,8 +77,7 @@
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Brad Diesel
-                                <span class="float-right text-sm text-danger"><i
-                                        class="fas fa-star"></i></span>
+                                <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">Call me whenever you can...</p>
                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -92,8 +92,7 @@
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 John Pierce
-                                <span class="float-right text-sm text-muted"><i
-                                        class="fas fa-star"></i></span>
+                                <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">I got your message bro</p>
                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -108,8 +107,7 @@
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
                                 Nora Silvester
-                                <span class="float-right text-sm text-warning"><i
-                                        class="fas fa-star"></i></span>
+                                <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
                             </h3>
                             <p class="text-sm">The subject goes here</p>
                             <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
@@ -171,14 +169,20 @@
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}"
+                @php
+                    $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
+                    if ($userAuth->image) {
+                        $pathImage = url("storage/tenants/{$userAuth->Tenant->uuid}/users/{$userAuth->image}");
+                    }
+                @endphp
+                <img src="{{ $pathImage }}"
                     class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline">{{ $userAuth->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header bg-primary">
-                    <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}"
-                        class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}" class="img-circle elevation-2"
+                        alt={{ __('User Image') }}>
                     <p>
                         {{ $userAuth->name }} <br>
                         <small>Analista de sistemas</small>
@@ -200,11 +204,11 @@
                 </li>   -->
 
                 <li class="user-footer">
-                    <a href="{{ route('profiles.edit') }}" class="btn btn-primary btn-flat">{{ __('Profile') }}</a>
+                    <a href="{{ route('profiles.edit') }}"
+                        class="btn btn-primary btn-flat">{{ __('Profile') }}</a>
                     <a href="{{ route('logout') }} " class="btn btn-danger btn-flat float-right"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Log Out') }}</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                        style="display: none;">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 </li>
@@ -215,7 +219,7 @@
                 <i class="fas fa-expand-arrows-alt"></i>
             </a>
         </li>
-    <!--<li class="nav-item">
+        <!--<li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                 <i class="fas fa-th-large"></i>
             </a>

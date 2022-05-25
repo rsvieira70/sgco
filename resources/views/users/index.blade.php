@@ -25,9 +25,14 @@
                     @foreach ($users as $user)
                         <tr>
                             <td class="text-right">{{ $user->id }}</td>
+                            @php
+                                $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
+                                if ($user->image) {
+                                    $pathImage = url("storage/tenants/{$user->Tenant->uuid}/users/{$user->image}");
+                                }
+                            @endphp
                             <td class="text-center">
-                                <img class="direct-chat-img" src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}"
-                                    alt="message user image">
+                                <img class="direct-chat-img" src="{{ $pathImage }}" alt={{ __('User Image') }}>
                             </td>
                             <td>{{ $user->name }}<br>
                                 @switch ($user->user_type)
@@ -96,19 +101,19 @@
                                                     class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
                                         </form>
                                         <!--
-                                                <form action="{{ route('users.destroy', $user->id) }}"
-                                                    class="d-inline formulario-eliminar" method="POST">
-                                                    @method ('DELETE')
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-xs btn-danger"><i
-                                                            class="fas fa-trash"></i>
-                                                        {{ __('Delete') }}</button>
-                                                </form>
-                                            -->
+                                                    <form action="{{ route('users.destroy', $user->id) }}"
+                                                        class="d-inline formulario-eliminar" method="POST">
+                                                        @method ('DELETE')
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-xs btn-danger"><i
+                                                                class="fas fa-trash"></i>
+                                                            {{ __('Delete') }}</button>
+                                                    </form>
+                                                -->
                                     @endif
                                     <!-- <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary "><i class="fas fa-id-card"></i> Perfil</a>
-                                                                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary "><i class="fas fa-tasks"></i> Permissões</a>
-                                                                            -->
+                                                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary "><i class="fas fa-tasks"></i> Permissões</a>
+                                                                                -->
                                 </td>
                             @endif
                         </tr>
