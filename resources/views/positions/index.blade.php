@@ -73,5 +73,5 @@
 @section('java-complement')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('jquery/jquery-datatable/jquery.simple.datatable.js') }}"></script>
+    <script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
 @endsection
