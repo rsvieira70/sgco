@@ -8,15 +8,7 @@
         @method('PUT')
         <div class="row">
             <div class="col-sm-12">
-
-
                 <div class="invoice p-3 mb-3">
-
-
-
-
-
-
                     <div class="row">
                         <input type="hidden" name="id" value="{{ $loggedId }}">
                         <div class="col-sm-4">
@@ -345,19 +337,19 @@
                         </div>
                     </div>
                 </div>
-            
-            <div class="row">
-                <div class="col-sm-12">
-                    <button type="submit" class="btn btn-success float-right"><i class="fas fa-save"></i>
-                        {{ __('Save') }}</button>
-                    <a href="{{ route('dashboard') }}" class="btn btb-sm btn-danger"><i
-                            class="fas fa-arrow-circle-left"></i>
-                        {{ __('Go back') }}</a>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-success float-right"><i class="fas fa-save"></i>
+                            {{ __('Save') }}</button>
+                        <a href="{{ route('dashboard') }}" class="btn btb-sm btn-danger"><i
+                                class="fas fa-arrow-circle-left"></i>
+                            {{ __('Go back') }}</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 @endsection;
 @section('java-complement')
     <script src="{{ asset('jquery/jquery.mask/jquery.mask.min.js') }}"></script>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\Tenant;
 
 class DashboardController extends Controller {
     public function __construct() { $this->middleware('auth'); }
@@ -9,10 +10,12 @@ class DashboardController extends Controller {
         $title =  __('Dashboard');
         $reference =  __('Dashboard');
         $userAuth = Auth()->User();
+        $tenant = Tenant::find($userAuth->id);
         return view('dashboard', [
             'title' => $title,
             'reference' => $reference,
-            'userAuth' => $userAuth
+            'userAuth' => $userAuth,
+            'tenant' => $tenant
         ]);
     }
 }

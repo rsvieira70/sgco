@@ -2,7 +2,7 @@
     <img class="animation__wobble" src="{{ asset('AdminLTE/dist/img/sgcoLogo.png') }}" alt="sgcoLogo" height="60"
         width="60">
 </div>
-<nav class="main-header navbar navbar-expand navbar-white navbar-light ">
+<nav class="main-header navbar navbar-expand navbar-light navbar-white">
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button">
@@ -175,17 +175,15 @@
                         $pathImage = url("storage/tenants/{$userAuth->Tenant->uuid}/users/{$userAuth->image}");
                     }
                 @endphp
-                <img src="{{ $pathImage }}"
-                    class="user-image img-circle elevation-2" alt="User Image">
-                <span class="d-none d-md-inline">{{ $userAuth->name }}</span>
+                <img src="{{ $pathImage }}" class="user-image img-circle elevation-2" alt="User Image">
+                <span class="d-none d-md-inline">{{ $userAuth->nickname ?? $userAuth->social_name ?? $userAuth->name }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header bg-primary">
-                    <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}" class="img-circle elevation-2"
-                        alt={{ __('User Image') }}>
+                    <img src="{{ $pathImage }}" class="img-circle elevation-2" alt={{ __('User Image') }}>
                     <p>
-                        {{ $userAuth->name }} <br>
-                        <small>Analista de sistemas</small>
+                        {{ $userAuth->nickname ?? $userAuth->social_name ?? $userAuth->name }} <br>
+                        <small></small>
                         <small>{{ __('Member') }} {{ $userAuth->created_at->diffForHumans() }}</small>
                     </p>
                 </li>

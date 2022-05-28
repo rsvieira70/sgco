@@ -2,6 +2,8 @@
     <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/dist/js/adminlte.js?v=3.2.0') }}"></script>
+    <script src="{{ asset('jquery/jquery.several/jquery.selected.menu.js') }}"></script>
+
     @yield("java-complement")
 
     <!-- sweetalert ---------------------------------------------------->
