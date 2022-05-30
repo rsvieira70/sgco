@@ -11,11 +11,13 @@ class DashboardController extends Controller {
         $reference =  __('Dashboard');
         $userAuth = Auth()->User();
         $tenant = Tenant::find($userAuth->id);
+        $tenants = Tenant::orderBy('social_reason', 'asc')->get();
         return view('dashboard', [
             'title' => $title,
             'reference' => $reference,
             'userAuth' => $userAuth,
-            'tenant' => $tenant
+            'tenant' => $tenant,
+            'tenants' => $tenant
         ]);
     }
 }

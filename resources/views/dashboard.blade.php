@@ -3,44 +3,6 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-sm-12">
-            <div class="callout callout-info">
-                <h5><i class="fas fa-info"></i> Company's branch: <strong>{{ $tenant->fancy_name }}</strong><br></h5> 
-                <strong>'Razão social: "    {{ $tenant->social_reason }}</strong><br>
-                <div class="row invoice-info">
-                    <div class="col-sm-4 invoice-col">
-                        <strong>{{ __('Address') }}</strong><br>
-                        {{ $tenant->address }} {{ $tenant->house_number }}
-                        {{ $tenant->complement }} <br>
-                        {{ $tenant->neighborhood }} <br>
-                        {{ $tenant->city }} {{ $tenant->state }} {{ $tenant->zip_code }}<br>
-                    </div>
-                    <div class="col-sm-4 invoice-col">
-                        <strong>{{ __('Phones') }}</strong><br>
-                        <i class="fas fa-phone-square-alt"></i> {{ $tenant->telephone }}<br>
-                        <i class="fas fa-mobile-alt"></i> {{ $tenant->cell_phone }}<br>
-                        <i class="fab fa-whatsapp-square"></i> {{ $tenant->whatsapp }}<br>
-                        <i class="fab fa-telegram"></i> {{ $tenant->telegram }}<br>
-                    </div>
-                    <div class="col-sm-4 invoice-col">
-                        <strong>{{ __('Social media') }}</strong><br>
-                        <i class="fab fa-facebook-square"></i> {{ $tenant->facebook }}<br>
-                        <i class="fab fa-instagram-square"></i> {{ $tenant->instagram }}<br>
-                        <i class="fab fa-twitter-square"></i> {{ $tenant->twitter }}<br>
-                        <i class="fab fa-linkedin"></i> {{ $tenant->linkedin }}<br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-3 col-6">
             <div class="small-box bg-info">
                 <div class="inner">

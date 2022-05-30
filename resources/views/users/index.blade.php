@@ -14,7 +14,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('Code') }}</th>
-                        <th cçass="text-center">{{ __('Photo') }}</th>
+                        <th class="text-center">{{ __('Photo') }}</th>
                         <th class="text-left">{{ __('Name') }}</th>
                         <th class="text-left">{{ __('Email') }}</th>
                         <th class="text-center">{{ __('Status') }}</th>

@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
 
     public function edit()
-    {
+    { 
         $id = Auth::user()->id;
         $profile = Profile::find($id);
         if ($profile) {

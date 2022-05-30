@@ -42,6 +42,7 @@
         </li> -->
     </ul>
     <ul class="navbar-nav ml-auto">
+    <!--
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="fas fa-search"></i>
@@ -63,7 +64,7 @@
                 </form>
             </div>
         </li>
-
+    -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
                 <i class="far fa-comments"></i>
@@ -87,7 +88,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                     <div class="media">
-                        <img src="{{ asset('AdminLTE/dist/img/user8-128x128.jpg') }}" alt="User Avatar"
+                        <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}" alt="User Avatar"
                             class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -102,7 +103,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item">
                     <div class="media">
-                        <img src="{{ asset('AdminLTE/dist/img/user3-128x128.jpg') }}" alt="User Avatar"
+                        <img src="{{ asset('AdminLTE/dist/img/noImagePessoa.png') }}" alt="User Avatar"
                             class="img-size-50 img-circle mr-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">

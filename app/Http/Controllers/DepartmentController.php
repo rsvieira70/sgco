@@ -6,10 +6,8 @@ use App\Models\Department;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
-use App\Notifications\systemErrorEmail;
 use App\Http\Requests\DepartmentRequest;
 use App\Notifications\SystemErrorAlert;
-use GrahamCampbell\ResultType\Success;
 
 class DepartmentController extends Controller
 {
