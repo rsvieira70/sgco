@@ -4,7 +4,7 @@ $(document).ready(function () {
         $("#neighborhood").val("");
         $("#city").val("");
         $("#state").val("");
-        $("#ibge").val("");
+        $("#dceu").val("");
     }
     $("#zip_code").blur(function () {
         var zip_code = $(this).val().replace(/\D/g, '');
@@ -15,14 +15,14 @@ $(document).ready(function () {
                 $("#neighborhood").val("...");
                 $("#city").val("...");
                 $("#state").val("...");
-                $("#ibge").val("...");
+                $("#dceu").val("...");
                 $.getJSON("https://viacep.com.br/ws/" + zip_code + "/json/?callback=?", function (dados) {
                     if (!("erro" in dados)) {
                         $("#address").val(dados.logradouro);
                         $("#neighborhood").val(dados.bairro);
                         $("#city").val(dados.localidade);
                         $("#state").val(dados.uf);
-                        $("#ibge").val(dados.ibge);
+                        $("#dceu").val(dados.ibge);
                     } //end if.
                     else {
                         clear_form_zip_code();

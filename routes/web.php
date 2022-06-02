@@ -15,14 +15,14 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/tenants', [TenantController::class, 'index'])->name('tenants.index');
-    Route::get('/tenants/create', [TenantController::class, 'create'])->name('tenants.create');
-    Route::post('/tenants', [TenantController::class, 'store'])->name('tenants.store');
-    Route::get('/tenants/{id}', [TenantController::class, 'show'])->name('tenants.show');
-    Route::get('/tenants/{id}/edit', [TenantController::class, 'edit'])->name('tenants.edit');
-    Route::put('/tenants/{id}', [TenantController::class, 'update'])->name('tenants.update');
-    Route::patch('/tenants/{id}', [TenantController::class, 'suspend'])->name('tenants.suspend');
-    Route::delete('/tenants/{id}', [TenantController::class, 'destroy'])->name('tenants.destroy');
+    Route::get('/tenants', [TenantController::class, 'index'])->middleware(['tenant.authorization'])->name('tenants.index');
+    Route::get('/tenants/create', [TenantController::class, 'create'])->middleware(['tenant.authorization'])->name('tenants.create');
+    Route::post('/tenants', [TenantController::class, 'store'])->middleware(['tenant.authorization'])->name('tenants.store');
+    Route::get('/tenants/{id}', [TenantController::class, 'show'])->middleware(['tenant.authorization'])->name('tenants.show');
+    Route::get('/tenants/{id}/edit', [TenantController::class, 'edit'])->middleware(['tenant.authorization'])->name('tenants.edit');
+    Route::put('/tenants/{id}', [TenantController::class, 'update'])->middleware(['tenant.authorization'])->name('tenants.update');
+    Route::patch('/tenants/{id}', [TenantController::class, 'suspend'])->middleware(['tenant.authorization'])->name('tenants.suspend');
+    Route::delete('/tenants/{id}', [TenantController::class, 'destroy'])->middleware(['tenant.authorization'])->name('tenants.destroy');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');

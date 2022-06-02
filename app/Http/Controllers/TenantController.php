@@ -51,9 +51,24 @@ class TenantController extends Controller
         }
     }
 
-    public function show(Tenant $tenant)
+    public function show($id)
     {
-        //
+        $tenant = Tenant::with(['Tenant'])->find($id);
+        
+        if ($tenant) {
+            $tenant->employer_identification_number = Useful::class::cnpj($tenant->employer_identification_number);
+            $tenant->zip_code = Useful::class::zip_code($tenant->zip_code);
+            $tenant->telephone = Useful::class::phone($tenant->telephone);
+            $tenant->cell_phone = Useful::class::phone($tenant->cell_phone);
+            $tenant->whatsapp = Useful::class::phone($tenant->whatsapp);
+            $tenant->telegram = Useful::class::phone($tenant->telegram);
+
+            $title =  __('Tenant show');
+            $reference = __('tenant');
+            $userAuth = Auth()->User();
+            return view('tenants.show', compact('title', 'reference', 'userAuth', 'tenant'));
+        }
+        return redirect()->route('tenants.index');
     }
 
     public function edit($id)
@@ -93,13 +108,13 @@ class TenantController extends Controller
     {
         db::beginTransaction();
         try {
-            $user = Tenant::find($id);
+            $tenant = Tenant::find($id);
             if ($tenant->suspension_date == null) {
                 $tenant->suspension_date = now();
             } else {
                 $tenant->suspension_date = null;
             }
-            $user->save();
+            $tenant->save();
 
             db::commit();
             return redirect()->route('tenants.index')->with('alert', 'update-ok');

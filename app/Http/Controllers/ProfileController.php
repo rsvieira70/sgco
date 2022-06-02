@@ -67,7 +67,7 @@ class ProfileController extends Controller
             $profile->neighborhood = $data['neighborhood'];
             $profile->city = $data['city'];
             $profile->state = $data['state'];
-            $profile->ibge = $data['ibge'];
+            $profile->dceu = $data['dceu'];
             $profile->telephone = $data['telephone'];
             $profile->cell_phone = $data['cell_phone'];
             $profile->whatsapp = $data['whatsapp'];

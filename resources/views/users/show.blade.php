@@ -126,7 +126,7 @@
                                                     {{ $user->complement }} <br>
                                                     {{ $user->neighborhood }} <br>
                                                     {{ $user->city }} {{ $user->state }} {{ $user->zip_code }}<br>
-                                                    <b>{{ __('IBGE') }}</b> {{ $user->ibge }}
+                                                    <b>{{ __('DCEU') }}</b> {{ $user->dceu }}
                                                 </div>
                                                 <div class="col-sm-4 invoice-col">
                                                     <strong>{{ __('Phones') }}</strong><br>

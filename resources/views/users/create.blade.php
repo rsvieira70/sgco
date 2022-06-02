@@ -24,7 +24,7 @@
                                 <div class="col-sm-3">
                                     <label for="department_id">{{ __('Department') }}</label>
                                     <select class="custom-select" id="department_id" name="department_id"
-                                        class="form-control @error('department_id') is-invalid @enderror">
+                                        class="form-control @error('department_id') is-invalid @enderror" required>
                                         <option value='' disabled selected>{{ __('Select a department') }}</option>
                                         @foreach ($departments as $department)
                                             <option value="{{ $department->id }}"

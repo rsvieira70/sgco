@@ -47,7 +47,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
                                     </div>
-                                    <input type="text" id="cpfsocial_security_number" name="social_security_number"
+                                    <input type="text" id="social_security_number" name="social_security_number"
                                         value="{{ old('social_security_number', $profile->social_security_number, null) }}"
                                         maxlength="11"
                                         class="form-control {{ $errors->has('social_security_number') ? 'is-invalid' : '' }}"
@@ -169,11 +169,11 @@
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <label for="ibge">{{ __('IBGE') }}</label>
-                                <input type="text" id="ibge" name="ibge" value="{{ old('ibge', $profile->ibge, null) }}"
-                                    maxlength="7" class="form-control {{ $errors->has('ibge') ? 'is-invalid' : '' }}"
+                                <label for="dceu">{{ __('DCEU') }}</label>
+                                <input type="text" id="dceu" name="dceu" value="{{ old('dceu', $profile->dceu, null) }}"
+                                    maxlength="7" class="form-control {{ $errors->has('dceu') ? 'is-invalid' : '' }}"
                                     requerid>
-                                <div class="invalid-feedback">{{ $errors->first('ibge') }} </div>
+                                <div class="invalid-feedback">{{ $errors->first('dceu') }} </div>
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ class Profile extends Model
         'neighborhood',
         'city',
         'state',
-        'ibge',
+        'dceu',
         'telephone',
         'cell_phone',
         'whatsapp',

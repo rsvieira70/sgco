@@ -13,9 +13,12 @@ class Tenant extends Model
     protected $fillable = [
         'social_reason',
         'fancy_name',
-        'administrative_responsibility',
-        'responsible_dentist',
-        'image',
+        'administrative_responsible ',
+        'administrative_responsible_image',
+        'technical_responsible',
+        'technical_responsible_inbde',
+        'technical_responsible_inbde_state',
+        'technical_responsible_image',
         'zip_code',
         'address',
         'house_number',
@@ -23,7 +26,7 @@ class Tenant extends Model
         'neighborhood',
         'city',
         'state',
-        'ibge',
+        'dceu',
         'website',
         'email',
         'telephone',
@@ -33,13 +36,12 @@ class Tenant extends Model
         'instagram',
         'twitter',
         'linkedin',
-        'cnpj',
+        'employer_identification_number',
         'state_registration',
         'municipal_registration',
         'opening_date',
         'suspension_date'
     ];
-
     public static function boot(){
         parent::boot();
         self::creating(function($model){
