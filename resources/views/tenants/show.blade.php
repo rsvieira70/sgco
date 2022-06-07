@@ -9,7 +9,7 @@
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
                                     <div class="ribbon-wrapper ribbon-lg">
-                                        @switch ($user->user_type)
+                                        @switch ($tenant->user_type)
                                             @case (0)
                                                 <div class="ribbon bg-danger">
 
@@ -30,7 +30,7 @@
 
                                             @case (3)
                                                 <div class="ribbon bg-danger">
-                                                    {{ __('User') }}
+                                                    {{ __('Tenant') }}
                                                 </div>
                                             @break
 
@@ -43,41 +43,41 @@
                                     </div>
                                     @php
                                         $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
-                                        if ($user->image) {
-                                            $pathImage = url("storage/tenants/{$user->Tenant->uuid}/users/{$user->image}");
+                                        if ($tenant->image) {
+                                            $pathImage = url("storage/tenants/{$tenant->Tenant->uuid}/users/{$tenant->image}");
                                         }
                                     @endphp
                                     <div class="text-center">
-                                        <img class="profile-user-img img-fluid img-circle" src="{{ $pathImage }}"
-                                            alt="User profile picture">
+                                        <img class="profile-tenant-img img-fluid img-circle" src="{{ $pathImage }}"
+                                            alt="Tenant profile picture">
                                     </div>
-                                    <h3 class="profile-username text-center">{{ $user->name }}</h3>
-                                    @if ($user->position_id !== null)
-                                        <p class="text-muted text-center">{{ $user->position->description }}</p>
+                                    <h3 class="profile-username text-center">{{ $tenant->name }}</h3>
+                                    @if ($tenant->position_id !== null)
+                                        <p class="text-muted text-center">{{ $tenant->position->description }}</p>
                                     @endif
                                     <p class="text-muted text-center">{{ __('Member') }}
-                                        {{ $user->created_at->diffForHumans() }}</p>
+                                        {{ $tenant->created_at->diffForHumans() }}</p>
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
-                                            @if ($user->department_id != null)
+                                            @if ($tenant->department_id != null)
                                                 <b>{{ __('Department') }}:</b>
-                                                {{ $user->department->description }}<br>
+                                                {{ $tenant->department->description }}<br>
                                             @endif
                                             <b>{{ __('Registration date') }}:</b>
-                                            {{ date('d/m/Y', strtotime($user->registration_date)) }}<br>
-                                            <b>{{ __('Email') }}:</b> {{ $user->email }}
+                                            {{ date('d/m/Y', strtotime($tenant->registration_date)) }}<br>
+                                            <b>{{ __('Email') }}:</b> {{ $tenant->email }}
                                         </li>
                                     </ul>
-                                    @if ($user->suspension_date !== null)
+                                    @if ($tenant->suspension_date !== null)
                                         <div class="alert alert-danger alert-dismissible">
                                             <h5><i class="icon fas fa-ban"></i> {{ __('Alert') }}!</h5>
-                                            {{ __('User suspended in') }}
-                                            {{ date('d/m/Y', strtotime($user->suspension_date)) }}
+                                            {{ __('Tenant suspended in') }}
+                                            {{ date('d/m/Y', strtotime($tenant->suspension_date)) }}
                                         </div>
                                     @else
                                         <div class="alert alert-success alert-dismissible">
                                             <h5><i class="icon fas fa-check"></i> {{ __('Alert') }}!</h5>
-                                            {{ __('User active') }}
+                                            {{ __('Tenant active') }}
                                         </div>
                                     @endif
                                 </div>
@@ -87,11 +87,11 @@
                                     <h3 class="card-title">{{ __('About me') }}</h3>
                                 </div>
                                 <div class="card-body">
-                                    <b> {{ __('Name') }}:</b> {{ $user->name }}<br>
-                                    <b> {{ __('Social name') }}:</b> {{ $user->social_name }} <br>
-                                    <b> {{ __('Nickname') }}:</b> {{ $user->nickname }}<br>
-                                    <b>{{ __('Birth') }}:</b> {{ date('d/m/Y', strtotime($user->birth)) }}<br>
-                                    <b>{{ __('Social security number') }}:</b> {{ $user->social_security_number }}
+                                    <b> {{ __('Name') }}:</b> {{ $tenant->name }}<br>
+                                    <b> {{ __('Social name') }}:</b> {{ $tenant->social_name }} <br>
+                                    <b> {{ __('Nickname') }}:</b> {{ $tenant->nickname }}<br>
+                                    <b>{{ __('Birth') }}:</b> {{ date('d/m/Y', strtotime($tenant->birth)) }}<br>
+                                    <b>{{ __('Social security number') }}:</b> {{ $tenant->social_security_number }}
                                 </div>
                             </div>
                         </div>
@@ -122,47 +122,47 @@
                                             <div class="row invoice-info">
                                                 <div class="col-sm-4 invoice-col">
                                                     <strong>{{ __('Address') }}</strong><br>
-                                                    {{ $user->address }} {{ $user->house_number }}
-                                                    {{ $user->complement }} <br>
-                                                    {{ $user->neighborhood }} <br>
-                                                    {{ $user->city }} {{ $user->state }} {{ $user->zip_code }}<br>
-                                                    <b>{{ __('IBGE') }}</b> {{ $user->ibge }}
+                                                    {{ $tenant->address }} {{ $tenant->house_number }}
+                                                    {{ $tenant->complement }} <br>
+                                                    {{ $tenant->neighborhood }} <br>
+                                                    {{ $tenant->city }} {{ $tenant->state }} {{ $tenant->zip_code }}<br>
+                                                    <b>{{ __('IBGE') }}</b> {{ $tenant->ibge }}
                                                 </div>
                                                 <div class="col-sm-4 invoice-col">
                                                     <strong>{{ __('Phones') }}</strong><br>
-                                                    <i class="fas fa-phone-square-alt"></i> {{ $user->telephone }}<br>
-                                                    <i class="fas fa-mobile-alt"></i> {{ $user->cell_phone }}<br>
-                                                    <i class="fab fa-whatsapp-square"></i> {{ $user->whatsapp }}<br>
-                                                    <i class="fab fa-telegram"></i> {{ $user->telegram }}<br>
+                                                    <i class="fas fa-phone-square-alt"></i> {{ $tenant->telephone }}<br>
+                                                    <i class="fas fa-mobile-alt"></i> {{ $tenant->cell_phone }}<br>
+                                                    <i class="fab fa-whatsapp-square"></i> {{ $tenant->whatsapp }}<br>
+                                                    <i class="fab fa-telegram"></i> {{ $tenant->telegram }}<br>
                                                 </div>
                                                 <div class="col-sm-4 invoice-col">
                                                     <strong>{{ __('Social media') }}</strong><br>
-                                                    <i class="fab fa-facebook-square"></i> {{ $user->facebook }}<br>
-                                                    <i class="fab fa-instagram-square"></i> {{ $user->instagram }}<br>
-                                                    <i class="fab fa-twitter-square"></i> {{ $user->twitter }}<br>
-                                                    <i class="fab fa-linkedin"></i> {{ $user->linkedin }}<br>
+                                                    <i class="fab fa-facebook-square"></i> {{ $tenant->facebook }}<br>
+                                                    <i class="fab fa-instagram-square"></i> {{ $tenant->instagram }}<br>
+                                                    <i class="fab fa-twitter-square"></i> {{ $tenant->twitter }}<br>
+                                                    <i class="fab fa-linkedin"></i> {{ $tenant->linkedin }}<br>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-12">
                                                     <h4>
-                                                        <i class="far fa-file-alt mr-1"></i> {{ __('User note') }}
+                                                        <i class="far fa-file-alt mr-1"></i> {{ __('Tenant note') }}
                                                     </h4>
                                                 </div>
                                             </div>
-                                            <p class="text-muted">{{ $user->user_note }}</p>
+                                            <p class="text-muted">{{ $tenant->user_note }}</p>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-12">
                                                     <h4>
-                                                        <i class="far fa-file-alt mr-1"></i> {{ __('User profile') }}
+                                                        <i class="far fa-file-alt mr-1"></i> {{ __('Tenant profile') }}
                                                     </h4>
                                                 </div>
                                             </div>
 
                                             <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                                {{ $user->profile_note }}
+                                                {{ $tenant->profile_note }}
                                             </p>
                                         </div>
                                         <div class="tab-pane" id="timeline">
@@ -194,7 +194,7 @@
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <i class="fas fa-user bg-info"></i>
+                                                    <i class="fas fa-tenant bg-info"></i>
                                                     <div class="timeline-item">
                                                         <span class="time"><i class="far fa-clock"></i> 5 mins
                                                             ago</span>
@@ -225,7 +225,7 @@
                                                 </div>
                                                 <div class="time-label">
                                                     <span class="bg-success">
-                                                        {{ date('d M Y', strtotime($user->registration_date)) }}
+                                                        {{ date('d M Y', strtotime($tenant->registration_date)) }}
                                                     </span>
                                                 </div>
                                                 <div>

@@ -44,11 +44,11 @@ class Profile extends Model
         });
     }
     //accessor get
-    public function getSocialsecuritynumberAttribute()
-    {
-        $social_security_number = $this->attributes['social_security_number'];
-        return substr($social_security_number, 0, 3) . '.' . substr($social_security_number, 3, 3) . '.' . substr($social_security_number, 6, 3) . '-' . substr($social_security_number, 9, 2);
-    }         
+      public function getSocialsecuritynumberAttribute()
+     {
+         $social_security_number = $this->attributes['social_security_number'];
+         return substr($social_security_number, 0, 3) . '.' . substr($social_security_number, 3, 3) . '.' . substr($social_security_number, 6, 3) . '-' . substr($social_security_number, 9, 2);
+     }         
     //mutators set
     public function setNameAttribute($value)
     {
@@ -94,19 +94,19 @@ class Profile extends Model
     }
     public function setTelephoneAttribute($value)
     {
-        $this->attributes['telephone'] = preg_replace("/\D/","", $value);
+        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
     }
     public function setCellPhoneAttribute($value)
     {
-        $this->attributes['cell_phone'] = preg_replace("/\D/","", $value);
+        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
     }
     public function setWhatsAppAttribute($value)
     {
-        $this->attributes['whatsapp'] = preg_replace("/\D/","", $value);
+        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
     }
     public function setTelegramAttribute($value)
     {
-        $this->attributes['telegram'] = preg_replace("/\D/","", $value);
+        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
     }
 
     public function setFacebookAttribute($value)

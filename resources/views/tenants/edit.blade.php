@@ -2,8 +2,7 @@
 @section('head-complement')
 @endsection
 @section('content')
-    <form action="{{ route('tenants.update', $tenant->id) }}" method="POST" class="form-horizontal"
-        enctype="multipart/form-data">
+    <form action="{{ route('tenants.update', $tenant->id) }}" method="POST" class="form-horizontal">
         @csrf
         @method('PUT')
         <div class="row">
@@ -41,7 +40,7 @@
                                     </div>
                                     <input type="text" id="employer_identification_number"
                                         name="employer_identification_number"
-                                        value="{{ old('employer_identification_number', $tenant->social_security_number, null) }}"
+                                        value="{{ old('employer_identification_number', $tenant->employer_identification_number, null) }}"
                                         maxlength="11"
                                         class="form-control {{ $errors->has('employer_identification_number') ? 'is-invalid' : '' }}"
                                         data-mask="00.000.000/0000-00" data-mask-reverse="true" required>
@@ -91,81 +90,6 @@
                                     value="{{ old('opening_date', $tenant->opening_date, null) }}"
                                     class="form-control @error('opening_date') is-invalid @enderror" required>
                                 <div class="invalid-feedback">{{ $errors->first('opening_date') }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <div class="form-group">
-                                <label for="administrative_responsible">{{ __('Administrative responsible') }}</label>
-                                <input type="text" id="administrative_responsible" name="administrative_responsible"
-                                    value="{{ old('administrative_responsible', $tenant->administrative_responsible, null) }}"
-                                    maxlength="50"
-                                    class="form-control {{ $errors->has('administrative_responsible') ? 'is-invalid' : '' }}"
-                                    required>
-                                <div class="invalid-feedback">{{ $errors->first('administrative_responsible') }} </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="form-group">
-                                <label
-                                    for="administrative_responsible_image">{{ __('Photo administrative responsible') }}
-                                    ({{ __('Choose a file only if you want to include or change photo') }})</label>
-                                <div class="Input-group">
-                                    @php
-                                        $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
-                                        if ($tenant->administrative_responsibility_image) {
-                                            $pathImage = url("storage/tenants/{$tenant->Tenant->uuid}/users/{$tenant->administrative_responsible_image}");
-                                        }
-                                    @endphp
-                                    <td class="text-center">
-                                        <img class="direct-chat-img" src="{{ $pathImage }}"
-                                            alt={{ __('User Image') }}>
-                                    </td>
-                                    <input type="file" id="administrative_responsible_image"
-                                        name="administrative_responsible_image"
-                                        value="{{ old('administrative_responsible_image', $tenant->administrative_responsible_image, null) }}"
-                                        class="form-control @error('administrative_responsible_image') is-invalid @enderror">
-                                    <div class="invalid-feedback">
-                                        {{ $errors->first('administrative_responsible_image') }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <div class="form-group">
-                                <label for="technical_responsible">{{ __('Technical responsible') }}</label>
-                                <input type="text" id="technical_responsible" name="technical_responsible"
-                                    value="{{ old('technical_responsible', $tenant->technical_responsible, null) }}"
-                                    maxlength="50"
-                                    class="form-control {{ $errors->has('technical_responsible') ? 'is-invalid' : '' }}"
-                                    required>
-                                <div class="invalid-feedback">{{ $errors->first('technical_responsible') }} </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="form-group">
-                                <label for="technical_responsible_image">{{ __('Photo technical responsiblee') }}
-                                    ({{ __('Choose a file only if you want to include or change photo') }})</label>
-                                <div class="Input-group">
-                                    @php
-                                        $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
-                                        if ($tenant->responsible_dentist_image) {
-                                            $pathImage = url("storage/tenants/{$tenant->Tenant->uuid}/users/{$tenant->responsible_dentist_image}");
-                                        }
-                                    @endphp
-                                    <td class="text-center">
-                                        <img class="direct-chat-img" src="{{ $pathImage }}"
-                                            alt={{ __('User Image') }}>
-                                    </td>
-                                    <input type="file" id="technical_responsible_image" name="technical_responsible_image"
-                                        value="{{ old('technical_responsible_image', $tenant->technical_responsible_image, null) }}"
-                                        class="form-control @error('technical_responsible_image') is-invalid @enderror">
-                                    <div class="invalid-feedback">{{ $errors->first('technical_responsible_image') }}
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -409,9 +333,8 @@
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-success float-right"><i class="fas fa-save"></i>
                             {{ __('Save') }}</button>
-                        <a href="{{ route('dashboard') }}" class="btn btb-sm btn-danger"><i
-                                class="fas fa-arrow-circle-left"></i>
-                            {{ __('Go back') }}</a>
+                        <a href="{{ route('tenants.index') }}" class="btn btb-sm btn-danger"><i
+                                class="fas fa-arrow-circle-left"></i> {{ __('Go back') }}</a>
                     </div>
                 </div>
             </div>

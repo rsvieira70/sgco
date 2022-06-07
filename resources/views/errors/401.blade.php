@@ -16,7 +16,7 @@
                             {{ __('The page could not be accessed, you need authorization to access it.') }} <br>
                             {{ __('Meanwhile, you may') }} <a href="{{ route('dashboard') }}">{{ __('return to dashboard') }}</a> <br>
                             {{ __("Don't worry, we've already warned the developer.") }}
-s                        </p>
+                        </p>
                     </div>
                 </div>
             </div>

@@ -65,5 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'tenant.fileSystems' => \App\Http\Middleware\TenantFileSystems::class,
         'tenant.authorization' => \App\Http\Middleware\TenantAuthorization::class,
+        'profile.check.exist' => \App\Http\Middleware\ProfileCheckExist::class,
+        'user.check.active' => \App\Http\Middleware\UserCheckActive::class,
     ];
 }

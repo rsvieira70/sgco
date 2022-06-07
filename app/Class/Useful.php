@@ -8,31 +8,31 @@ class Useful
      * @param string $cpf
      * @return string
      */
-    public static function cpf($cpf)
+    public static function ssn($ssn)
     {
-        if (!$cpf) {
+        if (!$ssn) {
             return '';
         }
-        if (strlen($cpf) == 11) {
-            return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9);
+        if (strlen($ssn) == 11) {
+            return substr($ssn, 0, 3) . '.' . substr($ssn, 3, 3) . '.' . substr($ssn, 6, 3) . '-' . substr($ssn, 9);
         }
-        return $cpf;
+        return $ssn;
     }
     /**------------
-     * Formata uma string segundo a máscara de CNPJ
+     * Formata uma string segundo a máscara de EIN
      * caso o tamanho da string seja diferente de 14, a string será retornada sem formatação
-     * @param $cnpj
+     * @param $ein
      * @return string
      */
-    public static function cnpj($cnpj)
+    public static function ein($ein)
     {
-        if (!$cnpj) {
+        if (!$ein) {
             return '';
         }
-        if (strlen($cnpj) == 14) {
-            return substr($cnpj, 0, 2) . '.' . substr($cnpj, 2, 3) . '.' . substr($cnpj, 5, 3) . '/' . substr($cnpj, 8, 4) . '-' . substr($cnpj, 12, 2);
+        if (strlen($ein) == 14) {
+            return substr($ein, 0, 2) . '.' . substr($ein, 2, 3) . '.' . substr($ein, 5, 3) . '/' . substr($ein, 8, 4) . '-' . substr($ein, 12, 2);
         }
-        return $cnpj;
+        return $ein;
     }
     /**
      * Formata uma string segundo a máscara de telefone

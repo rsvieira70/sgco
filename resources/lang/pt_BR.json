@@ -756,6 +756,7 @@
     "Reactivate": "Reativar",
     "Suspend": "Suspender",
     "Suspended": "Suspenso",
+    "Suspended in": "Suspenso em",
     "Users": "Usuários",
     "User": "Usuário",
     "Miscellaneous records": "Cadastro diversos",
@@ -791,6 +792,7 @@
     "You will not be able to reverse this action!": "Você não será capaz de reverter esta ação!",
     "This action can be reversed at any time!": "Esta ação pode ser revertida a qualquer momento!",
     "Yes, delete it!": "Sim, exclua-o!",
+    "Yes, suspend it!": "Sim, suspenda-o!",
     "No, cancel!": "Não, cancele!",
     "Invalid CPF": "CPF inválido",
     "The value entered for the :attribute field is already in use": "O valor informado para o campo :attribute já está em uso",
@@ -838,7 +840,7 @@
     "Social name": "Nome social",
     "Nickname": "Apelido",
     "Birth": "Nascimento",
-    "Correspondence": "Correspondêcia",
+    "Correspondence": "Correspondência",
     "Informations": "Informações",
     "Phones": "Telefones",
     "Social media": "Redes sociais",
@@ -852,14 +854,27 @@
     "Complement": "Complemento",
     "Number": "Número",
     "DCEU": "IBGE",
-    "Social security number": "CPF",
+    "Social security number": "Cadastro Pessoa Física",
+    "SSN": "CPF",
     "Invalid Social security number": "CPF inválido",
     "Please enter full name": "Por favor, insira o nome completo",
     "Leave blank to keep the current password": "Deixe em branco para manter a senha atual",
     "User Image": "Imagem do Usuário",
     "Choose a file only if you want to include or change your profile picture": "Escolha um arquivo apenas se quiser incluir ou alterar sua foto de perfil",
-    "Choose a file only if you want to include or change photo": "Escolha um arquivo apenas se quiser incluir ou alterar a foto"
-    
+    "Choose a file only if you want to include or change photo": "Escolha um arquivo apenas se quiser incluir ou alterar a foto",
+    "New tenant": "Nova Filial",
+    "Social reason": "Razão social",
+    "Fancy name": "Nome fantasia",
+    "Employer identification number": "Cadastro Nacional Pessoa Jurídica",
+    "EIN": "CNPJ",
+    "State registration": "Incrição estadual",
+    "Municipal registration": "Incrição municipal",
+    "Opening date": "Data de abertura",
+    "New tenant registration": "Cadastro de nova filial",
+    "List of tenants": "Lista das filiais",
+    "Tenant update" : "Alteração da filial",
+    "Tenant show": "Exibição da filial"
+
 
 
 

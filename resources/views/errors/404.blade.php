@@ -16,7 +16,7 @@
                             {{ __('We could not find the page you were looking for.') }} <br>
                             {{ __('Meanwhile, you may') }} <a href="{{ route('dashboard') }}">{{ __('return to dashboard') }}</a> <br>
                             {{ __("Don't worry, we've already warned the developer.") }}
-ss                        </p>
+                        </p>
                     </div>
                 </div>
             </div>

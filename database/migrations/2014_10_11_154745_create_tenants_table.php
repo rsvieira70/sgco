@@ -13,12 +13,6 @@ return new class extends Migration
             $table->uuid('uuid');
             $table->string('social_reason',60);
             $table->string('fancy_name',50);
-            $table->string('administrative_responsible ',50);
-            $table->string('administrative_responsible_image',80)->nullable();
-            $table->string('technical_responsible',50);
-            $table->string('technical_responsible_inbde',20);
-            $table->string('technical_responsible_inbde_state',2);
-            $table->string('technical_responsible_image',80)->nullable();
             $table->decimal('zip_code', 8,0);
             $table->string('address',70);
             $table->string('house_number',10);
@@ -32,6 +26,7 @@ return new class extends Migration
             $table->decimal('telephone',10,0)->nullable();
             $table->decimal('cell_phone',11,0)->nullable();
             $table->decimal('whatsapp',11,0)->nullable();
+            $table->decimal('telegram',11,0)->nullable();
             $table->string('facebook',80)->nullable();
             $table->string('instagram',80)->nullable();
             $table->string('twitter',80)->nullable();
@@ -47,7 +42,6 @@ return new class extends Migration
             $table->index('employer_identification_number');
         });
     }
-
     public function down()
     {
         Schema::dropIfExists('tenants');

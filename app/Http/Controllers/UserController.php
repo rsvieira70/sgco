@@ -63,7 +63,7 @@ class UserController extends Controller
         $user = NewUser::with(['Department', 'Position', 'Tenant'])->find($id);
         
         if ($user) {
-            $user->social_security_number = Useful::class::cpf($user->social_security_number);
+            $user->social_security_number = Useful::class::ssn($user->social_security_number);
             $user->zip_code = Useful::class::zip_code($user->zip_code);
             $user->telephone = Useful::class::phone($user->telephone);
             $user->cell_phone = Useful::class::phone($user->cell_phone);

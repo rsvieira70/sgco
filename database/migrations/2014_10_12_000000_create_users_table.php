@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('neighborhood',30)->nullable();
             $table->string('city',50)->nullable();
             $table->string('state',2)->nullable();
-            $table->decimal('dceu',7,0)->nullable();
+            $table->string('dceu',20)->nullable();
             $table->decimal('telephone',10, 0)->nullable();
             $table->decimal('cell_phone',11,0)->nullable();
             $table->decimal('whatsapp',11,0)->nullable();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Class\Useful;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class TenantController extends Controller
         $title =  __('List of tenants');
         $reference = __('tenant');
         $userAuth = Auth()->User();
-        $tenants = Tenant::orderBy('social_reason','asc')->get();
+        $tenants = Tenant::orderBy('social_reason', 'asc')->get();
         return view('tenants.index', compact('title', 'reference', 'userAuth', 'tenants'));
     }
 
@@ -44,8 +45,8 @@ class TenantController extends Controller
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to include') . ' '. __('tenant');
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to include') . ' ' . __('tenant');
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
             return redirect()->route('tenants.create')->with('alert', 'errors');
         }
@@ -53,10 +54,10 @@ class TenantController extends Controller
 
     public function show($id)
     {
-        $tenant = Tenant::with(['Tenant'])->find($id);
-        
+        $tenant = Tenant::find($id);
+
         if ($tenant) {
-            $tenant->employer_identification_number = Useful::class::cnpj($tenant->employer_identification_number);
+            $tenant->employer_identification_number = Useful::class::ein($tenant->employer_identification_number);
             $tenant->zip_code = Useful::class::zip_code($tenant->zip_code);
             $tenant->telephone = Useful::class::phone($tenant->telephone);
             $tenant->cell_phone = Useful::class::phone($tenant->cell_phone);
@@ -70,7 +71,6 @@ class TenantController extends Controller
         }
         return redirect()->route('tenants.index');
     }
-
     public function edit($id)
     {
         $tenant = Tenant::find($id);
@@ -89,7 +89,32 @@ class TenantController extends Controller
         db::beginTransaction();
         try {
             $tenant = Tenant::find($id);
-            $tenant->description = $data['description'];
+            $tenant->social_reason = $data['social_reason'];
+            $tenant->fancy_name = $data['fancy_name'];
+            $tenant->zip_code = $data['zip_code'];
+            $tenant->address = $data['address'];
+            $tenant->house_number = $data['house_number'];
+            $tenant->complement = $data['complement'];
+            $tenant->neighborhood = $data['neighborhood'];
+            $tenant->city = $data['city'];
+            $tenant->state = $data['state'];
+            $tenant->dceu = $data['dceu'];
+            $tenant->website = $data['website'];
+            $tenant->email = $data['email'];
+            $tenant->telephone = $data['telephone'];
+            $tenant->cell_phone = $data['cell_phone'];
+            $tenant->whatsapp = $data['whatsapp'];
+            $tenant->telegram = $data['telegram'];
+            $tenant->facebook = $data['facebook'];
+            $tenant->instagram = $data['instagram'];
+            $tenant->twitter = $data['twitter'];
+            $tenant->linkedin = $data['linkedin'];
+            $tenant->employer_identification_number = $data['employer_identification_number'];
+            $tenant->state_registration = $data['state_registration'];
+            $tenant->municipal_registration = $data['municipal_registration'];
+            $tenant->opening_date = $data['opening_date'];
+            $tenant->note = $data['note'];
+
             $tenant->save();
 
             db::commit();
@@ -97,10 +122,10 @@ class TenantController extends Controller
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to change') . ' '. __('tenant') . ' -> ' . __('Key' ) . ' ' . $id;
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to change') . ' ' . __('tenant') . ' -> ' . __('Key') . ' ' . $id;
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('tenants.update')->with('alert', 'errors');
+            return redirect()->route('tenants.update', ['tenant' => $id])->with('alert', 'errors');
         }
     }
 
@@ -141,8 +166,8 @@ class TenantController extends Controller
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to delete') . ' '. __('tenant') . ' -> ' . __('Key' ) . ' ' . $id;
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to delete') . ' ' . __('tenant') . ' -> ' . __('Key') . ' ' . $id;
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
             return redirect()->route('tenants.index')->with('alert', 'errors');
         }

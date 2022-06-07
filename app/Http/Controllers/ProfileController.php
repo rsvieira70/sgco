@@ -90,7 +90,7 @@ class ProfileController extends Controller
             $error = __('Failed to change') . ' ' . __('profile') . ' -> ' . __('Key') . ' ' . $id;
             $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('profiles.edit')->with('alert', 'errors');
+            return redirect()->route('profiles.edit', ['profile' => $id])->with('alert', 'errors');
         }
     }
 }

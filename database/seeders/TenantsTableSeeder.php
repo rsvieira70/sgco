@@ -15,8 +15,6 @@ class TenantsTableSeeder extends Seeder
         ([
             'social_reason' => 'SPM CLÍNICA ODONTOLÓGICA LTDA.',
             'fancy_name' => 'Ortoriso - Limeira',
-            'administrative_responsible' => 'Dra. Patricia Campos Freire',
-            'administrative_responsible' => 'Dra. Patricia Campos Freire',
             'zip_code' => 13480050,
             'address' => 'Rua Alferes Franco',
             'house_number' => '601',
@@ -38,8 +36,6 @@ class TenantsTableSeeder extends Seeder
         ([
             'social_reason' => 'Clinica odontologica ortoriso Jundiaí Ltda',
             'fancy_name' => 'Ortoriso - Jundiaí',
-            'administrative_responsible' => 'Dra. Patricia  Dario Martineli',
-            'administrative_responsible' => 'Patricia  Dario Martineli',
             'zip_code' => 13201080,
             'address' => 'Rua Petronilha Antunes',
             'house_number' => '517',

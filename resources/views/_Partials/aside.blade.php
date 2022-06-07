@@ -508,7 +508,7 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('tenants.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="fas fa-industry nav-icon"></i>
                                 <p>{{ __('Tenants') }}</p>
                             </a>
                         </li>

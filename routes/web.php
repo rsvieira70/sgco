@@ -12,7 +12,13 @@ use App\Http\Controllers\DepartmentController;
 require __DIR__ . '/auth.php';
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::middleware(['auth'])->group(function () {
+
+Route::middleware(['auth', 'user.check.active'])->group(function () {
+    Route::get('/profiles/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
+    Route::put('/profiles/update', [ProfileController::class, 'update'])->name('profiles.update');
+});
+
+Route::middleware(['auth', 'profile.check.exist', 'user.check.active'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/tenants', [TenantController::class, 'index'])->middleware(['tenant.authorization'])->name('tenants.index');
@@ -32,9 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
     Route::patch('/users/{id}', [UserController::class, 'suspend'])->name('users.suspend');
     Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-
-    Route::get('/profiles/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
-    Route::put('/profiles/update', [ProfileController::class, 'update'])->name('profiles.update');
 
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments.index');
     Route::get('/departments/create', [DepartmentController::class, 'create'])->name('departments.create');
