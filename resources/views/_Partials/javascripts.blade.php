@@ -3,11 +3,12 @@
     <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/dist/js/adminlte.js?v=3.2.0') }}"></script>
     <script src="{{ asset('jquery/jquery.several/jquery.selected.menu.js') }}"></script>
+    <script src="{{ asset('AdminLTE/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
     @yield("java-complement")
 
-    <!-- sweetalert ---------------------------------------------------->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>;
+    <!-- sweetalert --------------------------------------------------
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>; -->
 
     <script>
         $('.formDelete').submit(function(e) {

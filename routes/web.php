@@ -13,12 +13,12 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
-Route::middleware(['auth', 'user.check.active'])->group(function () {
+Route::middleware(['auth', 'user.check.active', 'tenant.check.active'])->group(function () {
     Route::get('/profiles/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
     Route::put('/profiles/update', [ProfileController::class, 'update'])->name('profiles.update');
 });
 
-Route::middleware(['auth', 'profile.check.exist', 'user.check.active'])->group(function () {
+Route::middleware(['auth', 'profile.check.exist', 'user.check.active', 'tenant.check.active'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/tenants', [TenantController::class, 'index'])->middleware(['tenant.authorization'])->name('tenants.index');
