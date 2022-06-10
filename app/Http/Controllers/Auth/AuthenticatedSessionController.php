@@ -7,19 +7,22 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class AuthenticatedSessionController extends Controller
 {
     public function create()
     {
         $title = 'Login';
-        $reference = 'Usuário';
-        return view('auth.login', compact('title', 'reference'));
+        return view('auth.login', compact('title'));
     }
     public function store(LoginRequest $request)
     {
         $request->authenticate();
         $request->session()->regenerate();
+        Alert::toast(__('Login successfully!'),'success');
+
         return redirect()->intended(RouteServiceProvider::HOME);
     }
     public function destroy(Request $request)

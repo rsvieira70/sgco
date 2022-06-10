@@ -15,30 +15,25 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Notifications\SystemErrorAlert;
 use App\Rules\FullName;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         $title =  __('List of users');
-        $reference = __('User');
         $userAuth = Auth()->User();
         $users = NewUser::orderBy('name', 'asc')->get();
-        return view('users.index', compact('title', 'reference', 'userAuth', 'users'));
+        return view('users.index', compact('title', 'userAuth', 'users'));
     }
     public function create()
     {
         $title =  __('New user registration');
-        $reference = __('user');
         $userAuth = Auth()->User();
         $positions = Position::orderBy('description', 'asc')->get();
         $departments = Department::orderBy('description', 'asc')->get();
-        return view('users.create', compact('title', 'reference', 'userAuth', 'positions', 'departments'));
+        return view('users.create', compact('title', 'userAuth', 'positions', 'departments'));
     }
     public function store(UserRequest $request)
     {
@@ -48,7 +43,8 @@ class UserController extends Controller
         try {
             NewUser::create($data);
             db::commit();
-            return redirect()->route('users.index')->with('alert', 'store-ok');
+            Alert::alert()->success(__('Included'), __('User') . __(' successfully added!'));
+            return redirect()->route('users.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();

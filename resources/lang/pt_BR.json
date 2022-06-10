@@ -785,14 +785,18 @@
     "Included": "Incluido",
     "Changed": "Alterado",
     "Excluded": "Excluido",
+    "Reactivated": "Reativado",
     " successfully added!": " incluido com sucesso!",
     " successfully changed!": " alterado com sucesso!",
     " successfully deleted!": " deletado com sucesso!",
+    " successfully suspended!": " suspenso com sucesso!",
+    " successfully reactivated!": " reativado com sucesso!",
     "Are you sure?": "Você tem certeza?",
     "You will not be able to reverse this action!": "Você não será capaz de reverter esta ação!",
     "This action can be reversed at any time!": "Esta ação pode ser revertida a qualquer momento!",
     "Yes, delete it!": "Sim, exclua-o!",
     "Yes, suspend it!": "Sim, suspenda-o!",
+    "Yes, reactivate it!": "Sim, reative-o!",
     "No, cancel!": "Não, cancele!",
     "Invalid CPF": "CPF inválido",
     "The value entered for the :attribute field is already in use": "O valor informado para o campo :attribute já está em uso",
@@ -873,7 +877,8 @@
     "New tenant registration": "Cadastro de nova filial",
     "List of tenants": "Lista das filiais",
     "Tenant update" : "Alteração da filial",
-    "Tenant show": "Exibição da filial"
+    "Tenant show": "Exibição da filial",
+    "Login successfully!": "Login efetuado com sucesso!"
 
 
 

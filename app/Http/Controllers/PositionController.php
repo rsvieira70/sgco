@@ -8,28 +8,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\PositionRequest;
 use App\Notifications\SystemErrorAlert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PositionController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         $title =  __('List of positions');
-        $reference = __('Position');
         $userAuth = Auth()->User();
         $positions = Position::orderBy('description','asc')->get();
-        return view('positions.index', compact('title', 'reference', 'userAuth', 'positions'));
+        return view('positions.index', compact('title', 'userAuth', 'positions'));
     }
 
     public function create()
     {
         $title =  __('New position registration');
-        $reference = __('position');
         $userAuth = Auth()->User();
-        return view('positions.create', compact('title', 'reference', 'userAuth'));
+        return view('positions.create', compact('title', 'userAuth'));
     }
 
     public function store(PositionRequest $request)
@@ -39,8 +34,8 @@ class PositionController extends Controller
         try {
             Position::create($data);
             db::commit();
-
-            return redirect()->route('positions.index')->with('alert', 'store-ok');
+            Alert::alert()->success(__('Included'), __('Position') . __(' successfully added!'));
+            return redirect()->route('positions.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();

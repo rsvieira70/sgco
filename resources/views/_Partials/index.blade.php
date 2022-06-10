@@ -1,13 +1,4 @@
 <?php
-    $swalIncludedTitle = __('Included');
-    $swalIncludedText = __(' successfully added!');
-   
-    $swalUpdateTitle = __('Changed');
-    $swalUpdateText = __(' successfully changed!');
-   
-    $swalDeleteTitle = __('Excluded');
-    $swalDeleteText = __(' successfully deleted!');
-   
     $swalFormDeleteTitle = __('Are you sure?');
     $swalFormDeleteText = __('You will not be able to reverse this action!');
     $swalFormDeleteConfirmButtonText = __('Yes, delete it!');
@@ -18,15 +9,16 @@
     $swalFormSuspendConfirmButtonText = __('Yes, suspend it!');
     $swalFormSuspendCancelButtonText = __('No, cancel!');
 
-    $swalErrorTitle = __('Opps! An internal error occurred.');
-    $swalErrorText = __('Your request could not be executed!');
-    $swalErrorfooter = __("Don't worry, we've already warned the developer.");
+    $swalFormReactivateTitle = __('Are you sure?');
+    $swalFormReactivateText = __('This action can be reversed at any time!');
+    $swalFormReactivateConfirmButtonText = __('Yes, reactivate it!');
+    $swalFormReactivateCancelButtonText = __('No, cancel!');
 ?>
 <!DOCTYPE html>
 <html lang="{{ env('locale') }}">
 @includeIf('_Partials.head')
-
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+    @include('sweetalert::alert')
     <div class="wrapper">
         @includeIf('_Partials.navbar')
         @includeIf('_Partials.aside')

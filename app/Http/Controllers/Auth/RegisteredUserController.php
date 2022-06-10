@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class RegisteredUserController extends Controller
 {
@@ -33,7 +35,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        Alert::success('Congrats', 'You\'ve Successfully Registered');
         event(new Registered($user));
 
         Auth::login($user);

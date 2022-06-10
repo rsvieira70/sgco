@@ -9,28 +9,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\TenantRequest;
 use App\Notifications\SystemErrorAlert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TenantController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         $title =  __('List of tenants');
-        $reference = __('tenant');
         $userAuth = Auth()->User();
         $tenants = Tenant::orderBy('social_reason', 'asc')->get();
-        return view('tenants.index', compact('title', 'reference', 'userAuth', 'tenants'));
+        return view('tenants.index', compact('title', 'userAuth', 'tenants'));
     }
 
     public function create()
     {
         $title =  __('New tenant registration');
-        $reference = __('tenant');
         $userAuth = Auth()->User();
-        return view('tenants.create', compact('title', 'reference', 'userAuth'));
+        return view('tenants.create', compact('title', 'userAuth'));
     }
 
     public function store(TenantRequest $request)
@@ -40,8 +35,8 @@ class TenantController extends Controller
         try {
             Tenant::create($data);
             db::commit();
-
-            return redirect()->route('tenants.index')->with('alert', 'store-ok');
+            Alert::alert()->success(__('Included'), __('Tenant') . __(' successfully added!'));
+            return redirect()->route('tenant.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();

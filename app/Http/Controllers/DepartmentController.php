@@ -8,28 +8,23 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\DepartmentRequest;
 use App\Notifications\SystemErrorAlert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartmentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     public function index()
     {
         $title =  __('List of departments');
-        $reference = __('Department');
         $userAuth = Auth()->User();
-        $departments = Department::orderBy('description','asc')->get();
-        return view('departments.index', compact('title', 'reference', 'userAuth', 'departments'));
+        $departments = Department::orderBy('description', 'asc')->get();
+        return view('departments.index', compact('title', 'userAuth', 'departments'));
     }
 
     public function create()
     {
         $title =  __('New department registration');
-        $reference = __('department');
         $userAuth = Auth()->User();
-        return view('departments.create', compact('title', 'reference', 'userAuth'));
+        return view('departments.create', compact('title', 'userAuth'));
     }
 
     public function store(DepartmentRequest $request)
@@ -39,15 +34,18 @@ class DepartmentController extends Controller
         try {
             Department::create($data);
             db::commit();
-
-            return redirect()->route('departments.index')->with('alert', 'store-ok');
+            Alert::alert()->success(__('Included'), __('Department') . __(' successfully added!'));
+            return redirect()->route('departments.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to include') . ' '. __('department');
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to include') . ' ' . __('department');
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('departments.create')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('departments.index');
         }
     }
 
@@ -61,9 +59,8 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         if ($department) {
             $title =  __('Department update');
-            $reference = __('department');
             $userAuth = Auth()->User();
-            return view('departments.edit', compact('title', 'reference', 'userAuth', 'department'));
+            return view('departments.edit', compact('title', 'userAuth', 'department'));
         }
         return redirect()->route('departments.index');
     }
@@ -78,14 +75,18 @@ class DepartmentController extends Controller
             $department->save();
 
             db::commit();
-            return redirect()->route('departments.index')->with('alert', 'update-ok');
+            Alert::alert()->success(__('Changed'), __('Department') . __(' successfully changed!'));
+            return redirect()->route('departments.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to change') . ' '. __('department') . ' -> ' . __('Key' ) . ' ' . $id;
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to change') . ' ' . __('department') . ' -> ' . __('Key') . ' ' . $id;
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('departments.update')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('departments.index');
         }
     }
 
@@ -94,22 +95,29 @@ class DepartmentController extends Controller
         db::beginTransaction();
         try {
             $department = Department::findOrFail($id);
-            if($department->suspended == null){
+            if ($department->suspended == null) {
                 $department->suspended = 1;
-            }else{
+            } else {
                 $department->suspended = null;
             }
             $department->save();
-
             db::commit();
-            return redirect()->route('departments.index')->with('alert', 'update-ok');
+            if ($department->suspended == null) {
+                Alert::alert()->success(__('Reactivated'), __('Department') . __(' successfully reactivated!'));
+            } else {
+                Alert::alert()->success(__('Suspended'), __('Department') . __(' successfully suspended!'));
+            }
+            return redirect()->route('departments.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to suspend') . ' '. __('department') . ' -> ' . __('Key' ) . ' ' . $id;
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to suspend') . ' ' . __('department') . ' -> ' . __('Key') . ' ' . $id;
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('departments.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('departments.index');
         }
     }
 
@@ -121,15 +129,19 @@ class DepartmentController extends Controller
             if ($department) {
                 $department->delete();
                 db::commit();
-                return redirect()->route('departments.index')->with('alert', 'destroy-ok');
+                Alert::alert()->success(__('Excluded'), __('Department') . __(' successfully deleted!'));
+                return redirect()->route('departments.index');
             }
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
-            $error = __('Failed to delete') . ' '. __('department') . ' -> ' . __('Key' ) . ' ' . $id;
-            $users = User::whereIn('user_type',['1'])->get();
+            $error = __('Failed to delete') . ' ' . __('department') . ' -> ' . __('Key') . ' ' . $id;
+            $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('departments.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('departments.index');
         }
     }
 }

@@ -9,25 +9,19 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileRequest;
 use App\Notifications\SystemErrorAlert;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-
     public function edit()
     { 
         $id = Auth::user()->id;
         $profile = Profile::find($id);
         if ($profile) {
             $title =  __('Profile');
-            $reference = __('profile');
             $userAuth = Auth()->User();
             $loggedId = intval(Auth::id());
-            return view('profiles.edit', compact('title', 'reference', 'userAuth', 'loggedId', 'profile'));
+            return view('profiles.edit', compact('title',  'userAuth', 'loggedId', 'profile'));
         }
         return redirect()->route('dashboard');
     }
