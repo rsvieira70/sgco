@@ -10,14 +10,8 @@ class DashboardController extends Controller
     public function index()
     {
         $title =  __('Dashboard');
-        $reference =  __('dashboard');
         $userAuth = Auth()->User();
         $tenant = Tenant::find($userAuth->id);
-        return view('dashboard', [
-            'title' => $title,
-            'reference' => $reference,
-            'userAuth' => $userAuth,
-            'tenant' => $tenant,
-        ]);
+        return view('dashboard', compact('title', 'userAuth', 'tenant'));
     }
 }

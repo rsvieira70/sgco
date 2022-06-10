@@ -2,12 +2,6 @@
 namespace App\Class;
 class Useful
 {
-    /**
-     * Formata uma string segundo a máscara de CPF
-     * caso o tamanho da string seja diferente de 11, a string será retornada sem formatação
-     * @param string $cpf
-     * @return string
-     */
     public static function ssn($ssn)
     {
         if (!$ssn) {
@@ -18,12 +12,6 @@ class Useful
         }
         return $ssn;
     }
-    /**------------
-     * Formata uma string segundo a máscara de EIN
-     * caso o tamanho da string seja diferente de 14, a string será retornada sem formatação
-     * @param $ein
-     * @return string
-     */
     public static function ein($ein)
     {
         if (!$ein) {
@@ -34,12 +22,6 @@ class Useful
         }
         return $ein;
     }
-    /**
-     * Formata uma string segundo a máscara de telefone
-     * caso o tamanho da string seja diferente de 10 ou 11, a string será retornada sem formatação
-     * @param string $fone
-     * @return string
-     */
     public static function phone($phone)
     {
         if (!$phone) {
@@ -53,12 +35,6 @@ class Useful
         }
         return $phone;
     }
-   /**
-     * Formata uma string segundo a máscara de CEP
-     * caso o tamanho da string seja diferente de 10 ou 11, a string será retornada sem formatação
-     * @param string $fone
-     * @return string
-     */
     public static function zip_code($zip_code)
     {
         if (!$zip_code) {

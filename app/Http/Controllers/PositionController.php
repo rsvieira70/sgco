@@ -42,7 +42,10 @@ class PositionController extends Controller
             $error = __('Failed to include') . ' '. __('position');
             $users = User::whereIn('user_type',['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('positions.create')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('positions.index');
         }
     }
 
@@ -56,9 +59,8 @@ class PositionController extends Controller
         $position = Position::find($id);
         if ($position) {
             $title =  __('Position update');
-            $reference = __('position');
             $userAuth = Auth()->User();
-            return view('positions.edit', compact('title', 'reference', 'userAuth', 'position'));
+            return view('positions.edit', compact('title', 'userAuth', 'position'));
         }
         return redirect()->route('positions.index');
     }
@@ -71,16 +73,19 @@ class PositionController extends Controller
             $position = Position::find($id);
             $position->description = $data['description'];
             $position->save();
-
             db::commit();
-            return redirect()->route('positions.index')->with('alert', 'update-ok');
+            Alert::alert()->success(__('Changed'), __('Position') . __(' successfully changed!'));
+            return redirect()->route('positions.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to change') . ' '. __('position') . ' -> ' . __('Key' ) . ' ' . $id;
             $users = User::whereIn('user_type',['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('positions.update')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('positions.index');
         }
     }
 
@@ -97,14 +102,22 @@ class PositionController extends Controller
             $position->save();
 
             db::commit();
-            return redirect()->route('positions.index')->with('alert', 'update-ok');
+            if ($position->suspended == null) {
+                Alert::alert()->success(__('Reactivated'), __('Position') . __(' successfully reactivated!'));
+            } else {
+                Alert::alert()->success(__('Suspended'), __('Positionn') . __(' successfully suspended!'));
+            }
+            return redirect()->route('positions.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to suspend') . ' '. __('position') . ' -> ' . __('Key' ) . ' ' . $id;
             $users = User::whereIn('user_type',['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('positions.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('positions.index');
         }
     }
 
@@ -116,7 +129,8 @@ class PositionController extends Controller
             if ($position) {
                 $position->delete();
                 db::commit();
-                return redirect()->route('positions.index')->with('alert', 'destroy-ok');
+                Alert::alert()->success(__('Excluded'), __('Position') . __(' successfully deleted!'));
+                return redirect()->route('positions.index');
             }
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
@@ -124,7 +138,10 @@ class PositionController extends Controller
             $error = __('Failed to delete') . ' '. __('position') . ' -> ' . __('Key' ) . ' ' . $id;
             $users = User::whereIn('user_type',['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('positions.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('positions.index');
         }
     }
 }

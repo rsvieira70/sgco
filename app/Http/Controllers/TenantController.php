@@ -43,7 +43,10 @@ class TenantController extends Controller
             $error = __('Failed to include') . ' ' . __('tenant');
             $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('tenants.create')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('tenants.index');
         }
     }
 
@@ -58,11 +61,9 @@ class TenantController extends Controller
             $tenant->cell_phone = Useful::class::phone($tenant->cell_phone);
             $tenant->whatsapp = Useful::class::phone($tenant->whatsapp);
             $tenant->telegram = Useful::class::phone($tenant->telegram);
-
             $title =  __('Tenant show');
-            $reference = __('tenant');
             $userAuth = Auth()->User();
-            return view('tenants.show', compact('title', 'reference', 'userAuth', 'tenant'));
+            return view('tenants.show', compact('title', 'userAuth', 'tenant'));
         }
         return redirect()->route('tenants.index');
     }
@@ -71,9 +72,8 @@ class TenantController extends Controller
         $tenant = Tenant::find($id);
         if ($tenant) {
             $title =  __('Tenant update');
-            $reference = __('tenant');
             $userAuth = Auth()->User();
-            return view('tenants.edit', compact('title', 'reference', 'userAuth', 'tenant'));
+            return view('tenants.edit', compact('title', 'userAuth', 'tenant'));
         }
         return redirect()->route('tenants.index');
     }
@@ -109,18 +109,20 @@ class TenantController extends Controller
             $tenant->municipal_registration = $data['municipal_registration'];
             $tenant->opening_date = $data['opening_date'];
             $tenant->note = $data['note'];
-
             $tenant->save();
-
             db::commit();
-            return redirect()->route('tenants.index')->with('alert', 'update-ok');
+            Alert::alert()->success(__('Changed'), __('Tenant') . __(' successfully changed!'));
+            return redirect()->route('tenants.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to change') . ' ' . __('tenant') . ' -> ' . __('Key') . ' ' . $id;
             $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('tenants.update', ['tenant' => $id])->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('tenants.index', ['tenant' => $id]);
         }
     }
 
@@ -135,16 +137,23 @@ class TenantController extends Controller
                 $tenant->suspension_date = null;
             }
             $tenant->save();
-
             db::commit();
-            return redirect()->route('tenants.index')->with('alert', 'update-ok');
+            if ($tenant->suspension_date == null) {
+                Alert::alert()->success(__('Reactivated'), __('Tenant') . __(' successfully reactivated!'));
+            } else {
+                Alert::alert()->success(__('Suspended'), __('Tenant') . __(' successfully suspended!'));
+            }
+            return redirect()->route('tenants.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to suspend') . ' ' . __('tenant') . ' -> ' . __('Key') . ' ' . $id;
             $users = Tenant::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('tenants.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('tenants.index');
         }
     }
 
@@ -156,7 +165,8 @@ class TenantController extends Controller
             if ($tenant) {
                 $tenant->delete();
                 db::commit();
-                return redirect()->route('tenants.index')->with('alert', 'destroy-ok');
+                Alert::alert()->success(__('Excluded'), __('Tenant') . __(' successfully deleted!'));
+                return redirect()->route('tenants.index');
             }
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
@@ -164,7 +174,10 @@ class TenantController extends Controller
             $error = __('Failed to delete') . ' ' . __('tenant') . ' -> ' . __('Key') . ' ' . $id;
             $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('tenants.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('tenants.index');
         }
     }
 }

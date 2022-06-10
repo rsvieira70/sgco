@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class UserCheckActive
 {

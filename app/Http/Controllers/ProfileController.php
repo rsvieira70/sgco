@@ -5,8 +5,9 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\ProfileRequest;
 use App\Notifications\SystemErrorAlert;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -36,11 +37,12 @@ class ProfileController extends Controller
             $data['image'] = $nameImage;
             $upload = $request->image->storeAs('users', $nameImage);
             
-            if (!$upload)
-                return redirect()
-                    ->back()
-                    ->with('error', 'Falha ao fazer upload')
-                    ->withInput();
+            if (!$upload) {
+                Alert::alert()->error(__('Opps! An internal error occurred.'), __('An error occured while uploading the file.'))
+                ->footer(__("An unexpected error occurred and we have notified our support team. Please try again later."))
+                ->showConfirmButton(__('Ok'), '#d33');
+                return redirect()->back()->withInput();
+            }
         }
         db::beginTransaction();
         try {
@@ -52,6 +54,12 @@ class ProfileController extends Controller
             $profile->social_security_number = $data['social_security_number'];
             $profile->birth = $data['birth'];
             if (!empty($data['image'])) {
+                if ($profile->image) {
+                    $image_old = "storage/tenants/{$profile->Tenant->uuid}/users/{$profile->image}";
+                    if(File::exists($image_old)) {
+                        File::delete($image_old);
+                    }
+                }
                 $profile->image = $data['image'];
             };
             $profile->zip_code = $data['zip_code'];
@@ -77,14 +85,18 @@ class ProfileController extends Controller
             $profile->profile_note = $data['profile_note'];
             $profile->save();
             db::commit();
-            return redirect()->route('dashboard')->with('alert', 'update-ok');
+            Alert::alert()->success(__('Changed'), __('Profile') . __(' successfully changed!'));
+            return redirect()->route('dashboard');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to change') . ' ' . __('profile') . ' -> ' . __('Key') . ' ' . $id;
             $users = User::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('profiles.edit', ['profile' => $id])->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('profiles.index');
         }
     }
 }

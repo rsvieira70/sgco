@@ -51,7 +51,10 @@ class UserController extends Controller
             $error = __('Failed to include') . ' ' . __('user');
             $users = NewUser::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('users.create')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('users.index');
         }
     }
     public function show($id)
@@ -65,11 +68,9 @@ class UserController extends Controller
             $user->cell_phone = Useful::class::phone($user->cell_phone);
             $user->whatsapp = Useful::class::phone($user->whatsapp);
             $user->telegram = Useful::class::phone($user->telegram);
-
             $title =  __('User show');
-            $reference = __('user');
             $userAuth = Auth()->User();
-            return view('users.show', compact('title', 'reference', 'userAuth', 'user'));
+            return view('users.show', compact('title', 'userAuth', 'user'));
         }
         return redirect()->route('users.index');
     }
@@ -78,11 +79,10 @@ class UserController extends Controller
         $user = NewUser::find($id);
         if ($user) {
             $title =  __('User update');
-            $reference = __('user');
             $userAuth = Auth()->User();
             $positions = Position::orderBy('description', 'asc')->get();
             $departments = Department::orderBy('description', 'asc')->get();
-            return view('users.edit', compact('title', 'reference', 'userAuth', 'user', 'positions', 'departments'));
+            return view('users.edit', compact('title', 'userAuth', 'user', 'positions', 'departments'));
         }
         return redirect()->route('users.index');
     }
@@ -176,14 +176,18 @@ class UserController extends Controller
         try {
             $user->save();
             db::commit();
-            return redirect()->route('users.index')->with('alert', 'update-ok');
+            Alert::alert()->success(__('Changed'), __('User') . __(' successfully changed!'));
+            return redirect()->route('users.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to change') . ' ' . __('user') . ' -> ' . __('Key') . ' ' . $id;
             $users = NewUser::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('users.edit')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('users.index');
         }
     }
 
@@ -198,16 +202,23 @@ class UserController extends Controller
                 $user->suspension_date = null;
             }
             $user->save();
-
             db::commit();
-            return redirect()->route('users.index')->with('alert', 'update-ok');
+            if ($user->suspension_date == null) {
+                Alert::alert()->success(__('Reactivated'), __('User') . __(' successfully reactivated!'));
+            } else {
+                Alert::alert()->success(__('Suspended'), __('User') . __(' successfully suspended!'));
+            }
+            return redirect()->route('users.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
             db::rollBack();
             $error = __('Failed to suspend') . ' ' . __('user') . ' -> ' . __('Key') . ' ' . $id;
             $users = NewUser::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('users.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('users.index');
         }
     }
 
@@ -219,7 +230,8 @@ class UserController extends Controller
             if ($user) {
                 $user->delete();
                 db::commit();
-                return redirect()->route('users.index')->with('alert', 'destroy-ok');
+                Alert::alert()->success(__('Excluded'), __('User') . __(' successfully deleted!'));
+                return redirect()->route('users.index');
             }
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
@@ -227,7 +239,10 @@ class UserController extends Controller
             $error = __('Failed to delete') . ' ' . __('user') . ' -> ' . __('Key') . ' ' . $id;
             $users = NewUser::whereIn('user_type', ['1'])->get();
             Notification::send($users, new SystemErrorAlert($error, $exception));
-            return redirect()->route('users.index')->with('alert', 'errors');
+            Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
+                ->footer(__("Don't worry, we've already warned the developer."))
+                ->showConfirmButton(__('Ok'), '#d33');
+            return redirect()->route('users.index');
         }
     }
 }
