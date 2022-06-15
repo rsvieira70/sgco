@@ -57,7 +57,7 @@
                                     </form>
                                 @else
                                     <form action="{{ route('tenants.suspend', $tenant->id) }}"
-                                        class="d-inline formsuspend" method="POST">
+                                        class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-xs btn-success"><i

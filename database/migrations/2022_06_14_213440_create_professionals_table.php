@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create('professionals', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('tenant_id');
-            $table->string('description', 80);
-            $table->string('label',50);
-            $table->longText('note')->nullable();
             $table->timestamps();
-            $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pages');
+        Schema::dropIfExists('professionals');
     }
 };

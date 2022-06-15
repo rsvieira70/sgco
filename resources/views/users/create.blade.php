@@ -1,4 +1,8 @@
 @extends('_Partials.index')
+@section('head-complement')
+    <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+@endsection;
+
 @section('content')
     <form action="{{ route('users.store') }}" method="POST" class="form-horizontal">
         @csrf
@@ -48,6 +52,7 @@
                                                 </option>
                                             @endforeach
                                         </select>
+                                        <div class="invalid-feedback">{{ $errors->first('position_id') }} </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -73,6 +78,7 @@
                                             <option value="3" {{ old('user_type') == 3 ? 'selected' : '' }}>
                                                 {{ __('User') }}
                                         </select>
+                                        <div class="invalid-feedback">{{ $errors->first('user_type') }} </div>
                                     </div>
                                 </div>
                             </div>
@@ -107,9 +113,23 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="user_note">{{ __('Note') }}</label>
-                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4"
-                                            style="height: 30mm">{{ old('user_note', null) }}</textarea>
+                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4" style="height: 30mm">{{ old('user_note', null) }}</textarea>
                                         <div class="invalid-feedback">{{ $errors->first('user_note') }} </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group clearfix">
+                                        <div class="icheck-primary d-inline">
+                                            <input type="checkbox" class="form-control @error('administrative_responsible') is-invalid @enderror"
+                                                id="administrative_responsible"
+                                                name="administrative_responsible" 
+                                                value="1"
+                                                {{ old('administrative_responsible', null) ? 'checked' : '' }}>
+                                            <label for="administrative_responsible">{{ __('Administrative responsible') }}</label>
+                                            <div class="invalid-feedback">{{ __('There is already another user as administrative responsible') }} </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

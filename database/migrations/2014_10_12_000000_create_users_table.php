@@ -38,6 +38,7 @@ return new class extends Migration
             $table->integer('department_id')->nullable();
             $table->integer('position_id')->nullable();
             $table->date('registration_date')->nullable();
+            $table->boolean('administrative_responsible')->nullable();
             $table->date('suspension_date')->nullable();
             $table->longText('user_note')->nullable();
             $table->longText('profile_note')->nullable();

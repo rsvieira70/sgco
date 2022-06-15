@@ -56,6 +56,10 @@
                                         <small>{{ __('Patient') }}</small>
                                     @break
                                 @endswitch
+                                @if ($user->administrative_responsible !== null)
+                                    <i class="fas fa-hand-point-right"></i>
+                                    <small> {{ __('Administrative responsible') }}</small>
+                                @endif
                             </td>
                             <td>{{ $user->email }}</td>
                             @if ($user->suspension_date !== null)
@@ -92,23 +96,23 @@
                                 @else
                                     <a href="{{ route('users.show', $user->id) }}" class="btn btn-xs btn-primary "><i
                                             class="far fa-eye"></i>{{ __('View') }}</a>
-                                    <form action="{{ route('users.suspend', $user->id) }}" class="d-inline formsuspend"
-                                        method="POST">
+                                    <form action="{{ route('users.suspend', $user->id) }}"
+                                        class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-xs btn-success"><i
                                                 class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                     <!--
-                                                        <form action="{{ route('users.destroy', $user->id) }}"
-                                                            class="d-inline formulario-eliminar" method="POST">
-                                                            @method ('DELETE')
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-xs btn-danger"><i
-                                                                    class="fas fa-trash"></i>
-                                                                {{ __('Delete') }}</button>
-                                                        </form>
-                                                    -->
+                                                            <form action="{{ route('users.destroy', $user->id) }}"
+                                                                class="d-inline formulario-eliminar" method="POST">
+                                                                @method ('DELETE')
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-xs btn-danger"><i
+                                                                        class="fas fa-trash"></i>
+                                                                    {{ __('Delete') }}</button>
+                                                            </form>
+                                                        -->
                                 @endif
                             </td>
                         </tr>

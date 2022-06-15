@@ -838,8 +838,10 @@
     "Select a user type": "Selecione um tipo de usuário",
     "Patient": "Paciente",
     "Alert": "Alerta",
+    "Tenant suspended in": "Filial suspensa em",
     "User suspended in": "Usuário suspenso em",
     "User active": "Usuário ativo",
+    "Tenant active": "Filial ativa",
     "About me": "Sobre mim",
     "Social name": "Nome social",
     "Nickname": "Apelido",
@@ -878,7 +880,10 @@
     "List of tenants": "Lista das filiais",
     "Tenant update" : "Alteração da filial",
     "Tenant show": "Exibição da filial",
-    "Login successfully!": "Login efetuado com sucesso!"
+    "Login successfully!": "Login efetuado com sucesso!", 
+    "Administrative responsible": "Responsável administrativo",
+    "There is already another user as administrative responsible": "Já existe outro usuário como responsável administrativo",
+    "Responsible": "Responsáveis"
 
 
 

@@ -3,8 +3,10 @@
 namespace App\Rules;
 
 use App\Tenant\ManagerTenant;
+use Attribute;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Database\Schema\ColumnDefinition;
 
 class TenantUnique implements Rule
 {
@@ -20,9 +22,9 @@ class TenantUnique implements Rule
     {
         $tenant = app(ManagerTenant::class)->getTenantIdentify();
         $result = DB::table($this->table)
-                    ->where($attribute, ucfirst(strtolower($value)))
-                    ->where('tenant_id', $tenant)
-                    ->first();
+            ->where($attribute, ucfirst(strtolower($value)))
+            ->where('tenant_id', $tenant)
+            ->first();
         if ($result && strtolower($result->{$this->column}) == strtolower($this->columnValue))
             return true;
         return is_null($result);
@@ -30,6 +32,6 @@ class TenantUnique implements Rule
 
     public function message()
     {
-        return  __('The value entered for the :attribute field is already in use') ;
+        return  __('The value entered for the :attribute field is already in use');
     }
 }

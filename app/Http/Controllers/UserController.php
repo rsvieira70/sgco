@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Class\Useful;
+use App\Http\Requests\UserRequest;
+use App\Models\Department;
+use App\Models\NewUser;
+use App\Models\Position;
+use App\Notifications\SystemErrorAlert;
+use App\Rules\FullName;
+use App\Rules\TenantUnique;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
-use App\Class\Useful;
-use App\Models\NewUser;
-use App\Models\Position;
-use App\Models\Department;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
-use App\Notifications\SystemErrorAlert;
-use App\Rules\FullName;
 use RealRashid\SweetAlert\Facades\Alert;
-
 
 class UserController extends Controller
 {
@@ -90,6 +89,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
+        if(!$request->get('administrative_responsible')){ $data['administrative_responsible'] = null; }
         $user = NewUser::find($id);
         if ($user) {
             $data = $request->only([
@@ -101,8 +101,10 @@ class UserController extends Controller
                 'user_note',
                 'email',
                 'password',
-                'password_confirmation'
+                'password_confirmation',
+                'administrative_responsible'
             ]);
+            if(!$request->get('administrative_responsible')){ $data['administrative_responsible'] = null; }
             if ($user->user_type == 2 || $user->user_type == 3) {
                 $validator = Validator::make(
                     $data,
@@ -114,6 +116,7 @@ class UserController extends Controller
                         'department_id' => ['required', 'min:1'],
                         'position_id' => ['required', 'min:1'],
                         'registration_date' => ['required', 'date'],
+                        'administrative_responsible' =>['nullable', new TenantUnique('users',$id)]
                     ],
                     [],
                     [
@@ -123,8 +126,9 @@ class UserController extends Controller
                         'user_type' => __('Type user'),
                         'department_id' => __('department'),
                         'position_id' => __('position'),
-                        'registration_date' => __('Registration date')
-                    ]
+                        'registration_date' => __('Registration date'),
+                        'administrative_responsible' => __('Administrative responsible')
+                        ]
                 );
                 $user->name = $data['name'];
                 $user->email = $data['email'];
@@ -133,6 +137,7 @@ class UserController extends Controller
                 $user->department_id = $data['department_id'];
                 $user->position_id = $data['position_id'];
                 $user->registration_date = $data['registration_date'];
+                $user->administrative_responsible = $data['administrative_responsible'];
             } else {
                 $validator = Validator::make(
                     $data,
@@ -140,12 +145,14 @@ class UserController extends Controller
                         'name' => ['required', 'string', 'max:60', new FullName()],
                         'email' => ['required', 'string', 'email', 'max:100', "unique:users,email,{$id}"],
                         'user_note' => ['nullable', 'string'],
+                        'administrative_responsible' =>['nullable', new TenantUnique('users',$id)]
                     ],
                     [],
                     [
                         'name' => __('Name'),
                         'email' => __('Email'),
-                        'user_note' => __('User note')
+                        'user_note' => __('User note'),
+                        'administrative_responsible' => __('Administrative responsible')
                     ]
                 );
                 $user->name = $data['name'];
@@ -169,7 +176,7 @@ class UserController extends Controller
                 }
             };
             if (count($validator->errors()) > 0) {
-                return redirect()->route('users.edit', ['user' => $id])->withErrors($validator);
+                return redirect()->route('users.edit', $id)->withErrors($validator);
             };
         };
         db::beginTransaction();

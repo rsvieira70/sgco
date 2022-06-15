@@ -33,7 +33,7 @@ class Useful
         if (strlen($phone) == 11) {
             return '(' . substr($phone, 0, 2) . ')' . substr($phone, 2, 5) . '-' . substr($phone, 7);
         }
-        return $phone;
+        return $phone; 
     }
     public static function zip_code($zip_code)
     {

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Class\Useful;
+use App\Http\Requests\TenantRequest;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Notifications\SystemErrorAlert;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
-use App\Http\Requests\TenantRequest;
-use App\Notifications\SystemErrorAlert;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class TenantController extends Controller
@@ -53,9 +53,8 @@ class TenantController extends Controller
     public function show($id)
     {
         $tenant = Tenant::find($id);
-
         if ($tenant) {
-            $tenant->employer_identification_number = Useful::class::ein($tenant->employer_identification_number);
+            $tenant->employer_identification_number = Useful::class::ssn($tenant->employer_identification_number);
             $tenant->zip_code = Useful::class::zip_code($tenant->zip_code);
             $tenant->telephone = Useful::class::phone($tenant->telephone);
             $tenant->cell_phone = Useful::class::phone($tenant->cell_phone);
@@ -63,7 +62,8 @@ class TenantController extends Controller
             $tenant->telegram = Useful::class::phone($tenant->telegram);
             $title =  __('Tenant show');
             $userAuth = Auth()->User();
-            return view('tenants.show', compact('title', 'userAuth', 'tenant'));
+            $administrative = User::whereIn('administrative_responsible', ['true'])->get()->first();
+            return view('tenants.show', compact('title', 'userAuth', 'administrative', 'tenant'));
         }
         return redirect()->route('tenants.index');
     }
@@ -75,7 +75,7 @@ class TenantController extends Controller
             $userAuth = Auth()->User();
             return view('tenants.edit', compact('title', 'userAuth', 'tenant'));
         }
-        return redirect()->route('tenants.index');
+        return redirect()->route('tenant.index');
     }
 
     public function update(TenantRequest $request, $id)

@@ -41,6 +41,14 @@
                                             @break
                                         @endswitch
                                     </div>
+                                    @if ($user->administrative_responsible !== null)
+                                        <div class="ribbon-wrapper ribbon-xl">
+                                            <div class="ribbon bg-primary">
+                                                <small> {{ __('Administrative responsible') }}</small>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     @php
                                         $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
                                         if ($user->image) {
@@ -102,11 +110,11 @@
                                         <li class="nav-item"><a class="nav-link active" href="#information"
                                                 data-toggle="tab">{{ __('Informations') }}</a></li>
                                         <!--
-                                                                            <li class="nav-item"><a class="nav-link" href="#timeline"
-                                                                                    data-toggle="tab">{{ __('Timeline') }}</a></li>
-                                                                                                    <li class="nav-item"><a class="nav-link" href="#settings"
-                                                                                                            data-toggle="tab">{{ __('Settings') }}</a></li>
-                                                                                                    -->
+                                                                                <li class="nav-item"><a class="nav-link" href="#timeline"
+                                                                                        data-toggle="tab">{{ __('Timeline') }}</a></li>
+                                                                                                        <li class="nav-item"><a class="nav-link" href="#settings"
+                                                                                                                data-toggle="tab">{{ __('Settings') }}</a></li>
+                                                                                                        -->
                                     </ul>
                                 </div>
                                 <div class="card-body">

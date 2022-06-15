@@ -46,7 +46,7 @@
                                     </form>
                                 @else
                                     <form action="{{ route('positions.suspend', [$position->id]) }}"
-                                        class="d-inline formSuspend" method="POST">
+                                        class="d-inline formReactivates" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-xs btn-success"><i

@@ -44,11 +44,11 @@ class Profile extends Model
         });
     }
     //accessor get
-      public function getSocialsecuritynumberAttribute()
-     {
-         $social_security_number = $this->attributes['social_security_number'];
-         return substr($social_security_number, 0, 3) . '.' . substr($social_security_number, 3, 3) . '.' . substr($social_security_number, 6, 3) . '-' . substr($social_security_number, 9, 2);
-     }         
+    //  public function getSocialsecuritynumberAttribute()
+    // {
+    //     $social_security_number = $this->attributes['social_security_number'];
+    //     return substr($social_security_number, 0, 3) . '.' . substr($social_security_number, 3, 3) . '.' . substr($social_security_number, 6, 3) . '-' . substr($social_security_number, 9, 2);
+    // }         
     //mutators set
     public function setNameAttribute($value)
     {
