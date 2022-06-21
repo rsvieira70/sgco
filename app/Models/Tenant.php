@@ -130,4 +130,7 @@ class Tenant extends Model
     {
         return $this->hasMany(Position::class);
     }
+    public function tenantDocuments() {
+        return $this->hasMany(TenantDocument::class);
+    }
 }

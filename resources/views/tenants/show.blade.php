@@ -8,15 +8,17 @@
                         <div class="col-md-4">
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
-                                    
-                                        <b> {{ __('Social reason') }}:</b> {{ $tenant->social_reason }}<br>
-                                        <b> {{ __('Fancy name') }}:</b> {{ $tenant->fancy_name }} <br>
-                                        <b>{{ __('Opening date') }}:</b> {{ date('d/m/Y', strtotime($tenant->opening_date)) }}<br>
-                                        <b>{{ __('Employer identification number') }}:</b> {{ $tenant->employer_identification_number }}<br>
-                                        <b>{{ __('State registration') }}:</b> {{ $tenant->state_registration }}<br>
-                                        <b>{{ __('Municipal registration') }}:</b> {{ $tenant->municipal_registration }}
-                                        
-                                    
+
+                                    <b> {{ __('Social reason') }}:</b> {{ $tenant->social_reason }}<br>
+                                    <b> {{ __('Fancy name') }}:</b> {{ $tenant->fancy_name }} <br>
+                                    <b>{{ __('Opening date') }}:</b>
+                                    {{ date('d/m/Y', strtotime($tenant->opening_date)) }}<br>
+                                    <b>{{ __('Employer identification number') }}:</b>
+                                    {{ $tenant->employer_identification_number }}<br>
+                                    <b>{{ __('State registration') }}:</b> {{ $tenant->state_registration }}<br>
+                                    <b>{{ __('Municipal registration') }}:</b> {{ $tenant->municipal_registration }}
+
+
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
                                             <b>{{ __('Website') }}:</b> {{ $tenant->website }}<br>
@@ -42,15 +44,9 @@
                             <div class="card">
                                 <div class="card-header p-2">
                                     <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link active" href="#information"
-                                                data-toggle="tab">{{ __('Informations') }}</a></li>
-                                        <!--
-                                                                            <li class="nav-item"><a class="nav-link" href="#timeline"
-                                                                                    data-toggle="tab">{{ __('Timeline') }}</a></li>
-                                                                            -->
-                                                                                                    <li class="nav-item"><a class="nav-link" href="#responsible"
-                                                                                                            data-toggle="tab">{{ __('Responsible') }}</a></li>
-                                                                                                    
+                                        <li class="nav-item"><a class="nav-link active" href="#information" data-toggle="tab">{{ __('Informations') }}</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#responsible" data-toggle="tab">{{ __('Responsible') }}</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="#documents" data-toggle="tab">{{ __('Documents') }}</a></li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
@@ -69,7 +65,8 @@
                                                     {{ $tenant->address }} {{ $tenant->house_number }}
                                                     {{ $tenant->complement }} <br>
                                                     {{ $tenant->neighborhood }} <br>
-                                                    {{ $tenant->city }} {{ $tenant->state }} {{ $tenant->zip_code }}<br>
+                                                    {{ $tenant->city }} {{ $tenant->state }}
+                                                    {{ $tenant->zip_code }}<br>
                                                     <b>{{ __('DCEU') }}</b> {{ $tenant->dceu }}
                                                 </div>
                                                 <div class="col-sm-4 invoice-col">
@@ -99,91 +96,219 @@
                                                 {{ $tenant->note }}
                                             </p>
                                         </div>
-                                        <div class="tab-pane" id="timeline">
-                                            <div class="timeline timeline-inverse">
-                                                <div class="time-label">
-                                                    <span class="bg-danger">
-                                                        10 Feb. 2014
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-envelope bg-primary"></i>
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i>
-                                                            12:05</span>
-                                                        <h3 class="timeline-header"><a href="#">Support Team</a> sent you an
-                                                            email
-                                                        </h3>
-                                                        <div class="timeline-body">
-                                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo
-                                                            kaboodle
-                                                            quora plaxo ideeli hulu weebly balihoo...
+
+                                        <div class="tab-pane" id="responsible">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="card card-widget widget-user shadow">
+                                                        <div class="widget-user-header bg-info">
+                                                            @if ($administrative !== null)
+                                                                <h3 class="widget-user-username">{{ $administrative->name }}</h3>
+                                                            @else
+                                                                <h3 class="widget-user-username">{{ __('Undefined') }}</h3>
+                                                            @endif
+                                                            <h5 class="widget-user-desc">{{ __('Administrative responsible') }}</h5>
                                                         </div>
-                                                        <div class="timeline-footer">
-                                                            <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                                        @php
+                                                            $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
+                                                            if ($administrative !== null) {
+                                                                if ($administrative->image) {
+                                                                    $pathImage = url("storage/tenants/{$administrative->Tenant->uuid}/users/{$administrative->image}");
+                                                                }
+                                                            }
+                                                        @endphp
+                                                        <div class="widget-user-image">
+                                                            <img class="img-circle elevation-2" src="{{ $pathImage }}" alt="User Avatar">
                                                         </div>
+                                                        @if ($administrative !== null)
+                                                            <div class="card-footer">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 border-right">
+                                                                        <div class="description-block">
+                                                                            <span class="description-text">{{ __('Department') }}</span>
+                                                                            <h5 class="description-header">
+                                                                                {{ $administrative->department->description }}
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4 border-right">
+                                                                        <div class="description-block">
+                                                                            <span class="description-text">{{ __('Position') }}</span>
+                                                                            <h5 class="description-header">
+                                                                                {{ $administrative->position->description }}
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="description-block">
+                                                                            <span class="description-text">{{ __('Alert') }}</span>
+                                                                            @if ($administrative->suspension_date !== null)
+                                                                                <h5 class="description-header">
+                                                                                    {{ __('User suspended in') }}{{ date('d/m/Y', strtotime($administrative->suspension_date)) }}
+                                                                                </h5>
+                                                                            @else
+                                                                                <h5 class="description-header">
+                                                                                    {{ __('User active') }}</h5>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="small-box bg-info">
+                                                                <a href="{{ route('users.show', $administrative->id) }}" class="small-box-footer">{{ __('More information') }} <i
+                                                                        class="fas fa-arrow-circle-right"></i></a>
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <i class="fas fa-tenant bg-info"></i>
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i> 5 mins
-                                                            ago</span>
-                                                        <h3 class="timeline-header border-0"><a href="#">Sarah Young</a>
-                                                            accepted
-                                                            your friend request
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <i class="fas fa-comments bg-warning"></i>
-                                                    <div class="timeline-item">
-                                                        <span class="time"><i class="far fa-clock"></i> 27 mins
-                                                            ago</span>
-                                                        <h3 class="timeline-header"><a href="#">Jay White</a> commented on
-                                                            your
-                                                            post</h3>
-                                                        <div class="timeline-body">
-                                                            Take me to your leader!
-                                                            Switzerland is small and neutral!
-                                                            We are more like Germany, ambitious and misunderstood!
+                                                <div class="col-md-6">
+                                                    <div class="card card-widget widget-user shadow">
+                                                        <div class="widget-user-header bg-success">
+                                                            @if ($administrative !== null)
+                                                                <h3 class="widget-user-username">{{ $administrative->name }}</h3>
+                                                            @else
+                                                                <h3 class="widget-user-username">{{ __('Undefined') }}</h3>
+                                                            @endif
+                                                            <h5 class="widget-user-desc">{{ __('Responsible dentist') }}</h5>
                                                         </div>
-                                                        <div class="timeline-footer">
-                                                            <a href="#" class="btn btn-warning btn-flat btn-sm">View
-                                                                comment</a>
+                                                        @php
+                                                            $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
+                                                            if ($administrative !== null) {
+                                                                if ($administrative->image) {
+                                                                    $pathImage = url("storage/tenants/{$administrative->Tenant->uuid}/users/{$administrative->image}");
+                                                                }
+                                                            }
+                                                        @endphp
+                                                        <div class="widget-user-image">
+                                                            <img class="img-circle elevation-2" src="{{ $pathImage }}" alt="User Avatar">
                                                         </div>
+                                                        @if ($administrative !== null)
+                                                            <div class="card-footer">
+                                                                <div class="row">
+                                                                    <div class="col-sm-4 border-right">
+                                                                        <div class="description-block">
+                                                                            <span class="description-text">{{ __('Department') }}</span>
+                                                                            <h5 class="description-header">
+                                                                                {{ $administrative->department->description }}
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4 border-right">
+                                                                        <div class="description-block">
+                                                                            <span class="description-text">{{ __('Position') }}</span>
+                                                                            <h5 class="description-header">
+                                                                                {{ $administrative->position->description }}
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="description-block">
+                                                                            <span class="description-text">{{ __('Alert') }}</span>
+                                                                            @if ($administrative->suspension_date !== null)
+                                                                                <h5 class="description-header">
+                                                                                    {{ __('User suspended in') }}{{ date('d/m/Y', strtotime($administrative->suspension_date)) }}
+                                                                                </h5>
+                                                                            @else
+                                                                                <h5 class="description-header">{{ __('User active') }}</h5>
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="small-box bg-success">
+                                                                <a href="{{ route('users.show', $administrative->id) }}" class="small-box-footer">{{ __('More information') }} <i
+                                                                        class="fas fa-arrow-circle-right"></i></a>
+                                                            </div>
+                                                        @endif
                                                     </div>
-                                                </div>
-                                                <div class="time-label">
-                                                    <span class="bg-success">
-                                                        {{ date('d M Y', strtotime($tenant->registration_date)) }}
-                                                    </span>
-                                                </div>
-                                                <div>
-                                                    <i class="far fa-clock bg-gray"></i>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="responsible">
-                                            @if ($administrative->name !== null)
-                                            <div class="callout callout-success">
-                                                <h5>{{ __('Administrative responsible') }}!</h5>
-                                                <p>{{ $administrative->name }}</p>
+                                        <div class="tab-pane" id="documents">
+                                            <div class="row">
+                                                <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
+                                                    <ul class="list-unstyled">
+
+                                                        @foreach ($tenant->tenantDocuments as $tenantDocument)
+                                                            <li>
+                                                                <a href="" class="btn-link text-secondary">
+                                                                    @switch ($tenantDocument->type)
+                                                                        @case ('PDF')
+                                                                            <i class="fas fa-file-pdf"></i>
+                                                                        @break
+
+                                                                        @case ('DOC')
+                                                                            <i class="fas fa-file-word"></i>
+                                                                        @break
+
+                                                                        @case ('DOCX')
+                                                                            <i class="fas fa-file-word"></i>
+                                                                        @break
+
+                                                                        @case ('XLSX')
+                                                                            <i class="fas fa-file-excel"></i>
+                                                                        @break
+
+                                                                        @case ('XLS')
+                                                                            <i class="fas fa-file-excel"></i>
+                                                                        @break
+
+                                                                        @case ('PPT')
+                                                                            <i class="fas fa-file-powerpoint"></i>
+                                                                        @break
+
+                                                                        @case ('BMP')
+                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                        @break
+
+                                                                        @case ('PNG')
+                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                        @break
+
+                                                                        @case ('GIF')
+                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                        @break
+
+                                                                        @case ('JPG')
+                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                        @break
+
+                                                                        @case ('JPEG')
+                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                        @break
+
+                                                                        @case ('ZIP')
+                                                                            <i class="fas fa-file-archive"></i>
+                                                                        @break
+
+                                                                        @case ('WAV')
+                                                                            <i class="fas fa-file-audio"></i>
+                                                                        @break
+
+                                                                        @case ('MP3')
+                                                                            <i class="fas fa-file-audio"></i>
+                                                                        @break
+
+                                                                        @case ('MOV')
+                                                                            <i class="fas fa-file-video"></i>
+                                                                        @break
+
+                                                                        @case ('AVI')
+                                                                            <i class="fas fa-file-video"></i>
+                                                                        @break
+                                                                    @endswitch
+                                                                {{ $tenantDocument->description }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        @else
-                                            <div class="callout callout-success">
-                                                <h5>{{ __('Administrative responsible') }}!</h5>
-                                                <p>Não definido</p>
+                                            <hr>
+                                            <div class="callout callout-info">
+                                                <h5><i class="icon fas fa-info"></i> {{ __('Information')}}!</h5>
+                                                <p>{{ __('Click on the document to view it, for a new document contact the administrator')}}</p>
                                             </div>
-                                        @endif
-    
-
-
-
-                                                                                   </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -194,8 +319,7 @@
         </div>
         <div class="row no-print">
             <div class="col-12">
-                <a href="{{ route('tenants.index') }}" class="btn btb-sm btn-danger"><i
-                        class="fas fa-arrow-circle-left"></i>
+                <a href="{{ url()->previous() }}" class="btn btb-sm btn-danger"><i class="fas fa-arrow-circle-left"></i>
                     {{ __('Go back') }}</a>
             </div>
         </div>

@@ -35,7 +35,7 @@ class TenantController extends Controller
         try {
             Tenant::create($data);
             db::commit();
-            Alert::alert()->success(__('Included'), __('Tenant') . __(' successfully added!'));
+            Alert::alert()->success(__('Included'), __('tenant') . __(' successfully added!'));
             return redirect()->route('tenant.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
@@ -52,7 +52,7 @@ class TenantController extends Controller
 
     public function show($id)
     {
-        $tenant = Tenant::find($id);
+        $tenant = Tenant::with(['tenantDocuments'])->find($id);
         if ($tenant) {
             $tenant->employer_identification_number = Useful::class::ssn($tenant->employer_identification_number);
             $tenant->zip_code = Useful::class::zip_code($tenant->zip_code);
@@ -62,7 +62,7 @@ class TenantController extends Controller
             $tenant->telegram = Useful::class::phone($tenant->telegram);
             $title =  __('Tenant show');
             $userAuth = Auth()->User();
-            $administrative = User::whereIn('administrative_responsible', ['true'])->get()->first();
+            $administrative = User::whereIn('administrative_responsible', ['true'])->with(['Department', 'Position', 'Tenant'])->get()->first();
             return view('tenants.show', compact('title', 'userAuth', 'administrative', 'tenant'));
         }
         return redirect()->route('tenants.index');
@@ -111,7 +111,7 @@ class TenantController extends Controller
             $tenant->note = $data['note'];
             $tenant->save();
             db::commit();
-            Alert::alert()->success(__('Changed'), __('Tenant') . __(' successfully changed!'));
+            Alert::alert()->success(__('Changed'), __('tenant') . __(' successfully changed!'));
             return redirect()->route('tenants.index');
         } catch (\Exception $exception) {
             $exception = $exception->getMessage();
@@ -139,9 +139,9 @@ class TenantController extends Controller
             $tenant->save();
             db::commit();
             if ($tenant->suspension_date == null) {
-                Alert::alert()->success(__('Reactivated'), __('Tenant') . __(' successfully reactivated!'));
+                Alert::alert()->success(__('Reactivated'), __('tenant') . __(' successfully reactivated!'));
             } else {
-                Alert::alert()->success(__('Suspended'), __('Tenant') . __(' successfully suspended!'));
+                Alert::alert()->success(__('Suspended'), __('tenant') . __(' successfully suspended!'));
             }
             return redirect()->route('tenants.index');
         } catch (\Exception $exception) {
@@ -165,7 +165,7 @@ class TenantController extends Controller
             if ($tenant) {
                 $tenant->delete();
                 db::commit();
-                Alert::alert()->success(__('Excluded'), __('Tenant') . __(' successfully deleted!'));
+                Alert::alert()->success(__('Excluded'), __('tenant') . __(' successfully deleted!'));
                 return redirect()->route('tenants.index');
             }
         } catch (\Exception $exception) {

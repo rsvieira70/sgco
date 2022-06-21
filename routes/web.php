@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TenantController;
+use App\Http\Controllers\TenantDocumentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PositionController;
@@ -29,6 +30,12 @@ Route::middleware(['auth', 'profile.check.exist', 'user.check.active', 'tenant.c
     Route::put('/tenants/{id}', [TenantController::class, 'update'])->middleware(['tenant.authorization'])->name('tenants.update');
     Route::patch('/tenants/{id}', [TenantController::class, 'suspend'])->middleware(['tenant.authorization'])->name('tenants.suspend');
     Route::delete('/tenants/{id}', [TenantController::class, 'destroy'])->middleware(['tenant.authorization'])->name('tenants.destroy');
+
+    Route::get('/tenantDocuments', [TenantDocumentController::class, 'index'])->middleware(['tenant.authorization'])->name('tenantDocuments.index');
+    Route::get('/tenantDocuments/create', [TenantDocumentController::class, 'create'])->middleware(['tenant.authorization'])->name('tenantDocuments.create');
+    Route::post('/tenantDocuments', [TenantDocumentController::class, 'store'])->middleware(['tenant.authorization'])->name('tenantDocuments.store');
+    Route::get('/tenantDocuments/{id}', [TenantDocumentController::class, 'show'])->middleware(['tenant.authorization'])->name('tenantDocuments.show');
+    Route::delete('/tenantDocuments/{id}', [TenantDocumentController::class, 'destroy'])->middleware(['tenant.authorization'])->name('tenantDocuments.destroy');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');

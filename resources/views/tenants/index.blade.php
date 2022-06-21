@@ -28,40 +28,27 @@
                             <td>{{ $tenant->fancy_name }}</td>
                             @if ($tenant->suspension_date !== null)
                                 <td class="text-center">
-                                    <span class="badge badge-danger"><i class="fas fa-lock"></i>
-                                        {{ __('Suspended in') }}
-                                        {{ date('d/m/Y', strtotime($tenant->suspension_date)) }}</span>
+                                    <span class="badge badge-danger"><i class="fas fa-lock"></i>{{ __('Suspended in') }}{{ date('d/m/Y', strtotime($tenant->suspension_date)) }}</span>
                                 </td>
                             @else
                                 <td class="text-center">
-                                    <span class="badge badge-success"><i class="fas fa-lock-open"></i>
-                                        {{ __('Active') }}
-                                    </span>
+                                    <span class="badge badge-success"><i class="fas fa-lock-open"></i>{{ __('Active') }}</span>
                                 </td>
                             @endif
                             <td class="text-right">
-                                <a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-xs btn-primary "><i
-                                        class="far fa-eye"></i> {{ __('View') }}</a>
+                                <a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
                                 @if ($tenant->suspension_date == null)
-                                    <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-xs btn-info "><i
-                                            class="fas fa-pencil-alt"></i>
-                                        {{ __('Edit') }}</a>
-
-
-                                    <form action="{{ route('tenants.suspend', $tenant->id) }}"
-                                        class="d-inline formsuspend" method="POST">
+                                    <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>{{ __('Edit') }}</a>
+                                    <form action="{{ route('tenants.suspend', $tenant->id) }}" class="d-inline formsuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-warning"> <i
-                                                class="fas fa-lock"></i> {{ __('Suspend') }}</button>
+                                        <button type="submit" class="btn btn-xs btn-warning"> <i class="fas fa-lock"></i> {{ __('Suspend') }}</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('tenants.suspend', $tenant->id) }}"
-                                        class="d-inline formReactivate" method="POST">
+                                    <form action="{{ route('tenants.suspend', $tenant->id) }}" class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-success"><i
-                                                class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
+                                        <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                 @endif
                             </td>

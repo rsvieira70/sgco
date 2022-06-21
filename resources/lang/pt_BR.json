@@ -882,8 +882,20 @@
     "Tenant show": "Exibição da filial",
     "Login successfully!": "Login efetuado com sucesso!", 
     "Administrative responsible": "Responsável administrativo",
+    "Responsible dentist": "Dentista responsável",
     "There is already another user as administrative responsible": "Já existe outro usuário como responsável administrativo",
-    "Responsible": "Responsáveis"
+    "Responsible": "Responsáveis",
+    "Undefined": "Não definido",
+    "Tenants": "Filiais",
+    "Tenant": "Filial",
+    "tenant": "filial",
+    "Document": "Documento",
+    "document": "documento",
+    "Documents": "Documentos",
+    "documents": "documentos",
+    "Manage documents": "Gerenciar documentos",
+    "Information": "Informação",
+    "Click on the document to view it, for a new document contact the administrator": "Clique no documento para visualizá-lo, para um novo documento entre em contato com o administrador"
 
 
 
