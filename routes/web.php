@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\SpecialtyController;
 
 require __DIR__ . '/auth.php';
 
@@ -64,6 +65,14 @@ Route::middleware(['auth', 'profile.check.exist', 'user.check.active', 'tenant.c
     Route::patch('/positions/{id}', [PositionController::class, 'suspend'])->name('positions.suspend');
     Route::delete('/positions/{id}', [PositionController::class, 'destroy'])->name('positions.destroy');
 
+    Route::get('/specialties', [SpecialtyController::class, 'index'])->name('specialties.index');
+    Route::get('/specialties/create', [SpecialtyController::class, 'create'])->name('specialties.create');
+    Route::post('/specialties', [SpecialtyController::class, 'store'])->name('specialties.store');
+    Route::get('/specialties/{id}', [SpecialtyController::class, 'show'])->name('specialties.show');
+    Route::get('/specialties/{id}/edit', [SpecialtyController::class, 'edit'])->name('specialties.edit');
+    Route::put('/specialties/{id}', [SpecialtyController::class, 'update'])->name('specialties.update');
+    Route::patch('/specialties/{id}', [SpecialtyController::class, 'suspend'])->name('specialties.suspend');
+    Route::delete('/specialties/{id}', [SpecialtyController::class, 'destroy'])->name('specialties.destroy');
 });
 
 Route::resources([

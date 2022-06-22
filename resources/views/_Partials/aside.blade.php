@@ -1,8 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('dashboard') }}" class="brand-link">
-        <img src="{{ asset('AdminLTE/dist/img/OrtorisoLogo.png') }}" alt="ORTORISO Logo"
-            class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">{{$userAuth->Tenant->fancy_name}}</span>
+        <img src="{{ asset('AdminLTE/dist/img/OrtorisoLogo.png') }}" alt="ORTORISO Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">{{ $userAuth->Tenant->fancy_name }}</span>
     </a>
     <div class="sidebar">
         <!--
@@ -24,15 +23,14 @@
     -->
         <div class="form-inline mt-2">
             <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="{{ __('Search')}}"
-                    aria-label="{{ __('Search')}}">
+                <input class="form-control form-control-sidebar" type="search" placeholder="{{ __('Search') }}" aria-label="{{ __('Search') }}">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>
                     </button>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar nav-child-indent flex-column" data-widget="treeview" role="menu">
@@ -94,9 +92,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('specialties.index') }}" class="nav-link">
                                 <i class="fas fa-certificate nav-icon"></i>
-                                <p>{{ __('Especialities') }}</p>
+                                <p>{{ __('Specialties') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -223,7 +221,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
@@ -235,8 +233,8 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>{{ __('Type of duplicates') }}</p>
+                                        <i class="fas fa-file-invoice-dollar"></i>
+                                        <p>{{ __('Bank slip type') }}</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -246,7 +244,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
@@ -269,7 +267,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
@@ -292,7 +290,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon far fa-envelope"></i>
@@ -309,7 +307,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -336,7 +334,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> 
+                </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tasks"></i>
@@ -377,7 +375,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> 
+                </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -426,7 +424,7 @@
                             </a>
                         </li>
                     </ul>
-                </li> 
+                </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-archive"></i>
@@ -461,7 +459,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('departments.index') }}" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="fas fa-building nav-icon"></i>
                                 <p>{{ __('Chart of accounts') }}</p>
                             </a>
@@ -513,14 +511,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href=".#" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{ __('Pages') }}</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                
+
 
                 <!--
                 <li class="nav-item">

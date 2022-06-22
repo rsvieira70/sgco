@@ -228,7 +228,6 @@
                                             <div class="row">
                                                 <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
                                                     <ul class="list-unstyled">
-
                                                         @foreach ($tenant->tenantDocuments as $tenantDocument)
                                                             <li>
                                                                 <a href="" class="btn-link text-secondary">
@@ -297,7 +296,7 @@
                                                                             <i class="fas fa-file-video"></i>
                                                                         @break
                                                                     @endswitch
-                                                                {{ $tenantDocument->description }}</a>
+                                                                    {{ $tenantDocument->description }}</a>
                                                             </li>
                                                         @endforeach
                                                     </ul>
@@ -305,8 +304,8 @@
                                             </div>
                                             <hr>
                                             <div class="callout callout-info">
-                                                <h5><i class="icon fas fa-info"></i> {{ __('Information')}}!</h5>
-                                                <p>{{ __('Click on the document to view it, for a new document contact the administrator')}}</p>
+                                                <h5><i class="icon fas fa-info"></i> {{ __('Information') }}!</h5>
+                                                <p>{{ __('Click on the document to view it, for a new document contact the administrator') }}</p>
                                             </div>
                                         </div>
                                     </div>

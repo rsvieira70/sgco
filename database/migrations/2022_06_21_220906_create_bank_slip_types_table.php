@@ -8,16 +8,19 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('specialties', function (Blueprint $table) {
+        Schema::create('bank_slip_types', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 80);
+            $table->string('description', 50);
+            $table->boolean('pay_commission');
+            $table->boolean('issue_invoice');
+            $table->boolean('used_financial_agreement');
+            $table->boolean('pay_receipt');
             $table->boolean('suspended')->nullable();
             $table->timestamps();
         });
     }
-
     public function down()
     {
-        Schema::dropIfExists('specialties');
+        Schema::dropIfExists('bank_slip_types');
     }
 };

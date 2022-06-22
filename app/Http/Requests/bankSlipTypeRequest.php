@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-//use App\Rules\TenantUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecialtyRequest extends FormRequest
+class bankSlipTypeRequest extends FormRequest
 {
     public function authorize()
     {
@@ -19,15 +18,15 @@ class SpecialtyRequest extends FormRequest
                 'required',
                 'string',
                 'min:3',
-                'max:80',
-                "unique:specialties,description,{$this->id}"
+                'max:50',
+                "unique:bank_slip_types,description,{$this->id}"
             ]
         ];
     }
     public function attributes()
     { {
             return [
-                'description' =>  __('specialty') 
+                'description' =>  __('Description') 
             ];
         }
     }

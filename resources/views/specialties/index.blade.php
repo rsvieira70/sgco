@@ -6,25 +6,25 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('positions.create') }}" class="btn btb-sm btn-success"><i class="fas fa-building"></i>
-                {{ __('New position') }}</a>
+            <a href="{{ route('specialties.create') }}" class="btn btb-sm btn-success"><i class="fas fa-certificate nav-icon"></i>
+                {{ __('New specialty') }}</a>
         </div>
         <div class="card-body">
             <table id="datatable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('Code') }}</th>
-                        <th class="text-left">{{ __('Position') }}</th>
+                        <th class="text-left">{{ __('Specialty') }}</th>
                         <th class="text-center">{{ __('Status') }}</th>
                         <th class="text-right">{{ __('Action') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($positions as $position)
+                    @foreach ($specialties as $specialty)
                         <tr>
-                            <td class="text-right">{{ $position->id }}</td>
-                            <td>{{ $position->description }}</td>
-                            @if ($position->suspended !== null)
+                            <td class="text-right">{{ $specialty->id }}</td>
+                            <td>{{ $specialty->description }}</td>
+                            @if ($specialty->suspended !== null)
                                 <td class="text-center">
                                     <span class="badge badge-danger"><i class="fas fa-lock"></i>
                                         {{ __('Suspended') }}</span>
@@ -36,8 +36,8 @@
                                 </td>
                             @endif
                             <td class="text-right">
-                                @if ($position->suspended == null)
-                                    <form action="{{ route('positions.suspend', [$position->id]) }}"
+                                @if ($specialty->suspended == null)
+                                    <form action="{{ route('specialties.suspend', [$specialty->id]) }}"
                                         class="d-inline formSuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
@@ -45,7 +45,7 @@
                                             {{ __('Suspend') }}</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('positions.suspend', [$position->id]) }}"
+                                    <form action="{{ route('specialties.suspend', [$specialty->id]) }}"
                                         class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
@@ -53,9 +53,9 @@
                                                 class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                 @endif
-                                <a href="{{ route('positions.edit', [$position->id]) }}" class="btn btn-xs btn-info "><i
+                                <a href="{{ route('specialties.edit', [$specialty->id]) }}" class="btn btn-xs btn-info "><i
                                         class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
-                                <form action="{{ route('positions.destroy', [$position->id]) }}"
+                                <form action="{{ route('specialties.destroy', [$specialty->id]) }}"
                                     class="d-inline formDelete" method="POST">
                                     @method ('DELETE')
                                     @csrf
