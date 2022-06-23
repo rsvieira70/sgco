@@ -11,10 +11,10 @@ return new class extends Migration
         Schema::create('bank_slip_types', function (Blueprint $table) {
             $table->id();
             $table->string('description', 50);
-            $table->boolean('pay_commission');
-            $table->boolean('issue_invoice');
-            $table->boolean('used_financial_agreement');
-            $table->boolean('pay_receipt');
+            $table->boolean('pay_commission')->nullable();
+            $table->boolean('issue_invoice')->nullable();
+            $table->boolean('used_financial_agreement')->nullable();
+            $table->boolean('pay_receipt')->nullable();
             $table->boolean('suspended')->nullable();
             $table->timestamps();
         });

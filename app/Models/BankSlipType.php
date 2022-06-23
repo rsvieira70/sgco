@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class bankSlipType extends Model
+class BankSlipType extends Model
 {
     use HasFactory;
     protected $fillable = [

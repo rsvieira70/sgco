@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-//use App\Rules\TenantUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SpecialtyRequest extends FormRequest

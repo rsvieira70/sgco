@@ -114,6 +114,10 @@ class Tenant extends Model
     {
         $this->attributes['employer_identification_number'] = preg_replace("/\D/","", $value);
     }
+    public function setNoteAttribute($value)
+    {
+        $this->attributes['note'] = ucfirst($value);
+    }
     //
     //relationships
     public function users() {
@@ -121,14 +125,6 @@ class Tenant extends Model
     }
     public function profiles() {
         return $this->hasMany(Profile::class);
-    }
-    public function departments()
-    {
-        return $this->hasMany(Department::class);
-    }
-    public function positions()
-    {
-        return $this->hasMany(Position::class);
     }
     public function tenantDocuments() {
         return $this->hasMany(TenantDocument::class);

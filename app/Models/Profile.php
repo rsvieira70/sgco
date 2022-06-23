@@ -129,6 +129,10 @@ class Profile extends Model
     {
         $this->attributes['email'] = strtolower($value);
     }
+    public function setProfileNoteAttribute($value)
+    {
+        $this->attributes['profile_note'] = ucfirst($value);
+    }
     //
 
     //relationships

@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Models;
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use illuminate\Support\Str;
-//use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -45,6 +43,10 @@ class User extends Authenticatable
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
+    }
+    public function setUserNoteAttribute($value)
+    {
+        $this->attributes['user_note'] = ucfirst($value);
     }
     //
 

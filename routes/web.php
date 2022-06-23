@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SpecialtyController;
+use App\Http\Controllers\BankSlipTypeController;
 
 require __DIR__ . '/auth.php';
 
@@ -73,6 +74,24 @@ Route::middleware(['auth', 'profile.check.exist', 'user.check.active', 'tenant.c
     Route::put('/specialties/{id}', [SpecialtyController::class, 'update'])->name('specialties.update');
     Route::patch('/specialties/{id}', [SpecialtyController::class, 'suspend'])->name('specialties.suspend');
     Route::delete('/specialties/{id}', [SpecialtyController::class, 'destroy'])->name('specialties.destroy');
+
+    Route::get('/bankSlipTypes', [BankSlipTypeController::class, 'index'])->name('bankSlipTypes.index');
+    Route::get('/bankSlipTypes/create', [BankSlipTypeController::class, 'create'])->name('bankSlipTypes.create');
+    Route::post('/bankSlipTypes', [BankSlipTypeController::class, 'store'])->name('bankSlipTypes.store');
+    Route::get('/bankSlipTypes/{id}', [BankSlipTypeController::class, 'show'])->name('bankSlipTypes.show');
+    Route::get('/bankSlipTypes/{id}/edit', [BankSlipTypeController::class, 'edit'])->name('bankSlipTypes.edit');
+    Route::put('/bankSlipTypes/{id}', [BankSlipTypeController::class, 'update'])->name('bankSlipTypes.update');
+    Route::patch('/bankSlipTypes/{id}', [BankSlipTypeController::class, 'suspend'])->name('bankSlipTypes.suspend');
+    Route::delete('/bankSlipTypes/{id}', [BankSlipTypeController::class, 'destroy'])->name('bankSlipTypes.destroy');
+
+    Route::get('/teeth', [ToothController::class, 'index'])->name('teeth.index');
+    Route::get('/teeth/create', [ToothController::class, 'create'])->name('teeth.create');
+    Route::post('/teeth', [ToothController::class, 'store'])->name('teeth.store');
+    Route::get('/teeth/{id}', [ToothController::class, 'show'])->name('teeth.show');
+    Route::get('/teeth/{id}/edit', [ToothController::class, 'edit'])->name('teeth.edit');
+    Route::put('/teeth/{id}', [ToothController::class, 'update'])->name('teeth.update');
+    Route::patch('/teeth/{id}', [ToothController::class, 'suspend'])->name('teeth.suspend');
+    Route::delete('/teeth/{id}', [ToothController::class, 'destroy'])->name('teeth.destroy');
 });
 
 Route::resources([

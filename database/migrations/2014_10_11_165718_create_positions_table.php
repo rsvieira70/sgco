@@ -10,11 +10,9 @@ class CreatePositionsTable extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('tenant_id');
             $table->string('description', 50);
             $table->boolean('suspended')->nullable();
             $table->timestamps();
-            $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
         });
     }
 
