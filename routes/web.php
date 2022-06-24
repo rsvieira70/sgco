@@ -11,6 +11,8 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\BankSlipTypeController;
+use App\Http\Controllers\ToothController;
+use App\Http\Controllers\TypeOrthodonticContractController;
 
 require __DIR__ . '/auth.php';
 
@@ -92,6 +94,15 @@ Route::middleware(['auth', 'profile.check.exist', 'user.check.active', 'tenant.c
     Route::put('/teeth/{id}', [ToothController::class, 'update'])->name('teeth.update');
     Route::patch('/teeth/{id}', [ToothController::class, 'suspend'])->name('teeth.suspend');
     Route::delete('/teeth/{id}', [ToothController::class, 'destroy'])->name('teeth.destroy');
+
+    Route::get('/typeOrthodonticContracts', [TypeOrthodonticContractController::class, 'index'])->name('typeOrthodonticContracts.index');
+    Route::get('/typeOrthodonticContracts/create', [TypeOrthodonticContractController::class, 'create'])->name('typeOrthodonticContracts.create');
+    Route::post('/typeOrthodonticContracts', [TypeOrthodonticContractController::class, 'store'])->name('typeOrthodonticContracts.store');
+    Route::get('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'show'])->name('typeOrthodonticContracts.show');
+    Route::get('/typeOrthodonticContracts/{id}/edit', [TypeOrthodonticContractController::class, 'edit'])->name('typeOrthodonticContracts.edit');
+    Route::put('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'update'])->name('typeOrthodonticContracts.update');
+    Route::patch('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'suspend'])->name('typeOrthodonticContracts.suspend');
+    Route::delete('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'destroy'])->name('typeOrthodonticContracts.destroy');
 });
 
 Route::resources([

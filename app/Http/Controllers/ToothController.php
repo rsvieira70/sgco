@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Tooth;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
 use App\Http\Requests\ToothRequest;
 use App\Notifications\SystemErrorAlert;
@@ -17,7 +16,7 @@ class ToothController extends Controller
     {
         $title =  __('List of teeth');
         $userAuth = Auth()->User();
-        $teeth = Tooth::orderBy('description', 'asc')->get();
+        $teeth = Tooth::orderBy('tooth_name', 'asc')->get();
         return view('teeth.index', compact('title', 'userAuth', 'teeth'));
     }
 
@@ -31,20 +30,6 @@ class ToothController extends Controller
     public function store(ToothRequest $request)
     {
         $data = $request->validated();
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $name = uniqid(date('HisYmd'));
-            $extension = $request->image->extension();
-            $nameImage = "{$name}.{$extension}";
-            $data['image'] = $nameImage;
-            $upload = $request->image->storeAs('users', $nameImage);
-
-            if (!$upload) {
-                Alert::alert()->error(__('Opps! An internal error occurred.'), __('An error occured while uploading the file.'))
-                    ->footer(__("An unexpected error occurred and we have notified our support team. Please try again later."))
-                    ->showConfirmButton(__('Ok'), '#d33');
-                return redirect()->back()->withInput();
-            }
-        }
         db::beginTransaction();
         try {
             Tooth::create($data);
@@ -83,20 +68,6 @@ class ToothController extends Controller
     public function update(ToothRequest $request, $id)
     {
         $data = $request->validated();
-        if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $name = uniqid(date('HisYmd'));
-            $extension = $request->image->extension();
-            $nameImage = "{$name}.{$extension}";
-            $data['image'] = $nameImage;
-            $upload = $request->image->storeAs('users', $nameImage);
-
-            if (!$upload) {
-                Alert::alert()->error(__('Opps! An internal error occurred.'), __('An error occured while uploading the file.'))
-                    ->footer(__("An unexpected error occurred and we have notified our support team. Please try again later."))
-                    ->showConfirmButton(__('Ok'), '#d33');
-                return redirect()->back()->withInput();
-            }
-        }
         if (!$request->get('mesial')) {
             $data['mesial'] = null;
         }
@@ -112,11 +83,11 @@ class ToothController extends Controller
         if (!$request->get('cervical')) {
             $data['cervical'] = null;
         }
+        if (!$request->get('incisal')) {
+            $data['incisal'] = null;
+        }
         if (!$request->get('occlusal')) {
             $data['occlusal'] = null;
-        }
-        if (!$request->get('buccal')) {
-            $data['buccal'] = null;
         }
         if (!$request->get('buccal')) {
             $data['buccal'] = null;
@@ -129,15 +100,6 @@ class ToothController extends Controller
             $tooth = Tooth::find($id);
             $tooth->tooth_code = $data['tooth_code'];
             $tooth->tooth_name = $data['tooth_name'];
-            if (!empty($data['image'])) {
-                if ($tooth->image) {
-                    $image_old = "storage/tenants/{$tooth->Tenant->uuid}/users/{$tooth->image}";
-                    if (File::exists($image_old)) {
-                        File::delete($image_old);
-                    }
-                }
-                $tooth->image = $data['image'];
-            };
             $tooth->mesial = $data['mesial'];
             $tooth->distal = $data['distal'];
             $tooth->lingual = $data['lingual'];

@@ -789,6 +789,16 @@
     "bank slip type": "tipo de duplicata",
     "Bank slip type successfully changed!": "Tipo de duplicata alterado com sucesso!",
     "New bank slip type": "Novo tipo de duplicata",
+    "List of teeth": "Lista de dentes",
+    "New tooth registration": "Cadastro de dentes",
+    "Tooth update": "Atualização do dente",
+    "Teeth": "Dentes",
+    "Tooth": "Dente",
+    "tooth": "dente",
+    "Tooth successfully changed!": "Dente alterado com sucesso!",
+    "New tooth": "Novo dente",
+    "Tooth code": "Código do dente",
+    "Tooth name": "Nome do dente",
     "Documentations": "Documentação",
     "Version": "Versão",
     "New patients": "Novos pacientes",
@@ -917,9 +927,19 @@
     "Can be used in financial agreement": "Pode ser usado em acordo financeiro",
     "Receive receipt fee if patient does not bring": "Receber taxa de recibo se o paciente não trouxer",
     "No documents found": "Nenhum documento encontrado",
+    "Allowed tooth surface": "Face do dente permitida",
     "Administrative": "Administrativo",
     "Bills to receive": "Contas a receber",
-    "Bills to pay": "Contas a pagar"
+    "Bills to pay": "Contas a pagar",
+    "Mesial": "Mesial",
+    "Distal": "Distal",
+    "Lingual": "Lingual",
+    "Palatal": "Palatina",
+    "Cervical": "Cervical",
+    "Incisal": "Incisal",
+    "Occlusal": "Oclusal",
+    "Buccal": "Vestibular",
+    "Multiple teeth": "Multiplos dentes"
 
 
 

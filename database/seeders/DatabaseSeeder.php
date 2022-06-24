@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BankSlipTypesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
+        $this->call(TeethTableSeeder::class);
     }
 }

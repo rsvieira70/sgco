@@ -69,7 +69,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('typeOrthodonticContracts.index') }}" class="nav-link">
                                 <i class="fas fa-file-medical nav-icon"></i>
                                 <p>{{ __('Types of contracts') }}</p>
                             </a>
@@ -120,6 +120,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('teeth.index') }}" class="nav-link">
+                                <i class="fas fa-tooth nav-icon"></i>
+                                <p>{{ __('Teeth') }}</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>

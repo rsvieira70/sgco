@@ -13,7 +13,6 @@ return new class extends Migration
             $table->id();
             $table->integer('tooth_code');
             $table->string('tooth_name', 50);
-            $table->string('image')->nullable();
             $table->boolean('mesial')->nullable();
             $table->boolean('distal')->nullable();
             $table->boolean('lingual')->nullable();

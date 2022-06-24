@@ -14,9 +14,8 @@ class ToothRequest extends FormRequest
     public function rules()
     {
         return [
-            'tooth_code' =>  ['required', 'integer', 'max:3', "unique:teeth,tooth_code,{$this->id}"],
+            'tooth_code' =>  ['required', 'max:3', "unique:teeth,tooth_code,{$this->id}"],
             'tooth_name' =>  ['required', 'string', 'min:3', 'max:50', "unique:teeth,tooth_name,{$this->id}"],
-            'image' => ['nullable', 'image', 'max:1024'],
             'mesial' => ['nullable'],
             'distal' => ['nullable'],
             'lingual' => ['nullable'],

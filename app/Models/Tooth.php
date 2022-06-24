@@ -11,7 +11,6 @@ class Tooth extends Model
     protected $fillable = [
         'tooth_code',
         'tooth_name',
-        'image',
         'mesial',
         'distal',
         'lingual',

@@ -129,4 +129,7 @@ class Tenant extends Model
     public function tenantDocuments() {
         return $this->hasMany(TenantDocument::class);
     }
+    public function TypeOrthodonticContracts() {
+        return $this->hasMany(TypeOrthodonticContract::class);
+    }
 }
