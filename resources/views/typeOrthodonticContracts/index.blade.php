@@ -6,7 +6,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('typeOrthodonticContracts.create') }}" class="btn btb-sm btn-success"><i class="fas fa-file-medical"></i>
+            <a href="{{ route('typeOrthodonticContracts.create') }}" class="btn btb-sm btn-success"><i class="fas fa-file-contract"></i>
                 {{ __('New type orthodontic contracts') }}</a>
         </div>
         <div class="card-body">
@@ -14,7 +14,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('Code') }}</th>
-                        <th class="text-left">{{ __('type orthodonti ccontracts') }}</th>
+                        <th class="text-left">{{ __('Types orthodontic contract') }}</th>
                         <th class="text-center">{{ __('Status') }}</th>
                         <th class="text-right">{{ __('Action') }}</th>
                     </tr>
@@ -37,26 +37,22 @@
                             @endif
                             <td class="text-right">
                                 @if ($typeOrthodonticContract->suspended == null)
-                                    <form action="{{ route('typeOrthodonticContracts.suspend', [$typeOrthodonticContract->id]) }}"
-                                        class="d-inline formSuspend" method="POST">
+                                    <form action="{{ route('typeOrthodonticContracts.suspend', [$typeOrthodonticContract->id]) }}" class="d-inline formSuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-xs btn-warning"><i class="fas fa-lock"></i>
                                             {{ __('Suspend') }}</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('typeOrthodonticContracts.suspend', [$typeOrthodonticContract->id]) }}"
-                                        class="d-inline formReactivate" method="POST">
+                                    <form action="{{ route('typeOrthodonticContracts.suspend', [$typeOrthodonticContract->id]) }}" class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-success"><i
-                                                class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
+                                        <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                 @endif
-                                <a href="{{ route('typeOrthodonticContracts.edit', [$typeOrthodonticContract->id]) }}" class="btn btn-xs btn-info "><i
-                                        class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
-                                <form action="{{ route('typeOrthodonticContracts.destroy', [$typeOrthodonticContract->id]) }}"
-                                    class="d-inline formDelete" method="POST">
+                                <a href="{{ route('typeOrthodonticContracts.edit', [$typeOrthodonticContract->id]) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>
+                                    {{ __('Edit') }}</a>
+                                <form action="{{ route('typeOrthodonticContracts.destroy', [$typeOrthodonticContract->id]) }}" class="d-inline formDelete" method="POST">
                                     @method ('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i>

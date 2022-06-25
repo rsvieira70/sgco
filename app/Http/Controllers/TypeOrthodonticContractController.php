@@ -14,7 +14,7 @@ class TypeOrthodonticContractController extends Controller
 {
     public function index()
     {
-        $title =  __('List of type orthodontic contracts');
+        $title =  __('List of types orthodontic contract');
         $userAuth = Auth()->User();
         $typeOrthodonticContracts = TypeOrthodonticContract::orderBy('description', 'asc')->get();
         return view('typeOrthodonticContracts.index', compact('title', 'userAuth', 'typeOrthodonticContracts'));
@@ -22,7 +22,7 @@ class TypeOrthodonticContractController extends Controller
 
     public function create()
     {
-        $title =  __('New type orthodontic contracts registration');
+        $title =  __('New type orthodontic contract registration');
         $userAuth = Auth()->User();
         return view('typeOrthodonticContracts.create', compact('title', 'userAuth'));
     }
@@ -58,7 +58,7 @@ class TypeOrthodonticContractController extends Controller
     {
         $typeOrthodonticContract = TypeOrthodonticContract::find($id);
         if ($typeOrthodonticContract) {
-            $title =  __('Type orthodontic contracts update');
+            $title =  __('Type orthodontic contract update');
             $userAuth = Auth()->User();
             return view('typeOrthodonticContracts.edit', compact('title', 'userAuth', 'typeOrthodonticContract'));
         }
@@ -68,46 +68,29 @@ class TypeOrthodonticContractController extends Controller
     public function update(TypeOrthodonticContractRequest $request, $id)
     {
         $data = $request->validated();
-        if (!$request->get('mesial')) {
-            $data['mesial'] = null;
+        if (!$request->get('receive_bracket')) {
+            $data['receive_bracket'] = null;
         }
-        if (!$request->get('distal')) {
-            $data['distal'] = null;
+        if (!$request->get('receive_band')) {
+            $data['receive_band'] = null;
         }
-        if (!$request->get('lingual')) {
-            $data['lingual'] = null;
-        }
-        if (!$request->get('palatal')) {
-            $data['palatal'] = null;
-        }
-        if (!$request->get('cervical')) {
-            $data['cervical'] = null;
-        }
-        if (!$request->get('incisal')) {
-            $data['incisal'] = null;
-        }
-        if (!$request->get('occlusal')) {
-            $data['occlusal'] = null;
-        }
-        if (!$request->get('buccal')) {
-            $data['buccal'] = null;
-        }
-        if (!$request->get('multiple')) {
-            $data['multiple'] = null;
+        if (!$request->get('fixed_value_contract')) {
+            $data['fixed_value_contract'] = null;
         }
         db::beginTransaction();
         try {
             $typeOrthodonticContract = TypeOrthodonticContract::find($id);
             $typeOrthodonticContract->description = $data['description'];
-            $typeOrthodonticContract->mesial = $data['mesial'];
-            $typeOrthodonticContract->distal = $data['distal'];
-            $typeOrthodonticContract->lingual = $data['lingual'];
-            $typeOrthodonticContract->palatal = $data['palatal'];
-            $typeOrthodonticContract->cervical = $data['cervical'];
-            $typeOrthodonticContract->incisal = $data['incisal'];
-            $typeOrthodonticContract->occlusal = $data['occlusal'];
-            $typeOrthodonticContract->buccal = $data['buccal'];
-            $typeOrthodonticContract->multiple= $data['multiple'];
+            $typeOrthodonticContract->receive_bracket = $data['receive_bracket'];
+            $typeOrthodonticContract->amount_orthodontic_bracket = $data['amount_orthodontic_bracket'];
+            $typeOrthodonticContract->orthodontic_bracket_price = $data['orthodontic_bracket_price'];
+            $typeOrthodonticContract->receive_band = $data['receive_band'];
+            $typeOrthodonticContract->amount_orthodontic_band = $data['amount_orthodontic_band'];
+            $typeOrthodonticContract->orthodontic_band_price = $data['orthodontic_band_price'];
+            $typeOrthodonticContract->orthodontic_appliance_price = $data['orthodontic_appliance_price'];
+            $typeOrthodonticContract->orthodontic_appliance_installation_price = $data['orthodontic_appliance_installation_price'];
+            $typeOrthodonticContract->orthodontic_appliance_maintenance_price= $data['orthodontic_appliance_maintenance_price'];
+            $typeOrthodonticContract->fixed_value_contract= $data['fixed_value_contract'];
             $typeOrthodonticContract->save();
             db::commit();
             Alert::alert()->success(__('Changed'), __('Type orthodontic contract') . __(' successfully changed!'));

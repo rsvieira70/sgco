@@ -789,6 +789,14 @@
     "bank slip type": "tipo de duplicata",
     "Bank slip type successfully changed!": "Tipo de duplicata alterado com sucesso!",
     "New bank slip type": "Novo tipo de duplicata",
+    "List of types orthodontic contract": "Lista de tipos de contrato ortodôntico",
+    "New type orthodontic contract registration": "Cadastro de novo tipo de contrato ortodôntico",
+    "Type orthodontic contract update": "Atualização do tipo de contrato ortodôntico",
+    "Types orthodontic contract": "Tipos de contrato ortodôntico",
+    "Type orthodontic contract": "Tipo de contrato ortodôntico",
+    "type orthodontic contract": "tipo de contrato ortodôntico",
+    "Type orthodontic contracts successfully changed!": "Tipo de contrato ortodôntico alterada com sucesso!",
+    "New type orthodontic contracts": "Novo tipo de contrato ortodôntico",
     "List of teeth": "Lista de dentes",
     "New tooth registration": "Cadastro de dentes",
     "Tooth update": "Atualização do dente",
@@ -824,6 +832,7 @@
     "No, cancel!": "Não, cancele!",
     "Invalid CPF": "CPF inválido",
     "The value entered for the :attribute field is already in use": "O valor informado para o campo :attribute já está em uso",
+    "The :attribute must be between 0 and 100": "O :attribute deve estar entre 0 a 100",
     "Oops! Page not found.": "Ops! Página não encontrada.",
     "Oops! Authorization requirid.": "Ops! Autorização necessária.",
     "Oops! This a forbidden area.": "Ops! Esta é uma área proibida.",
@@ -862,6 +871,7 @@
     "Select a specialty": "Selecione uma especialidade",
     "Select a bank slip type": "Selecione um tipo de duplicata",
     "Select a user type": "Selecione um tipo de usuário",
+    "Select a type orthodontic contract": "Selecione um tipo de usuário",
     "Patient": "Paciente",
     "Alert": "Alerta",
     "Tenant suspended in": "Filial suspensa em",
@@ -939,7 +949,19 @@
     "Incisal": "Incisal",
     "Occlusal": "Oclusal",
     "Buccal": "Vestibular",
-    "Multiple teeth": "Multiplos dentes"
+    "Multiple teeth": "Multiplos dentes",
+    "Bracket charge": "Cobrança de bracket",
+    "Generate bracket charge": "Gerar cobrança de bracket",
+    "Above how many exchanges": "Acima de quantas trocas",
+    "Maintenance percentage": "Percentual sobre a manutenção",
+    "Band charge": "Cobrança de banda",
+    "Generate band charge": "Gerar cobrança de banda",
+    "Orthodontic appliance price": "Valor do aparelho ortodôntico",
+    "Orthodontic appliance installation price": "Valor de instalação do aparelho ortodôntico",
+    "Orthodontic appliance maintenance price": "Valor da manutenção do aparelho ortodôntico",
+    "Fixed value contract, does not generate maintenance value": "Contrato de valor fixo, não gera valor de manutenção",
+    "Contract values": "Valor do contrato"
+
 
 
 

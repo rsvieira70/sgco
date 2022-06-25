@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Class\RemoveFormat;
 use App\Tenant\Traits\TenantTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -20,8 +21,8 @@ class TypeOrthodonticContract extends Model
         'amount_orthodontic_band',
         'orthodontic_band_price',
         'orthodontic_appliance_price',
-        'Orthodontic_appliance_installation_price',
-        'Orthodontic_appliance_maintenance_price',
+        'orthodontic_appliance_installation_price',
+        'orthodontic_appliance_maintenance_price',
         'fixed_value_contract',
         'suspended',
     ];
@@ -34,5 +35,25 @@ class TypeOrthodonticContract extends Model
     public function setDescriptionAttribute($value)
     {
         $this->attributes['description'] = ucfirst(strtolower($value));
+    }
+    public function setOrthodonticBracketPriceAttribute($value)
+    {
+        $this->attributes['orthodontic_bracket_price'] = removeFormat::class::removeFormatValue($value);
+    }
+    public function setOrthodonticBandPriceAttribute($value)
+    {
+        $this->attributes['orthodontic_band_price'] = RemoveFormat::class::removeFormatValue($value);
+    }
+    public function setOrthodonticAppliancePriceAttribute($value)
+    {
+        $this->attributes['orthodontic_appliance_price'] = RemoveFormat::class::removeFormatValue($value);
+    }
+    public function setOrthodonticApplianceInstallationPriceAttribute($value)
+    {
+        $this->attributes['orthodontic_appliance_installation_price'] = RemoveFormat::class::removeFormatValue($value);
+    }
+    public function setOrthodonticApplianceMaintenancePriceAttribute($value)
+    {
+        $this->attributes['orthodontic_appliance_maintenance_price'] = RemoveFormat::class::removeFormatValue($value);
     }
 }

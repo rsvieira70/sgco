@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('amount_orthodontic_band')->nullable();
             $table->float('orthodontic_band_price', 12, 2)->nullable();
             $table->float('orthodontic_appliance_price', 12, 2)->nullable();
-            $table->float('Orthodontic_appliance_installation_price', 12, 2)->nullable();
-            $table->float('Orthodontic_appliance_maintenance_price', 12, 2)->nullable();
+            $table->float('orthodontic_appliance_installation_price', 12, 2)->nullable();
+            $table->float('orthodontic_appliance_maintenance_price', 12, 2)->nullable();
             $table->boolean('fixed_value_contract')->nullable();
             $table->boolean('suspended')->nullable();
             $table->timestamps();
