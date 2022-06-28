@@ -832,7 +832,9 @@
     "No, cancel!": "Não, cancele!",
     "Invalid CPF": "CPF inválido",
     "The value entered for the :attribute field is already in use": "O valor informado para o campo :attribute já está em uso",
-    "The :attribute must be between 0 and 100": "O :attribute deve estar entre 0 a 100",
+    "The :attribute must be between 0,01% and 100,00%": "O :attribute deve estar entre 0,01% a 100,00%",
+    "The :attribute must be non-zero": "O :attribute tem que ser diferente de zero",
+    "The :attribute field is prohibited when :other is :value.": "O campo :attribute é proibido quando :other não estiver marcado.",
     "Oops! Page not found.": "Ops! Página não encontrada.",
     "Oops! Authorization requirid.": "Ops! Autorização necessária.",
     "Oops! This a forbidden area.": "Ops! Esta é uma área proibida.",
@@ -959,8 +961,9 @@
     "Orthodontic appliance price": "Valor do aparelho ortodôntico",
     "Orthodontic appliance installation price": "Valor de instalação do aparelho ortodôntico",
     "Orthodontic appliance maintenance price": "Valor da manutenção do aparelho ortodôntico",
-    "Fixed value contract, does not generate maintenance value": "Contrato de valor fixo, não gera valor de manutenção",
-    "Contract values": "Valor do contrato"
+    "Fixed value contract (does not generate maintenance value)": "Contrato de valor fixo (não gera valor de manutenção)",
+    "Fixed value contract": "Contrato de valor fixo",
+    "Contract values": "Valores do contrato"
 
 
 

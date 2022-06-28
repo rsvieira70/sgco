@@ -35,32 +35,36 @@
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="mesial" name="mesial" value="1" {{ old('mesial', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('mesial') is-invalid @enderror" id="mesial" name="mesial" value="1" {{ old('mesial', null) ? 'checked' : '' }}>
                                     <label for="mesial">{{ __('Mesial') }}</label>
-                                </div>
+                                    <div class="invalid-feedback">{{ $errors->first('mesial') }} </div>
+                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="distal" name="distal" value="1" {{ old('distal', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('distal') is-invalid @enderror" id="distal" name="distal" value="1" {{ old('distal', null) ? 'checked' : '' }}>
                                     <label for="distal">{{ __('Distal') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('distal') }} </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="lingual" name="lingual" value="1" {{ old('lingual', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('lingual') is-invalid @enderror" id="lingual" name="lingual" value="1" {{ old('lingual', null) ? 'checked' : '' }}>
                                     <label for="lingual">{{ __('Lingual') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('lingual') }} </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="palatal" name="palatal" value="1" {{ old('palatal', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('palatal') is-invalid @enderror" id="palatal" name="palatal" value="1" {{ old('palatal', null) ? 'checked' : '' }}>
                                     <label for="palatal">{{ __('Palatal') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('palatal') }} </div>
                                 </div>
                             </div>
                         </div>
@@ -69,32 +73,36 @@
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="cervical" name="cervical" value="1" {{ old('cervical', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('cervical') is-invalid @enderror" id="cervical" name="cervical" value="1" {{ old('cervical', null) ? 'checked' : '' }}>
                                     <label for="cervical">{{ __('Cervical') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('cervical') }} </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="incisal" name="incisal" value="1" {{ old('incisal', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('incisal') is-invalid @enderror" id="incisal" name="incisal" value="1" {{ old('incisal', null) ? 'checked' : '' }}>
                                     <label for="incisal">{{ __('Incisal') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('incisal') }} </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="occlusal" name="occlusal" value="1" {{ old('occlusal', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('occlusal') is-invalid @enderror" id="occlusal" name="occlusal" value="1" {{ old('occlusal', null) ? 'checked' : '' }}>
                                     <label for="occlusal">{{ __('Occlusal') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('occlusal') }} </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="buccal" name="buccal" value="1" {{ old('buccal', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('buccal') is-invalid @enderror" id="buccal" name="buccal" value="1" {{ old('buccal', null) ? 'checked' : '' }}>
                                     <label for="buccal">{{ __('Buccal') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('buccal') }} </div>
                                 </div>
                             </div>
                         </div>
@@ -104,8 +112,9 @@
                         <div class="col-sm-3">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id="multiple_teeth" name="multiple_teeth" value="1" {{ old('multiple_teeth', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" class="form-control @error('multipe_teeth') is-invalid @enderror" id="multiple_teeth" name="multiple_teeth" value="1" {{ old('multiple_teeth', null) ? 'checked' : '' }}>
                                     <label for="multiple_teeth">{{ __('Multiple teeth') }}</label>
+                                    <div class="invalid-feedback">{{ $errors->first('Multiple') }} </div>
                                 </div>
                             </div>
                         </div>

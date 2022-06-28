@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>{{ __('Bank slip type') }}</label>
+                                <label>{{ __('Type orthodontic contract') }}</label>
                                 <input type="text" id="description" name="description" value="{{ old('description', null) }}" maxlength="50"
                                     class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" required autofocus>
                                 <div class="invalid-feedback">{{ $errors->first('description') }} </div>
@@ -95,7 +95,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -147,7 +146,7 @@
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" id="fixed_value_contract" name="fixed_value_contract" value="1" {{ old('fixed_value_contract', null) ? 'checked' : '' }}>
-                                    <label for="fixed_value_contract">{{ __('Fixed value contract, does not generate maintenance value') }}</label>
+                                    <label for="fixed_value_contract">{{ __('Fixed value contract (does not generate maintenance value)') }}</label>
                                 </div>
                             </div>
                         </div>

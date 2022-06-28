@@ -55,8 +55,8 @@
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" id="pay_receipt" name="pay_receipt" value="1" {{ old('pay_receipt', $bankSlipType->pay_receipt) ? 'checked' : '' }}>
-                                    <label for="pay_receipt">{{ __('Receive receipt fee if patient does not brings') }}</label>
-                                </div>
+                                    <label for="pay_receipt">{{ __('Receive receipt fee if patient does not bring') }}</label>
+                                </div>                              
                             </div>
                         </div>
                     </div>

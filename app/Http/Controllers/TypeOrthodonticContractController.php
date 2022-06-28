@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Class\NumberFormat;
 use App\Models\TypeOrthodonticContract;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -60,6 +61,11 @@ class TypeOrthodonticContractController extends Controller
         if ($typeOrthodonticContract) {
             $title =  __('Type orthodontic contract update');
             $userAuth = Auth()->User();
+            $typeOrthodonticContract->orthodontic_bracket_price = NumberFormat::class::insertNumberFormat($typeOrthodonticContract->orthodontic_bracket_price);;
+            $typeOrthodonticContract->orthodontic_band_price = NumberFormat::class::insertNumberFormat($typeOrthodonticContract->orthodontic_band_price);;
+            $typeOrthodonticContract->orthodontic_appliance_price = NumberFormat::class::insertNumberFormat($typeOrthodonticContract->orthodontic_appliance_price);;
+            $typeOrthodonticContract->orthodontic_appliance_installation_price = NumberFormat::class::insertNumberFormat($typeOrthodonticContract->orthodontic_appliance_installation_price);;
+            $typeOrthodonticContract->orthodontic_appliance_maintenance_price = NumberFormat::class::insertNumberFormat($typeOrthodonticContract->orthodontic_appliance_maintenance_price);;
             return view('typeOrthodonticContracts.edit', compact('title', 'userAuth', 'typeOrthodonticContract'));
         }
         return redirect()->route('typeOrthodonticContracts.index');
