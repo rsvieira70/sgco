@@ -14,7 +14,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>{{ __('Type orthodontic contract') }}</label>
-                                <input type="text" id="description" name="description" value="{{ $typeOrthodonticContract->description }}" maxlength="50"
+                                <input type="text" id="description" name="description" value="{{ old('description', $typeOrthodonticContract->description) }}" maxlength="50"
                                     class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" autofocus>
                                 <div class="invalid-feedback">{{ $errors->first('description') }} </div>
                             </div>

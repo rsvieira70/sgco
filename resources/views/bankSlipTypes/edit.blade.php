@@ -14,7 +14,7 @@
                         <div class="col-sm-5">
                             <div class="form-group">
                                 <label>{{ __('Bank slip type') }}</label>
-                                <input type="text" id="description" name="description" value="{{ $bankSlipType->description }}" maxlength="50"
+                                <input type="text" id="description" name="description" value="{{  old('description', $bankSlipType->description) }}" maxlength="50"
                                     class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" autofocus>
                                 <div class="invalid-feedback">{{ $errors->first('description') }} </div>
                             </div>

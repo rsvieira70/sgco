@@ -13,6 +13,8 @@ use App\Http\Controllers\SpecialtyController;
 use App\Http\Controllers\BankSlipTypeController;
 use App\Http\Controllers\ToothController;
 use App\Http\Controllers\TypeOrthodonticContractController;
+use App\Http\Controllers\BankController;
+use App\Http\Controllers\ProfessionalController;
 
 require __DIR__ . '/auth.php';
 
@@ -103,6 +105,24 @@ Route::middleware(['auth', 'profile.check.exist', 'user.check.active', 'tenant.c
     Route::put('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'update'])->name('typeOrthodonticContracts.update');
     Route::patch('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'suspend'])->name('typeOrthodonticContracts.suspend');
     Route::delete('/typeOrthodonticContracts/{id}', [TypeOrthodonticContractController::class, 'destroy'])->name('typeOrthodonticContracts.destroy');
+
+    Route::get('/banks', [BankController::class, 'index'])->name('banks.index');
+    Route::get('/banks/create', [BankController::class, 'create'])->name('banks.create');
+    Route::post('/banks', [BankController::class, 'store'])->name('banks.store');
+    Route::get('/banks/{id}', [BankController::class, 'show'])->name('banks.show');
+    Route::get('/banks/{id}/edit', [BankController::class, 'edit'])->name('banks.edit');
+    Route::put('/banks/{id}', [BankController::class, 'update'])->name('banks.update');
+    Route::patch('/banks/{id}', [BankController::class, 'suspend'])->name('banks.suspend');
+    Route::delete('/banks/{id}', [BankController::class, 'destroy'])->name('banks.destroy');
+
+    Route::get('/professionals', [ProfessionalController::class, 'index'])->name('professionals.index');
+    Route::get('/professionals/create', [ProfessionalController::class, 'create'])->name('professionals.create');
+    Route::post('/professionals', [ProfessionalController::class, 'store'])->name('professionals.store');
+    Route::get('/professionals/{id}', [ProfessionalController::class, 'show'])->name('professionals.show');
+    Route::get('/professionals/{id}/edit', [ProfessionalController::class, 'edit'])->name('professionals.edit');
+    Route::put('/professionals/{id}', [ProfessionalController::class, 'update'])->name('professionals.update');
+    Route::patch('/professionals/{id}', [ProfessionalController::class, 'suspend'])->name('professionals.suspend');
+    Route::delete('/professionals/{id}', [ProfessionalController::class, 'destroy'])->name('professionals.destroy');
 });
 
 Route::resources([

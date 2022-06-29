@@ -98,9 +98,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('professionals.index') }}" class="nav-link">
                                 <i class="fas fa-user-md nav-icon"></i>
-                                <p>{{ __('Dentists') }}</p>
+                                <p>{{ __('Professionals') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -182,16 +182,16 @@
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-archive"></i>
+                                <i class="nav-icon fas fa-file-invoice-dollar"></i>
                                 <p>
-                                    {{ __('checking account') }}
+                                    {{ __('Checking account') }}
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fas fa-user-tie nav-icon"></i>
+                                    <a href="{{ route('banks.index') }}" class="nav-link">
+                                        <i class="fas fa-university nav-icon"></i>
                                         <p>{{ __('Banks') }}</p>
                                     </a>
                                 </li>

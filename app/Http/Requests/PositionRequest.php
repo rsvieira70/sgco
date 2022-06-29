@@ -20,7 +20,7 @@ class PositionRequest extends FormRequest
                 'string',
                 'min:3',
                 'max:50',
-                new TenantUnique('positions', $this->id)
+                "unique:departments,description,{$this->id}"
             ]
         ];
     }
