@@ -20,12 +20,11 @@ class BankRequest extends FormRequest
         ];
     }
     public function attributes()
-    { {
-            return [
-                'bank_code' =>  __('Bank code') ,
-                'name' =>  __('Bank name') ,
-                'short_name' => __('Bank short name')
-            ];
-        }
+    {
+        return [
+            'bank_code' =>  __('Bank code'),
+            'name' =>  __('Bank name'),
+            'short_name' => __('Bank short name')
+        ];
     }
 }

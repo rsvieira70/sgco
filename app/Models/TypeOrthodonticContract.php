@@ -11,7 +11,6 @@ class TypeOrthodonticContract extends Model
 {
     use HasFactory;
     use TenantTrait;
-
     protected $fillable = [
         'description',
         'receive_bracket',
@@ -38,22 +37,22 @@ class TypeOrthodonticContract extends Model
     }
     public function setOrthodonticBracketPriceAttribute($value)
     {
-        $this->attributes['orthodontic_bracket_price'] = ($value == null) ? null :  removeFormat::class::removeFormatValue($value);
+        $this->attributes['orthodontic_bracket_price'] = ($value == null) ? null : removeFormat::class::removeFormatValue($value);
     }
     public function setOrthodonticBandPriceAttribute($value)
     {
-        $this->attributes['orthodontic_band_price'] = ($value == null) ? null :  removeFormat::class::removeFormatValue($value);
+        $this->attributes['orthodontic_band_price'] = ($value == null) ? null : removeFormat::class::removeFormatValue($value);
     }
     public function setOrthodonticAppliancePriceAttribute($value)
     {
-        $this->attributes['orthodontic_appliance_price'] = ($value == null) ? null :  removeFormat::class::removeFormatValue($value);
+        $this->attributes['orthodontic_appliance_price'] = ($value == null) ? null : removeFormat::class::removeFormatValue($value);
     }
     public function setOrthodonticApplianceInstallationPriceAttribute($value)
     {
-        $this->attributes['orthodontic_appliance_installation_price'] = ($value == null) ? null :  removeFormat::class::removeFormatValue($value);
+        $this->attributes['orthodontic_appliance_installation_price'] = ($value == null) ? null : removeFormat::class::removeFormatValue($value);
     }
     public function setOrthodonticApplianceMaintenancePriceAttribute($value)
     {
-        $this->attributes['orthodontic_appliance_maintenance_price'] = ($value == null) ? null :  removeFormat::class::removeFormatValue($value);
+        $this->attributes['orthodontic_appliance_maintenance_price'] = ($value == null) ? null : removeFormat::class::removeFormatValue($value);
     }
 }

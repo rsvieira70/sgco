@@ -12,7 +12,6 @@ class Specialty extends Model
         'description',
         'suspended'
     ];
-    
     //mutators
     public function setDescriptionAttribute($value)
     {

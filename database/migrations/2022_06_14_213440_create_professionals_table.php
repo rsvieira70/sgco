@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('social_name',50);
             $table->string('nickname',30);
             $table->string('social_security_number',20);
-            $table->string('inbde',50);
+            $table->string('inbde',30);
+            $table->integer('inbde_state_id');
             $table->date('birth');
             $table->string('image')->nullable();
             $table->decimal('zip_code', 8,0); 
@@ -43,6 +44,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamps();
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
+            $table->foreign('inbde_state_id')->references('id')->on('states')->onDelete('cascade');
             $table->index('social_security_number');
             $table->index('name');
             $table->index('social_name');

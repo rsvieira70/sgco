@@ -11,7 +11,6 @@ class Tenant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'uuid',
         'social_reason',
         'fancy_name',
         'zip_code',
@@ -39,16 +38,38 @@ class Tenant extends Model
         'suspension_date',
         'note'
     ];
-    public static function boot(){
+    public static function boot()
+    {
         parent::boot();
-        self::creating(function($model){
+        self::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
+    }
+    //relationships
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
+    public function tenantDocuments()
+    {
+        return $this->hasMany(TenantDocument::class);
+    }
+    public function typeOrthodonticContracts()
+    {
+        return $this->hasMany(TypeOrthodonticContract::class);
+    }
+    public function professionals()
+    {
+        return $this->hasMany(Professional::class);
     }
     //mutators set
     public function setZipCodeAttribute($value)
     {
-        $this->attributes['zip_code'] = preg_replace("/\D/","", $value);
+        $this->attributes['zip_code'] = preg_replace("/\D/", "", $value);
     }
     public function setAddressAttribute($value)
     {
@@ -80,19 +101,19 @@ class Tenant extends Model
     }
     public function setTelephoneAttribute($value)
     {
-        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setCellPhoneAttribute($value)
     {
-        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setWhatsAppAttribute($value)
     {
-        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setTelegramAttribute($value)
     {
-        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setFacebookAttribute($value)
     {
@@ -112,24 +133,10 @@ class Tenant extends Model
     }
     public function setEmployerIdentificationNumberAttribute($value)
     {
-        $this->attributes['employer_identification_number'] = preg_replace("/\D/","", $value);
+        $this->attributes['employer_identification_number'] = preg_replace("/\D/", "", $value);
     }
     public function setNoteAttribute($value)
     {
         $this->attributes['note'] = ucfirst($value);
-    }
-    //
-    //relationships
-    public function users() {
-        return $this->hasMany(User::class);
-    }
-    public function profiles() {
-        return $this->hasMany(Profile::class);
-    }
-    public function tenantDocuments() {
-        return $this->hasMany(TenantDocument::class);
-    }
-    public function TypeOrthodonticContracts() {
-        return $this->hasMany(TypeOrthodonticContract::class);
     }
 }

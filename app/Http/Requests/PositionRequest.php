@@ -25,10 +25,9 @@ class PositionRequest extends FormRequest
         ];
     }
     public function attributes()
-    { {
-            return [
-                'description' =>  __('position') 
-            ];
-        }
+    {
+        return [
+            'description' =>  __('position')
+        ];
     }
 }

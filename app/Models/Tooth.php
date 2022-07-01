@@ -22,7 +22,6 @@ class Tooth extends Model
         'multiple_teeth',
         'suspended'
     ];
-
     //mutators
     public function setToothNameAttribute($value)
     {

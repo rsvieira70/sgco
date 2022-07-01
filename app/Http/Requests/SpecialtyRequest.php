@@ -24,10 +24,9 @@ class SpecialtyRequest extends FormRequest
         ];
     }
     public function attributes()
-    { {
-            return [
-                'description' =>  __('specialty') 
-            ];
-        }
+    {
+        return [
+            'description' =>  __('specialty')
+        ];
     }
 }

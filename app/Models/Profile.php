@@ -35,21 +35,15 @@ class Profile extends Model
         'twitter',
         'linkedin',
         'profile_note',
-        ];
+    ];
 
-    public static function boot(){
+    public static function boot()
+    {
         parent::boot();
-        self::creating(function($model){
+        self::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
     }
-    //accessor get
-    //  public function getSocialsecuritynumberAttribute()
-    // {
-    //     $social_security_number = $this->attributes['social_security_number'];
-    //     return substr($social_security_number, 0, 3) . '.' . substr($social_security_number, 3, 3) . '.' . substr($social_security_number, 6, 3) . '-' . substr($social_security_number, 9, 2);
-    // }         
-    //mutators set
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucwords(strtolower($value));
@@ -62,16 +56,16 @@ class Profile extends Model
     {
         $this->attributes['nickname'] = ucwords(strtolower($value));
     }
-    
+
     public function setSocialSecurityNumberAttribute($value)
     {
-        $this->attributes['social_security_number'] = preg_replace("/\D/","", $value);
+        $this->attributes['social_security_number'] = preg_replace("/\D/", "", $value);
     }
     public function setZipCodeAttribute($value)
     {
-        $this->attributes['zip_code'] = preg_replace("/\D/","", $value);
+        $this->attributes['zip_code'] = preg_replace("/\D/", "", $value);
     }
-    
+
     public function setAddressAttribute($value)
     {
         $this->attributes['address'] = ucwords(strtolower($value));
@@ -94,19 +88,19 @@ class Profile extends Model
     }
     public function setTelephoneAttribute($value)
     {
-        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setCellPhoneAttribute($value)
     {
-        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setWhatsAppAttribute($value)
     {
-        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setTelegramAttribute($value)
     {
-        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
 
     public function setFacebookAttribute($value)
@@ -133,12 +127,9 @@ class Profile extends Model
     {
         $this->attributes['profile_note'] = ucfirst($value);
     }
-    //
-
     //relationships
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
     }
-
 }

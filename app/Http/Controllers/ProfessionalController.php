@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\ProfessionalRequest;
 use App\Models\Professional;
 use App\Models\Specialty;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -22,13 +22,16 @@ class ProfessionalController extends Controller
         $professionals = Professional::orderBy('name', 'asc')->get();
         return view('professionals.index', compact('title', 'userAuth', 'professionals'));
     }
+    
     public function create()
     {
         $title =  __('New professional registration');
         $userAuth = Auth()->User();
+        $states = State::orderBy('description', 'asc')->get();
         $specialties = Specialty::orderBy('description', 'asc')->get();
-        return view('professionals.create', compact('title', 'userAuth', 'specialties'));
+        return view('professionals.create', compact('title', 'userAuth', 'states', 'specialties'));
     }
+    
     public function store(ProfessionalRequest $request)
     {
         $data = $request->validated();
@@ -47,9 +50,10 @@ class ProfessionalController extends Controller
             Alert::alert()->error(__('Opps! An internal error occurred.'), __('Your request could not be executed!'))
                 ->footer(__("Don't worry, we've already warned the developer."))
                 ->showConfirmButton(__('Ok'), '#d33');
-            return redirect()->route('users.index');
+            return redirect()->route('professionals.index');
         }
     }
+    
     public function show($id)
     {
         //

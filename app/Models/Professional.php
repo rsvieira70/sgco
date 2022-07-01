@@ -3,22 +3,22 @@
 namespace App\Models;
 
 use App\Tenant\Traits\TenantTrait;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 class Professional extends Model
 {
+    use HasFactory;
     use TenantTrait;
-
     protected $fillable = [
-        'tenant_id',
-        'uuid',
         'patent',
         'name',
         'social_name',
         'nickname',
         'social_security_number',
         'inbde',
+        'inbde_state_id',
         'birth',
         'image',
         'zip_code',
@@ -43,13 +43,23 @@ class Professional extends Model
         'note',
         'email',
     ];
-
-    public static function boot(){
+    public static function boot()
+    {
         parent::boot();
-        self::creating(function($model){
+        self::creating(function ($model) {
             $model->uuid = Str::uuid();
         });
     }
+    //relationships
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+    //mutators
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucwords(strtolower($value));
@@ -62,16 +72,16 @@ class Professional extends Model
     {
         $this->attributes['nickname'] = ucwords(strtolower($value));
     }
-    
+
     public function setSocialSecurityNumberAttribute($value)
     {
-        $this->attributes['social_security_number'] = preg_replace("/\D/","", $value);
+        $this->attributes['social_security_number'] = preg_replace("/\D/", "", $value);
     }
     public function setZipCodeAttribute($value)
     {
-        $this->attributes['zip_code'] = preg_replace("/\D/","", $value);
+        $this->attributes['zip_code'] = preg_replace("/\D/", "", $value);
     }
-    
+
     public function setAddressAttribute($value)
     {
         $this->attributes['address'] = ucwords(strtolower($value));
@@ -94,19 +104,19 @@ class Professional extends Model
     }
     public function setTelephoneAttribute($value)
     {
-        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['telephone'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setCellPhoneAttribute($value)
     {
-        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['cell_phone'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setWhatsAppAttribute($value)
     {
-        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['whatsapp'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setTelegramAttribute($value)
     {
-        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/","", $value);
+        $this->attributes['telegram'] = ($value == null) ? null :  preg_replace("/\D/", "", $value);
     }
     public function setFacebookAttribute($value)
     {
@@ -132,11 +142,4 @@ class Professional extends Model
     {
         $this->attributes['email'] = strtolower($value);
     }
-
-    //relationships
-    public function tenant()
-    {
-        return $this->belongsTo(Tenant::class);
-    }
-
 }

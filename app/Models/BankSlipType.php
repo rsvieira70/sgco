@@ -16,7 +16,6 @@ class BankSlipType extends Model
         'pay_receipt',
         'suspended'
     ];
-
     //mutators
     public function setDescriptionAttribute($value)
     {

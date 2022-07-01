@@ -10,17 +10,17 @@ class TenantDocument extends Model
 {
     use TenantTrait;
     use HasFactory;
-      protected $fillable = [
-          'description', 'document'
-      ];
-      //relationships
-      public function tenant()
-      {
-          return $this->belongsTo(Tenant::class);
-      }
-      //mutators
-      public function setDescriptionAttribute($value)
-      {
-          $this->attributes['description'] = ucfirst(strtolower($value));
-      }
-  }
+    protected $fillable = [
+        'description', 'document'
+    ];
+    //relationships
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+    //mutators
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = ucfirst(strtolower($value));
+    }
+}

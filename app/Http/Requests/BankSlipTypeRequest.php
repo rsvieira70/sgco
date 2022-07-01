@@ -22,10 +22,9 @@ class BankSlipTypeRequest extends FormRequest
         ];
     }
     public function attributes()
-    { {
-            return [
-                'description' =>  __('Description')
-            ];
-        }
+    {
+        return [
+            'description' =>  __('Description')
+        ];
     }
 }

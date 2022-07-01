@@ -20,11 +20,10 @@ class TenantDocumentRequest extends FormRequest
         ];
     }
     public function attributes()
-    { {
-            return [
-                'description' =>  __('Description') ,
-                'image' => __('Document'),
-            ];
-        }
+    {
+        return [
+            'description' =>  __('Description'),
+            'image' => __('Document'),
+        ];
     }
 }

@@ -16,7 +16,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="name">{{ __('Name') }}</label>
-                                        <input type="text" id="name" name="name" value="{{ old('name', $user->name, null) }}" maxlength="50"
+                                        <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" maxlength="50"
                                             class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" required autofocus>
                                         <div class="invalid-feedback">{{ $errors->first('name') }} </div>
                                     </div>
@@ -52,7 +52,7 @@
                                         <div class="form-group">
                                             <label for="registration_date">{{ __('Registration date') }}</label>
                                             <div class="input-group">
-                                                <input type="date" id="registration_date" name="registration_date" value="{{ old('registration_date', $user->registration_date, null) }}"
+                                                <input type="date" id="registration_date" name="registration_date" value="{{ old('registration_date', $user->registration_date) }}"
                                                     class="form-control data @error('registration_date') is-invalid @enderror">
                                                 <div class="invalid-feedback">{{ $errors->first('registration_date') }}
                                                 </div>
@@ -77,7 +77,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label for="email">{{ __('Email') }}</label>
-                                        <input type="email" id="email" name="email" value="{{ old('email', $user->email, null) }}" maxlength="255"
+                                        <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" maxlength="255"
                                             class="form-control @error('email') is-invalid @enderror" required>
                                         <div class="invalid-feedback">{{ $errors->first('email') }} </div>
                                     </div>
@@ -104,7 +104,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label for="user_note">{{ __('Note') }}</label>
-                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4" style="height: 30mm">{{ old('user_note', $user->user_note, null) }}</textarea>
+                                        <textarea name="user_note" class="form-control @error('user_note') is-invalid @enderror" rows="4" style="height: 30mm">{{ old('user_note', $user->user_note) }}</textarea>
                                         <div class="invalid-feedback">{{ $errors->first('user_note') }} </div>
                                     </div>
                                 </div>
