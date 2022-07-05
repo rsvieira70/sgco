@@ -11,8 +11,8 @@ return new class extends Migration
     {
         Schema::create('teeth', function (Blueprint $table) {
             $table->id();
-            $table->integer('tooth_code');
-            $table->string('tooth_name', 50);
+            $table->integer('tooth_code')->index();
+            $table->string('tooth_name', 50)->index();
             $table->boolean('mesial')->nullable();
             $table->boolean('distal')->nullable();
             $table->boolean('lingual')->nullable();
@@ -24,8 +24,6 @@ return new class extends Migration
             $table->boolean('multiple_teeth')->nullable();
             $table->boolean('suspended')->nullable();
             $table->timestamps();
-            $table->index('tooth_code');
-            $table->index('tooth_name');
         });
     }
     public function down()

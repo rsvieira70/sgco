@@ -17,7 +17,9 @@ class Professional extends Model
         'social_name',
         'nickname',
         'social_security_number',
-        'inbde',
+        'specialty_id',
+        'inbde_council_id',
+        'inbde_number',
         'inbde_state_id',
         'birth',
         'image',
@@ -38,18 +40,13 @@ class Professional extends Model
         'twitter',
         'linkedin',
         'registration_date',
+        'make_clinical_budget',
         'responsible_dentist',
         'suspension_date',
         'note',
+        'website',
         'email',
     ];
-    public static function boot()
-    {
-        parent::boot();
-        self::creating(function ($model) {
-            $model->uuid = Str::uuid();
-        });
-    }
     //relationships
     public function tenant()
     {
@@ -58,6 +55,18 @@ class Professional extends Model
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+    public function specialty()
+    {
+        return $this->belongsTo(Specialty::class);
+    }
+    public function patent()
+    {
+        return $this->belongsTo(Patent::class);
+    }
+    public function council()
+    {
+        return $this->belongsTo(Council::class);
     }
     //mutators
     public function setNameAttribute($value)
@@ -137,6 +146,10 @@ class Professional extends Model
     public function setNoteAttribute($value)
     {
         $this->attributes['note'] = ucfirst($value);
+    }
+    public function setWebsiteAttribute($value)
+    {
+        $this->attributes['website'] = strtolower($value);
     }
     public function setEmailAttribute($value)
     {

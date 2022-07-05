@@ -17,7 +17,7 @@ class State extends Model
     //relationships
     public function professionals()
     {
-        return $this->belongsTo(professional::class, 'inbde_state_id');
+        return $this->belongsTo(professional::class, 'council_state_id');
     }
     //mutators
     public function setInitialsAttribute($value)

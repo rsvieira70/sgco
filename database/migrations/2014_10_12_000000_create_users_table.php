@@ -12,10 +12,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('tenant_id');
             $table->uuid('uuid');
-            $table->string('name',50);
-            $table->string('social_name',50)->nullable();
-            $table->string('nickname',30)->nullable();
-            $table->string('social_security_number',20)->nullable();
+            $table->string('name',50)->index();
+            $table->string('social_name',50)->nullable()->index();
+            $table->string('nickname',30)->nullable()->index();
+            $table->string('social_security_number',20)->nullable()->index();
             $table->date('birth')->nullable();
             $table->string('image')->nullable();
             $table->decimal('user_type',1,0);  //1-Master 2-Administrator 3-Users = 4-Patients
@@ -50,10 +50,6 @@ return new class extends Migration
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
-            $table->index('social_security_number');
-            $table->index('name');
-            $table->index('social_name');
-            $table->index('nickname');
         });
     }
 

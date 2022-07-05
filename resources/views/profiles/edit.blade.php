@@ -7,7 +7,7 @@
         @method('PUT')
         <div class="row">
             <div class="col-sm-12">
-                <div class="invoice p-3 mb-3"> 
+                <div class="invoice p-3 mb-3">
                     <div class="row">
                         <input type="hidden" name="id" value="{{ $loggedId }}">
                         <div class="col-sm-4">
@@ -278,8 +278,7 @@
                                 <label for="password">{{ __('Password') }}</label>
                                 <input type="password" id="password" name="password" maxlength="255" class="form-control @error('password') is-invalid @enderror">
                                 <div class="invalid-feedback">{{ $errors->first('password') }} </div>
-                                <p class="text-danger"><i class="fas fa-hand-point-right"></i>
-                                    {{ __('Leave blank to keep the current password') }}</p>
+                                <p class="text-danger"><i class="fas fa-hand-point-right"></i>{{ __('Leave blank to keep the current password') }}</p>
                             </div>
                         </div>
                         <div class="col-sm-3">

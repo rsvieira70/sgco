@@ -37,13 +37,6 @@ class Profile extends Model
         'profile_note',
     ];
 
-    public static function boot()
-    {
-        parent::boot();
-        self::creating(function ($model) {
-            $model->uuid = Str::uuid();
-        });
-    }
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = ucwords(strtolower($value));

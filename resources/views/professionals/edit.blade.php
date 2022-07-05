@@ -12,7 +12,7 @@
                     <div class="row">
                         <input type="hidden" name="id" value="{{ $loggedId }}">
                         <div class="col-sm-2">
-                            <label for="user_type">{{ __('User type') }}</label>
+                            <label for="patent">{{ __('Patent') }}</label>
                             <div class="input-field">
                                 <select class="custom-select" id="patent" name="patent" class="form-control @error('patent') is-invalid @enderror" required autofocus>
                                     <option value="1" {{ old('patent', $professional->patent) == 1 ? 'selected' : '' }}> {{ __('Doctor') }}</option>
@@ -20,7 +20,7 @@
                                     <option value="3" {{ old('patent', $professional->patent) == 3 ? 'selected' : '' }}> {{ __('MR') }}</option>
                                     <option value="4" {{ old('patent', $professional->patent) == 4 ? 'selected' : '' }}> {{ __('Lady') }}</option>
                                 </select>
-                                <div class="invalid-feedback">{{ $errors->first('user_type') }} </div>
+                                <div class="invalid-feedback">{{ $errors->first('patent') }} </div>
                             </div>
                         </div>
                         <div class="col-sm-5">
@@ -64,11 +64,11 @@
                                     @php
                                         $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
                                         if ($professional->image) {
-                                            $pathImage = url("storage/tenants/{$professional->Tenant->uuid}/users/{$professional->image}");
+                                            $pathImage = url("storage/tenants/{$professional->Tenant->uuid}/professionals/{$professional->image}");
                                         }
                                     @endphp
                                     <td class="text-center">
-                                        <img class="direct-chat-img" src="{{ $pathImage }}" alt={{ __('User Image') }}>
+                                        <img class="direct-chat-img" src="{{ $pathImage }}" alt={{ __('Professional Image') }}>
                                     </td>
                                     <input type="file" id="image" name="image" value="{{ old('image', $professional->image) }}">
                                     </div>

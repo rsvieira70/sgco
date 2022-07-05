@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Class\RemoveFormat;
 use App\Tenant\Traits\TenantTrait;
+use App\Traits\UuidTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

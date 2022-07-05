@@ -22,8 +22,10 @@ class ProfessionalRequest extends FormRequest
             'social_name' => ['required', 'max:50', new FullName()],
             'nickname' => ['required', 'max:30'],
             'birth' => ['required', 'date', 'before:today'],
-            'inbde' => ['required', 'max:30'],
-            'inbde_state_id' => ['required', 'min:1'],
+            'specialty_id' => ['required', 'min:1'],
+            'council_id' => ['required', 'min:1'],
+            'council_number' => ['required', 'max:10'],
+            'council_state_id' => ['required', 'min:1'],
             'social_security_number' => ['required', 'max:20', new cpf()],
             'image' => ['nullable', 'image', 'max:1024'],
             'zip_code' => ['required', 'max:09'],
@@ -43,8 +45,10 @@ class ProfessionalRequest extends FormRequest
             'twitter' => ['nullable', 'string', 'max:80'],
             'linkedin' => ['nullable', 'string', 'max:80'],
             'registration_date' => ['required', 'date'],
+            'make_clinical_budget' => ['nullable'],
             'responsible_dentist' => ['nullable', new TenantUnique('professionals', $this->id)],
             'note' => ['nullable', 'string'],
+            'website' => ['max:255'],
             'email' => ['max:255', 'email', "unique:professionals,email,{$this->id}"]
         ];
     }
@@ -55,8 +59,10 @@ class ProfessionalRequest extends FormRequest
             'social_name' => __('Social name'),
             'nickname' => __('Nick name'),
             'birth' => __('Birth'),
-            'inbde' => __('INBDE'),
-            'inbde_state_id' => __('INBDE state'),
+            'specialty_id' => __('Specialty'),
+            'council_id' => __('Council'),
+            'council_number' => __('Council numbee'),
+            'council_state_id' => __('Council state'),
             'social_security_number' => __('Social security number'),
             'image' => __('Photo'),
             'zip_code' => __('Zip code'),
@@ -75,10 +81,12 @@ class ProfessionalRequest extends FormRequest
             'instagram' => __('Instagram'),
             'twitter' => __('Twitter'),
             'linkedin' =>  __('LinkedIn'),
-            'registration_date' => __('registration_date'),
-            'responsible_dentist' => __('responsible_dentist'),
+            'registration_date' => __('registration date'),
+            'make_clinical_budget' => __('Make clinical budget'),
+            'responsible_dentist' => __('Responsible dentist'),
             'note' => __('Note'),
-            'email' => __('email'),
+            'website' => __('website'),
+            'email' => __('Email'),
         ];
     }
 }

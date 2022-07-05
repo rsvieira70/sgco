@@ -8,11 +8,10 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('banks', function (Blueprint $table) {
+        Schema::create('patents', function (Blueprint $table) {
             $table->id();
-            $table->integer('bank_code');
             $table->string('name', 100);
-            $table->string('short_name', 50);
+            $table->string('short_name', 10);
             $table->boolean('suspended')->nullable();
             $table->timestamps();
         });
@@ -20,6 +19,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('banks');
+        Schema::dropIfExists('patents');
     }
 };

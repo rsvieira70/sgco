@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use illuminate\Support\Str;
 
 class Tenant extends Model
 {
@@ -38,13 +37,6 @@ class Tenant extends Model
         'suspension_date',
         'note'
     ];
-    public static function boot()
-    {
-        parent::boot();
-        self::creating(function ($model) {
-            $model->uuid = Str::uuid();
-        });
-    }
     //relationships
     public function users()
     {

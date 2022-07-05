@@ -9,7 +9,8 @@ class Position extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'description', 'suspended'
+        'description',
+        'suspended'
     ];
     //relationships
     public function user()

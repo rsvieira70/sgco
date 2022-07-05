@@ -21,14 +21,6 @@ class User extends Authenticatable
         'email',
         'password',
         ];
-
-    public static function boot(){
-        parent::boot();
-        self::creating(function($model){
-            $model->uuid = Str::uuid();
-        });
-    }
-
     protected $hidden = [
         'password',
         'remember_token',

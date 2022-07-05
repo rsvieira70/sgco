@@ -11,19 +11,20 @@
                     <div class="row">
                         <input type="hidden" name="id" value="{{ old('id', 0) }}">
                         <div class="col-sm-2">
+                            <label for="patent">{{ __('Patent') }}</label>
                             <div class="input-field">
-                                <label for="name">{{ __('Patent') }}</label>
                                 <select class="custom-select" id="patent" name="patent" class="form-control @error('patent') is-invalid @enderror" required autofocus>
                                     <option value='' disabled selected>{{ __('Select a patent') }}</option>
-                                    <option value="1" {{ old('patent') == 2 ? 'selected' : '' }}> {{ __('Doctor') }}
-                                    <option value="2" {{ old('patent') == 3 ? 'selected' : '' }}> {{ __('Female doctor') }}
-                                    <option value="3" {{ old('patent') == 3 ? 'selected' : '' }}> {{ __('Mr') }}
-                                    <option value="4" {{ old('patent') == 3 ? 'selected' : '' }}> {{ __('Lady') }}
+                                    @foreach ($patents as $patent)
+                                        <option value="{{ $patent->id }}" {{ old('patent', $patent->patent->id ?? '') == $patent->id ? 'selected' : '' }}>
+                                            {{ $patent->name }}
+                                        </option>
+                                    @endforeach
                                 </select>
-                                <div class="invalid-feedback">{{ $errors->first('user_type') }} </div>
+                                <div class="invalid-feedback">{{ $errors->first('patent') }} </div>
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="name">{{ __('Name') }}</label>
                                 <input type="text" id="name" name="name" value="{{ old('name', null) }}" maxlength="50" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
@@ -31,7 +32,7 @@
                                 <div class="invalid-feedback">{{ $errors->first('name') }} </div>
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="social_name">{{ __('Social name') }}</label>
                                 <input type="text" id="social_name" name="social_name" value="{{ old('social_name', null) }}" maxlength="50"
@@ -39,9 +40,7 @@
                                 <div class="invalid-feedback">{{ $errors->first('social_name') }} </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-5">
+                        <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="nickname">{{ __('Nickname') }}</label>
                                 <input type="text" id="nickname" name="nickname" value="{{ old('nickname', null) }}" maxlength="30"
@@ -49,23 +48,65 @@
                                 <div class="invalid-feedback">{{ $errors->first('nickname') }} </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="specialties">{{ __('Specialty') }}</label>
+                            <div class="input-field">
+                                <select class="custom-select" id="specialties" name="specialties" class="form-control @error('specialties') is-invalid @enderror" required>
+                                    <option value='' disabled selected>{{ __('Select a specialty') }}</option>
+                                    @foreach ($specialties as $specialty)
+                                        <option value="{{ $specialty->id }}" {{ old('specialties', $specialty->specialty->id ?? '') == $specialty->id ? 'selected' : '' }}>
+                                            {{ $specialty->description }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">{{ $errors->first('specialties') }} </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="council">{{ __('Council') }}</label>
+                            <div class="input-field">
+                                <select class="custom-select" id="council" name="council" class="form-control @error('council') is-invalid @enderror" required>
+                                    <option value='' disabled selected>{{ __('Select a council') }}</option>
+                                    @foreach ($councils as $council)
+                                        <option value="{{ $council->id }}" {{ old('council', $council->council->id ?? '') == $council->id ? 'selected' : '' }}>
+                                            {{ $council->short_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">{{ $errors->first('council') }} </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <label for="council">{{ __('Council number') }}</label>
+                                <input type="text" id="council" name="council" value="{{ old('council', null) }}" maxlength="10"
+                                    class="form-control {{ $errors->has('council') ? 'is-invalid' : '' }}" required>
+                                <div class="invalid-feedback">{{ $errors->first('council') }} </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="council_state_id">{{ __('Council state') }}</label>
+                            <div class="input-field">
+                                <select class="custom-select" id="council_state_id" name="council_state_id" class="form-control @error('council_state_id') is-invalid @enderror" required>
+                                    <option value='' disabled selected>{{ __('Select a council state') }}</option>
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->id }}" {{ old('council_state_id', $state->state->id ?? '') == $state->id ? 'selected' : '' }}>
+                                            {{ $state->description }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">{{ $errors->first('council_state_id') }} </div>
+                            </div>
+                        </div>
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="registration_date">{{ __('Registration date') }}</label>
-                                <input type="date" id="registration_date" name="registration_date" value="{{ old('registration_date', null) }}" class="form-control @error('registration_date') is-invalid @enderror" required>
+                                <input type="date" id="registration_date" name="registration_date" value="{{ old('registration_date', null) }}"
+                                    class="form-control @error('registration_date') is-invalid @enderror" required>
                                 <div class="invalid-feedback">{{ $errors->first('registration_date') }}
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="form-group">
-                                <label for="image">{{ __('Photo') }}</label>
-                                <div class="Input-group">
-                                    <input type="file" id="image" name="image" value="{{ old('image', null) }}" >
-                                </div>
-                                <p class="text-danger"><i class="fas fa-hand-point-right"></i>
-                                    {{ __('Choose a file only if you want to include or change your professional picture') }}
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -92,40 +133,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-7">
                             <div class="form-group">
-                                <label for="inbde">{{ __('INBDE') }}</label>
-                                <input type="text" id="inbde" name="inbde" value="{{ old('inbde', null) }}" maxlength="30"
-                                    class="form-control {{ $errors->has('inbde') ? 'is-invalid' : '' }}" required>
-                                <div class="invalid-feedback">{{ $errors->first('inbde') }} </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <label for="inbde_state_id">{{ __('INBDE state') }}</label>
-                            <div class="input-field">
-                                <select class="custom-select" id="inbde_state_id" name="inbde_state_id" class="form-control @error('inbde_state_id') is-invalid @enderror" required>
-                                    <option value='' disabled selected>{{ __('Select a state') }}</option>
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state->id }}" {{ old('inbde_state_id', $state->state->id ?? '') == $state->id ? 'selected' : '' }}>
-                                            {{ $state->description }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">{{ $errors->first('inbde_state_id') }} </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <label for="specialties">{{ __('Specialty') }}</label>
-                            <div class="input-field">
-                                <select class="custom-select" id="specialties" name="specialties" class="form-control @error('specialties') is-invalid @enderror" required>
-                                    <option value='' disabled selected>{{ __('Select a specialty') }}</option>
-                                    @foreach ($specialties as $specialty)
-                                        <option value="{{ $specialty->id }}" {{ old('specialties', $specialty->specialty->id ?? '') == $specialty->id ? 'selected' : '' }}>
-                                            {{ $specialty->description }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                <div class="invalid-feedback">{{ $errors->first('specialties') }} </div>
+                                <label for="image">{{ __('Photo') }}</label>
+                                <div class="Input-group">
+                                    <input type="file" id="image" name="image" value="{{ old('image', null) }}">
+                                </div>
+                                <p class="text-danger"><i class="fas fa-hand-point-right"></i>
+                                    {{ __('Choose a file only if you want to include or change photo') }}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -314,6 +330,14 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label for="website">{{ __('Website') }}</label>
+                                <input type="website" id="website" name="website" value="{{ old('website', null) }}" maxlength="255"
+                                    class="form-control @error('website') is-invalid @enderror">
+                                <div class="invalid-feedback">{{ $errors->first('website') }} </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
                                 <label for="email">{{ __('Email') }}</label>
                                 <input type="email" id="email" name="email" value="{{ old('email', null) }}" maxlength="255" class="form-control @error('email') is-invalid @enderror"
                                     required>
@@ -333,8 +357,18 @@
                         <div class="col-sm-12">
                             <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" class="form-control @error('responsible_dentist') is-invalid @enderror" id="responsible_dentist"
-                                        name="responsible_dentist" value="1" {{ old('responsible_dentist', null) ? 'checked' : '' }}>
+                                    <input type="checkbox" id="make_clinical_budget" name="make_clinical_budget" value="1" {{ old('make_clinical_budget', null) ? 'checked' : '' }}>
+                                    <label for="make_clinical_budget">{{ __('Professional makes clinical budget') }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group clearfix">
+                                <div class="icheck-primary d-inline">
+                                    <input type="checkbox" class="form-control @error('responsible_dentist') is-invalid @enderror" id="responsible_dentist" name="responsible_dentist" value="1"
+                                        {{ old('responsible_dentist', null) ? 'checked' : '' }}>
                                     <label for="responsible_dentist">{{ __('Responsible dentist') }}</label>
                                     <div class="invalid-feedback">{{ __('There is already another professional as administrative responsible') }} </div>
                                 </div>

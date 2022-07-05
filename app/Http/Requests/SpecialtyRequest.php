@@ -26,7 +26,7 @@ class SpecialtyRequest extends FormRequest
     public function attributes()
     {
         return [
-            'description' =>  __('specialty')
+            'description' =>  __('Specialty')
         ];
     }
 }

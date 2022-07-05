@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfessionalRequest;
+use App\Models\Council;
+use App\Models\Patent;
 use App\Models\Professional;
 use App\Models\Specialty;
 use App\Models\State;
@@ -29,7 +31,9 @@ class ProfessionalController extends Controller
         $userAuth = Auth()->User();
         $states = State::orderBy('description', 'asc')->get();
         $specialties = Specialty::orderBy('description', 'asc')->get();
-        return view('professionals.create', compact('title', 'userAuth', 'states', 'specialties'));
+        $councils = Council::orderBy('name', 'asc')->get();
+        $patents = Patent::orderBy('name', 'asc')->get();
+        return view('professionals.create', compact('title', 'userAuth', 'states', 'specialties', 'councils', 'patents'));
     }
     
     public function store(ProfessionalRequest $request)

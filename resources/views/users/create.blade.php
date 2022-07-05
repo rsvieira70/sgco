@@ -64,10 +64,8 @@
                                     <div class="input-field">
                                         <select class="custom-select" id="user_type" name="user_type" class="form-control @error('user_type') is-invalid @enderror" required>
                                             <option value='' disabled selected>{{ __('Select a user type') }}</option>
-                                            <option value="2" {{ old('user_type') == 2 ? 'selected' : '' }}>
-                                                {{ __('Administrator') }}
-                                            <option value="3" {{ old('user_type') == 3 ? 'selected' : '' }}>
-                                                {{ __('User') }}
+                                            <option value="2" {{ old('user_type') == 2 ? 'selected' : '' }}>{{ __('Administrator') }}
+                                            <option value="3" {{ old('user_type') == 3 ? 'selected' : '' }}>{{ __('User') }}
                                         </select>
                                         <div class="invalid-feedback">{{ $errors->first('user_type') }} </div>
                                     </div>

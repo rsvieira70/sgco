@@ -13,12 +13,14 @@ return new class extends Migration
             $table->unsignedInteger('tenant_id');
             $table->uuid('uuid');
             $table->integer('patent');
-            $table->string('name',50);
-            $table->string('social_name',50);
-            $table->string('nickname',30);
-            $table->string('social_security_number',20);
-            $table->string('inbde',30);
-            $table->integer('inbde_state_id');
+            $table->string('name',50)->index();
+            $table->string('social_name',50)->index();
+            $table->string('nickname',30)->index();
+            $table->string('social_security_number',20)->index();
+            $table->integer('specialty_id');
+            $table->integer('council_id');
+            $table->string('council_number',10);
+            $table->integer('council_state_id');
             $table->date('birth');
             $table->string('image')->nullable();
             $table->decimal('zip_code', 8,0); 
@@ -38,17 +40,17 @@ return new class extends Migration
             $table->string('twitter',80)->nullable();
             $table->string('linkedin',80)->nullable();
             $table->date('registration_date');
+            $table->boolean('make_clinical_budget')->nullable();
             $table->boolean('responsible_dentist')->nullable();
             $table->date('suspension_date')->nullable();
             $table->longText('note')->nullable();
+            $table->string('website')->nullable();
             $table->string('email')->unique();
             $table->timestamps();
             $table->foreign('tenant_id')->references('id')->on('tenants')->onDelete('cascade');
-            $table->foreign('inbde_state_id')->references('id')->on('states')->onDelete('cascade');
-            $table->index('social_security_number');
-            $table->index('name');
-            $table->index('social_name');
-            $table->index('nickname');
+            $table->foreign('council_state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->foreign('council_id')->references('id')->on('councils')->onDelete('cascade');
+            $table->foreign('specialty_id')->references('id')->on('specialties')->onDelete('cascade');
         });
     }
 

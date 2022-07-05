@@ -58,7 +58,7 @@ class TenantRequest extends FormRequest
             'state' => __('State'),
             'dceu' => __('DCEU'),
             'website' => __('website'),
-            'email' => __('email'),
+            'email' => __('Email'),
             'telephone' => __('Telephone'),
             'cell_phone' => __('Cell Phone'),
             'whatsapp' => __('Whatsapp'),
@@ -67,10 +67,10 @@ class TenantRequest extends FormRequest
             'instagram' => __('Instagram'),
             'twitter' => __('Twitter'),
             'linkedin' =>  __('LinkedIn'),
-            'employer_identification_number' => __('employer identification number'),
-            'state_registration' => __('state registration'),
-            'municipal_registration' => __('municipal registration'),
-            'opening_date' => __('opening_date'),
+            'employer_identification_number' => __('Employer identification number'),
+            'state_registration' => __('State registration'),
+            'municipal_registration' => __('Municipal registration'),
+            'opening_date' => __('Opening date'),
             'note' => __('Note')
 
         ];

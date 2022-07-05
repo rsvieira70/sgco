@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->string('social_reason',60);
+            $table->uuid('uuid')->index();
+            $table->string('social_reason',60)->index();
             $table->string('fancy_name',50);
             $table->decimal('zip_code', 8,0);
             $table->string('address',70);
@@ -31,15 +31,13 @@ return new class extends Migration
             $table->string('instagram',80)->nullable();
             $table->string('twitter',80)->nullable();
             $table->string('linkedin',80)->nullable();
-            $table->string('employer_identification_number',20);
+            $table->string('employer_identification_number',20)->index();
             $table->string('state_registration',15)->nullable();
             $table->string('municipal_registration',15)->nullable();
             $table->date('opening_date');
             $table->date('suspension_date')->nullable();
             $table->longText('note')->nullable();
             $table->timestamps();
-            $table->index('social_reason');
-            $table->index('employer_identification_number');
         });
     }
     public function down()

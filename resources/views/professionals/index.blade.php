@@ -6,7 +6,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('professionals.create') }}" class="btn btb-sm btn-success"><i class="fas fa-user-tie"></i>
+            <a href="{{ route('professionals.create') }}" class="btn btb-sm btn-success"><i class="fas fa-user-md"></i>
                 {{ __('New professional') }}</a>
         </div>
         <div class="card-body">
@@ -22,31 +22,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($professionals as $profissional)
+                    @foreach ($professionals as $professional)
                         <tr>
-                            <td class="text-right">{{ $profissional->id }}</td>
+                            <td class="text-right">{{ $professional->id }}</td>
                             @php
                                 $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
-                                if ($user->image) {
-                                    $pathImage = url("storage/tenants/{$profissional->Tenant->uuid}/users/{$profissional->image}");
+                                if ($professional->image) {
+                                    $pathImage = url("storage/tenants/{$professional->Tenant->uuid}/professionals/{$professional->image}");
                                 }
                             @endphp
                             <td class="text-center">
                                 <img class="direct-chat-img" src="{{ $pathImage }}" alt={{ __('Professional Image') }}>
                             </td>
-                            <td>{{ $profissional->name }}<br>
-                                <small>{{ __('Master') }}</small>
-                                @if ($profissional->responsible_dentist !== null)
+                            <td>{{ $professional->name }}<br>
+                                @if ($professional->responsible_dentist !== null)
                                     <i class="fas fa-hand-point-right"></i>
                                     <small> {{ __('Responsible dentist') }}</small>
                                 @endif
                             </td>
-                            <td>{{ $profissional->email }}</td>
-                            @if ($profissional->suspension_date !== null)
+                            <td>{{ $professional->email }}</td>
+                            @if ($professional->suspension_date !== null)
                                 <td class="text-center">
                                     <span class="badge badge-danger"><i class="fas fa-user-lock"></i>
                                         {{ __('Suspended in') }}
-                                        {{ date('d/m/Y', strtotime($profissional->suspension_date)) }}</span>
+                                        {{ date('d/m/Y', strtotime($professional->suspension_date)) }}</span>
                                 </td>
                             @else
                                 <td class="text-center">
@@ -56,17 +55,17 @@
                                 </td>
                             @endif
                             <td class="text-right">
-                                @if ($profissional->suspension_date == null)
-                                    <a href="{{ route('profissionals.show', $profissional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
-                                    <a href="{{ route('profissionals.edit', $user->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>
+                                @if ($professional->suspension_date == null)
+                                    <a href="{{ route('professionals.show', $professional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
+                                    <a href="{{ route('professionals.edit', $professional->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>
                                         {{ __('Edit') }}</a>
-                                    <form action="{{ route('users.suspend', $profissional->id) }}" class="d-inline formsuspend" method="POST">
+                                    <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formsuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-xs btn-warning"> <i class="fas fa-user-lock"></i> {{ __('Suspend') }}</button>
                                     @else
-                                        <a href="{{ route('profissionals.show', $profissional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
-                                        <form action="{{ route('profissionals.suspend', $profissional->id) }}" class="d-inline formReactivate" method="POST">
+                                        <a href="{{ route('profisseonals.show', $professional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
+                                        <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formReactivate" method="POST">
                                             @method ('PATCH')
                                             @csrf
                                             <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>

@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TeethTableSeeder::class);
         $this->call(BanksTableSeeder::class);
         $this->call(StatesTableSeeder::class);
+        $this->call(CouncilsTypeSeeder::class);
+        $this->call(PatentsTypeSeeder::class);
     }
 }
