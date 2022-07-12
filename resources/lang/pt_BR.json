@@ -904,6 +904,7 @@
     "Tenant suspended in": "Filial suspensa em",
     "User suspended in": "Usuário suspenso em",
     "User active": "Usuário ativo",
+    "Professional active": "Profissional ativo",
     "Tenant active": "Filial ativa",
     "About me": "Sobre mim",
     "Social name": "Nome social",
@@ -947,6 +948,7 @@
     "Administrative responsible": "Responsável administrativo",
     "Responsible dentist": "Dentista responsável",
     "There is already another user as administrative responsible": "Já existe outro usuário como responsável administrativo",
+    "There is already another professional as administrative responsible": "Já existe outro profissional como responsável administrativo",
     "Responsible": "Responsáveis",
     "Undefined": "Não definido",
     "Tenants": "Filiais",
@@ -995,7 +997,8 @@
     "Professional makes clinical budget": "Profissional faz orçamento clínico",
     "Council": "Conselho",
     "Council number": "Número do conselho",
-    "Council state": "Estado do conselho"
+    "Council state": "Estado do conselho",
+    "Random": "Aleatória"
 
 
 

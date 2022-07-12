@@ -17,7 +17,7 @@ class ProfessionalRequest extends FormRequest
     public function rules()
     {
         return [
-            'patent' => ['nullable', 'string'],
+            'patent_id' => ['required', 'min:1'],
             'name' => ['required', 'max:50', new FullName()],
             'social_name' => ['required', 'max:50', new FullName()],
             'nickname' => ['required', 'max:30'],
@@ -48,14 +48,14 @@ class ProfessionalRequest extends FormRequest
             'make_clinical_budget' => ['nullable'],
             'responsible_dentist' => ['nullable', new TenantUnique('professionals', $this->id)],
             'note' => ['nullable', 'string'],
-            'website' => ['max:255'],
+            'website' => ['nullable', 'max:255'],
             'email' => ['max:255', 'email', "unique:professionals,email,{$this->id}"]
         ];
     }
     public function attributes()
     {
         return [
-            'patent' => __('Patent'),
+            'patent_id' => __('Patent'),
             'social_name' => __('Social name'),
             'nickname' => __('Nick name'),
             'birth' => __('Birth'),

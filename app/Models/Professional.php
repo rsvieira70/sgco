@@ -12,15 +12,15 @@ class Professional extends Model
     use HasFactory;
     use TenantTrait;
     protected $fillable = [
-        'patent',
+        'patent_id',
         'name',
         'social_name',
         'nickname',
         'social_security_number',
         'specialty_id',
-        'inbde_council_id',
-        'inbde_number',
-        'inbde_state_id',
+        'council_id',
+        'council_number',
+        'council_state_id',
         'birth',
         'image',
         'zip_code',
@@ -54,7 +54,7 @@ class Professional extends Model
     }
     public function state()
     {
-        return $this->belongsTo(State::class);
+        return $this->belongsTo(State::class, 'council_state_id', 'id');
     }
     public function specialty()
     {
@@ -67,6 +67,18 @@ class Professional extends Model
     public function council()
     {
         return $this->belongsTo(Council::class);
+    }
+    public function professionalCertificates()
+    {
+        return $this->hasMany(ProfessionalCertificate::class);
+    }
+    public function professionalDocuments()
+    {
+        return $this->hasMany(ProfessionalDocument::class);
+    }
+    public function professionalPaymentInformations()
+    {
+        return $this->hasMany(ProfessionalPaymentInformation::class);
     }
     //mutators
     public function setNameAttribute($value)

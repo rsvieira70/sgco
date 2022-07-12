@@ -1,3 +1,4 @@
+    <script src="https://kit.fontawesome.com/febf1463db.js" crossorigin="anonymous"></script>
     <script src="{{ asset('AdminLTE/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>

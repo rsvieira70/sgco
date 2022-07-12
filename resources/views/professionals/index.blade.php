@@ -57,19 +57,19 @@
                             <td class="text-right">
                                 @if ($professional->suspension_date == null)
                                     <a href="{{ route('professionals.show', $professional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
-                                    <a href="{{ route('professionals.edit', $professional->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>
-                                        {{ __('Edit') }}</a>
+                                    <a href="{{ route('professionals.edit', $professional->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
                                     <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formsuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-xs btn-warning"> <i class="fas fa-user-lock"></i> {{ __('Suspend') }}</button>
-                                    @else
-                                        <a href="{{ route('profisseonals.show', $professional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
-                                        <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formReactivate" method="POST">
-                                            @method ('PATCH')
-                                            @csrf
-                                            <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
-                                        </form>
+                                    </form>
+                                @else
+                                    <a href="{{ route('professionals.show', $professional->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
+                                    <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formReactivate" method="POST">
+                                        @method ('PATCH')
+                                        @csrf
+                                        <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
+                                    </form>
                                 @endif
                             </td>
                         </tr>

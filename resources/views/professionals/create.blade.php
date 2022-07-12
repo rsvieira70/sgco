@@ -11,17 +11,17 @@
                     <div class="row">
                         <input type="hidden" name="id" value="{{ old('id', 0) }}">
                         <div class="col-sm-2">
-                            <label for="patent">{{ __('Patent') }}</label>
+                            <label for="patent_id">{{ __('Patent') }}</label>
                             <div class="input-field">
-                                <select class="custom-select" id="patent" name="patent" class="form-control @error('patent') is-invalid @enderror" required autofocus>
+                                <select class="custom-select" id="patent_id" name="patent_id" class="form-control @error('patent_id') is-invalid @enderror" required autofocus>
                                     <option value='' disabled selected>{{ __('Select a patent') }}</option>
                                     @foreach ($patents as $patent)
-                                        <option value="{{ $patent->id }}" {{ old('patent', $patent->patent->id ?? '') == $patent->id ? 'selected' : '' }}>
+                                        <option value="{{ $patent->id }}" {{ old('patent_id', $patent->patent->id ?? '') == $patent->id ? 'selected' : '' }}>
                                             {{ $patent->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <div class="invalid-feedback">{{ $errors->first('patent') }} </div>
+                                <div class="invalid-feedback">{{ $errors->first('patent_id') }} </div>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -51,39 +51,39 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="specialties">{{ __('Specialty') }}</label>
+                            <label for="specialty_id">{{ __('Specialty') }}</label>
                             <div class="input-field">
-                                <select class="custom-select" id="specialties" name="specialties" class="form-control @error('specialties') is-invalid @enderror" required>
+                                <select class="custom-select" id="specialty_id" name="specialty_id" class="form-control @error('specialty_id') is-invalid @enderror" required>
                                     <option value='' disabled selected>{{ __('Select a specialty') }}</option>
                                     @foreach ($specialties as $specialty)
-                                        <option value="{{ $specialty->id }}" {{ old('specialties', $specialty->specialty->id ?? '') == $specialty->id ? 'selected' : '' }}>
+                                        <option value="{{ $specialty->id }}" {{ old('specialty_id', $specialty->specialty->id ?? '') == $specialty->id ? 'selected' : '' }}>
                                             {{ $specialty->description }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <div class="invalid-feedback">{{ $errors->first('specialties') }} </div>
+                                <div class="invalid-feedback">{{ $errors->first('specialty_id') }} </div>
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <label for="council">{{ __('Council') }}</label>
+                            <label for="council_id">{{ __('Council') }}</label>
                             <div class="input-field">
-                                <select class="custom-select" id="council" name="council" class="form-control @error('council') is-invalid @enderror" required>
+                                <select class="custom-select" id="council_id" name="council_id" class="form-control @error('council_id') is-invalid @enderror" required>
                                     <option value='' disabled selected>{{ __('Select a council') }}</option>
                                     @foreach ($councils as $council)
-                                        <option value="{{ $council->id }}" {{ old('council', $council->council->id ?? '') == $council->id ? 'selected' : '' }}>
+                                        <option value="{{ $council->id }}" {{ old('council_id', $council->council->id ?? '') == $council->id ? 'selected' : '' }}>
                                             {{ $council->short_name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                <div class="invalid-feedback">{{ $errors->first('council') }} </div>
+                                <div class="invalid-feedback">{{ $errors->first('council_id') }} </div>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-group">
-                                <label for="council">{{ __('Council number') }}</label>
-                                <input type="text" id="council" name="council" value="{{ old('council', null) }}" maxlength="10"
-                                    class="form-control {{ $errors->has('council') ? 'is-invalid' : '' }}" required>
-                                <div class="invalid-feedback">{{ $errors->first('council') }} </div>
+                                <label for="council_number">{{ __('Council number') }}</label>
+                                <input type="text" id="council_number" name="council_number" value="{{ old('council_number', null) }}" maxlength="10"
+                                    class="form-control {{ $errors->has('council_number') ? 'is-invalid' : '' }}" required>
+                                <div class="invalid-feedback">{{ $errors->first('council_number') }} </div>
                             </div>
                         </div>
                         <div class="col-sm-2">
@@ -349,7 +349,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="Note">{{ __('Note') }}</label>
-                                <textarea name="note" class="form-control @error('note') is-invalid @enderror" rows="4" style="height: 30mm">{{ old('profile_note', null) }}</textarea>
+                                <textarea name="note" class="form-control @error('note') is-invalid @enderror" rows="4" style="height: 30mm">{{ old('note', null) }}</textarea>
                             </div>
                         </div>
                     </div>

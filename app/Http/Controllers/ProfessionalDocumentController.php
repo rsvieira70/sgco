@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TenantDocument;
 use Illuminate\Http\Request;
 
-class TenantDocumentController extends Controller
+class ProfessionalDocumentController extends Controller
 {
     public function index()
     {

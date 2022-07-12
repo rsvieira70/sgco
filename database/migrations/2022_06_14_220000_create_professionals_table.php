@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('tenant_id');
             $table->uuid('uuid');
-            $table->integer('patent');
+            $table->integer('patent_id');
             $table->string('name',50)->index();
             $table->string('social_name',50)->index();
             $table->string('nickname',30)->index();
@@ -51,6 +51,7 @@ return new class extends Migration
             $table->foreign('council_state_id')->references('id')->on('states')->onDelete('cascade');
             $table->foreign('council_id')->references('id')->on('councils')->onDelete('cascade');
             $table->foreign('specialty_id')->references('id')->on('specialties')->onDelete('cascade');
+            $table->foreign('patent_id')->references('id')->on('patents')->onDelete('cascade');
         });
     }
 

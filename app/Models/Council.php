@@ -16,7 +16,7 @@ class Council extends Model
     //relationships
     public function professionals()
     {
-        return $this->belongsTo(professional::class);
+        return $this->belongsTo(Professional::class);
     }
 
     //mutators

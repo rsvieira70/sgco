@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\TenantUnique;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TenantDocumentRequest extends FormRequest
+class ProfessionalDocumentRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,14 +14,16 @@ class TenantDocumentRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' =>  ['required', 'string', 'min:3', 'max:50', new TenantUnique('tenant_documents', $this->id)],
-            'document' => ['required', 'max:1024', new TenantUnique('tenant_documents', $this->id)],
+            'professional_id' => ['required', 'min:1'],
+            'description' =>  ['required', 'string', 'min:3', 'max:50'],
+            'document' => ['required', 'max:1024'],
             'document_type' =>  ['nullable'],
         ];
     }
     public function attributes()
     {
         return [
+            'professional_id' => __('Professional'),
             'description' =>  __('Description'),
             'document' => __('Document'),
             'document_type' => __('Document type'),

@@ -74,15 +74,9 @@ class TypeOrthodonticContractController extends Controller
     public function update(TypeOrthodonticContractRequest $request, $id)
     {
         $data = $request->validated();
-        if (!$request->get('receive_bracket')) {
-            $data['receive_bracket'] = null;
-        }
-        if (!$request->get('receive_band')) {
-            $data['receive_band'] = null;
-        }
-        if (!$request->get('fixed_value_contract')) {
-            $data['fixed_value_contract'] = null;
-        }
+        if (!$request->get('receive_bracket')) {$data['receive_bracket'] = null;}
+        if (!$request->get('receive_band')) {$data['receive_band'] = null;}
+        if (!$request->get('fixed_value_contract')) {$data['fixed_value_contract'] = null;}
         db::beginTransaction();
         try {
             $typeOrthodonticContract = TypeOrthodonticContract::find($id);

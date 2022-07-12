@@ -8,7 +8,6 @@
                         <div class="col-md-4">
                             <div class="card card-primary card-outline">
                                 <div class="card-body box-profile">
-
                                     <b> {{ __('Social reason') }}:</b> {{ $tenant->social_reason }}<br>
                                     <b> {{ __('Fancy name') }}:</b> {{ $tenant->fancy_name }} <br>
                                     <b>{{ __('Opening date') }}:</b>
@@ -17,8 +16,6 @@
                                     {{ $tenant->employer_identification_number }}<br>
                                     <b>{{ __('State registration') }}:</b> {{ $tenant->state_registration }}<br>
                                     <b>{{ __('Municipal registration') }}:</b> {{ $tenant->municipal_registration }}
-
-
                                     <ul class="list-group list-group-unbordered mb-3">
                                         <li class="list-group-item">
                                             <b>{{ __('Website') }}:</b> {{ $tenant->website }}<br>
@@ -113,7 +110,7 @@
                                                             $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
                                                             if ($administrative !== null) {
                                                                 if ($administrative->image) {
-                                                                    $pathImage = url("storage/tenants/{$administrative->Tenant->uuid}/users/{$administrative->image}");
+                                                                    $pathImage = url("storage/tenants/{$tenant->uuid}/users/{$administrative->image}");
                                                                 }
                                                             }
                                                         @endphp
@@ -164,8 +161,8 @@
                                                 <div class="col-md-6">
                                                     <div class="card card-widget widget-user shadow">
                                                         <div class="widget-user-header bg-success">
-                                                            @if ($administrative !== null)
-                                                                <h3 class="widget-user-username">{{ $administrative->name }}</h3>
+                                                            @if ($professional !== null)
+                                                                <h3 class="widget-user-username">{{ $professional->patent->name}} {{ $professional->name }}</h3>
                                                             @else
                                                                 <h3 class="widget-user-username">{{ __('Undefined') }}</h3>
                                                             @endif
@@ -173,31 +170,31 @@
                                                         </div>
                                                         @php
                                                             $pathImage = url('AdminLTE/dist/img/noImagePessoa.png');
-                                                            if ($administrative !== null) {
-                                                                if ($administrative->image) {
-                                                                    $pathImage = url("storage/tenants/{$administrative->Tenant->uuid}/users/{$administrative->image}");
+                                                            if ($professional !== null) {
+                                                                if ($professional->image) {
+                                                                    $pathImage = url("storage/tenants/{$tenant->uuid}/professionals/{$professional->image}");
                                                                 }
                                                             }
                                                         @endphp
                                                         <div class="widget-user-image">
                                                             <img class="img-circle elevation-2" src="{{ $pathImage }}" alt="User Avatar">
                                                         </div>
-                                                        @if ($administrative !== null)
+                                                        @if ($professional !== null)
                                                             <div class="card-footer">
                                                                 <div class="row">
                                                                     <div class="col-sm-4 border-right">
                                                                         <div class="description-block">
-                                                                            <span class="description-text">{{ __('Department') }}</span>
+                                                                            <span class="description-text">{{ __('Council') }}</span>
                                                                             <h5 class="description-header">
-                                                                                {{ $administrative->department->description }}
+                                                                                {{ $professional->Council->short_name }}-{{ $professional->council_number }}/{{ $professional->State->initials }}
                                                                             </h5>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-4 border-right">
                                                                         <div class="description-block">
-                                                                            <span class="description-text">{{ __('Position') }}</span>
+                                                                            <span class="description-text">{{ __('Specialty') }}</span>
                                                                             <h5 class="description-header">
-                                                                                {{ $administrative->position->description }}
+                                                                                {{ $professional->specialty->description }}
                                                                             </h5>
                                                                         </div>
                                                                     </div>
@@ -209,14 +206,14 @@
                                                                                     {{ __('User suspended in') }}{{ date('d/m/Y', strtotime($administrative->suspension_date)) }}
                                                                                 </h5>
                                                                             @else
-                                                                                <h5 class="description-header">{{ __('User active') }}</h5>
+                                                                                <h5 class="description-header">{{ __('Professional active') }}</h5>
                                                                             @endif
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="small-box bg-success">
-                                                                <a href="{{ route('users.show', $administrative->id) }}" class="small-box-footer">{{ __('More information') }} <i
+                                                                <a href="{{ route('professionals.show', $professional->id) }}" class="small-box-footer">{{ __('More information') }} <i
                                                                         class="fas fa-arrow-circle-right"></i></a>
                                                             </div>
                                                         @endif
@@ -231,69 +228,69 @@
                                                         @foreach ($tenant->tenantDocuments as $tenantDocument)
                                                             <li>
                                                                 <a href="" class="btn-link text-secondary">
-                                                                    @switch ($tenantDocument->type)
+                                                                    @switch ($tenantDocument->document_type)
                                                                         @case ('PDF')
-                                                                            <i class="fas fa-file-pdf"></i>
+                                                                            <i class="fas fa-fw fa-file-pdf"></i>
                                                                         @break
 
                                                                         @case ('DOC')
-                                                                            <i class="fas fa-file-word"></i>
+                                                                            <i class="fas fa-fw fa-file-word"></i>
                                                                         @break
 
                                                                         @case ('DOCX')
-                                                                            <i class="fas fa-file-word"></i>
+                                                                            <i class="fas fa-fw fa-file-word"></i>
                                                                         @break
 
                                                                         @case ('XLSX')
-                                                                            <i class="fas fa-file-excel"></i>
+                                                                            <i class="fas fa-fw fa-file-excel"></i>
                                                                         @break
 
                                                                         @case ('XLS')
-                                                                            <i class="fas fa-file-excel"></i>
+                                                                            <i class="fas fa-fw fa-file-excel"></i>
                                                                         @break
 
                                                                         @case ('PPT')
-                                                                            <i class="fas fa-file-powerpoint"></i>
+                                                                            <i class="fas fa-fw fa-file-powerpoint"></i>
                                                                         @break
 
                                                                         @case ('BMP')
-                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                            <i class="fas fa-fw fa-file-image"></i>
                                                                         @break
 
                                                                         @case ('PNG')
-                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                            <i class="fas fa-fw fa-file-image"></i>
                                                                         @break
 
                                                                         @case ('GIF')
-                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                            <i class="fas fa-fw fa-file-image"></i>
                                                                         @break
 
                                                                         @case ('JPG')
-                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                            <i class="fas fa-fw fa-file-image"></i>
                                                                         @break
 
                                                                         @case ('JPEG')
-                                                                            <i class="far fa-fw fa-file-image"></i>
+                                                                            <i class="fas fa-fw fa-file-image"></i>
                                                                         @break
 
                                                                         @case ('ZIP')
-                                                                            <i class="fas fa-file-archive"></i>
+                                                                            <i class="fas fa-fw fa-file-archive"></i>
                                                                         @break
 
                                                                         @case ('WAV')
-                                                                            <i class="fas fa-file-audio"></i>
+                                                                            <i class="fas fa-fw fa-file-audio"></i>
                                                                         @break
 
                                                                         @case ('MP3')
-                                                                            <i class="fas fa-file-audio"></i>
+                                                                            <i class="fas fa-fw fa-file-audio"></i>
                                                                         @break
 
                                                                         @case ('MOV')
-                                                                            <i class="fas fa-file-video"></i>
+                                                                            <i class="fas fa-fw fa-file-video"></i>
                                                                         @break
 
                                                                         @case ('AVI')
-                                                                            <i class="fas fa-file-video"></i>
+                                                                            <i class="fas fa-fw fa-file-video"></i>
                                                                         @break
                                                                     @endswitch
                                                                     {{ $tenantDocument->description }}</a>

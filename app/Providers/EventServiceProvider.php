@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Event;
 use App\Models\Professional;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Models\NewUser;
 use App\Observers\ProfessionalObserver;
 use App\Observers\TenantObserver;
 use App\Observers\UserObserver;
+use App\Observers\NewUserObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -36,6 +38,7 @@ class EventServiceProvider extends ServiceProvider
         Professional::observe(ProfessionalObserver::class);
         Tenant::observe(TenantObserver::class);
         User::observe(UserObserver::class);
+        NewUser::observe(NewUserObserver::class);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Class\Useful;
 use App\Http\Requests\TenantRequest;
+use App\Models\Professional;
 use App\Models\Tenant;
 use App\Models\User;
 use App\Notifications\SystemErrorAlert;
@@ -62,8 +63,9 @@ class TenantController extends Controller
             $tenant->telegram = Useful::class::phone($tenant->telegram);
             $title =  __('Tenant show');
             $userAuth = Auth()->User();
-            $administrative = User::whereIn('administrative_responsible', ['true'])->with(['Department', 'Position', 'Tenant'])->get()->first();
-            return view('tenants.show', compact('title', 'userAuth', 'administrative', 'tenant'));
+            $administrative = User::whereIn('administrative_responsible', ['true'])->with(['Department', 'Position'])->get()->first();
+            $professional = Professional::whereIn('responsible_dentist', ['true'])->with(['Patent','Specialty','Council', 'State'])->get()->first();
+            return view('tenants.show', compact('title', 'userAuth', 'administrative', 'professional', 'tenant'));
         }
         return redirect()->route('tenants.index');
     }
