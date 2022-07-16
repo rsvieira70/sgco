@@ -8,6 +8,7 @@ use App\Class\NumberFormat;
 use App\Models\Council;
 use App\Models\Patent;
 use App\Models\Professional;
+use App\Models\ProfessionalCertificate;
 use App\Models\ProfessionalDocument;
 use App\Models\ProfessionalPaymentInformation;
 use App\Models\Specialty;
@@ -80,7 +81,7 @@ class ProfessionalController extends Controller
 
     public function show($id)
     {
-        $professional = Professional::with(['Tenant', 'Patent', 'Specialty', 'Council', 'State', 'ProfessionalCertificates'])->find($id);
+        $professional = Professional::with(['Tenant', 'Patent', 'Specialty', 'Council', 'State'])->find($id);
         if ($professional) {
             $professional->social_security_number = Useful::class::ssn($professional->social_security_number);
             $professional->zip_code = Useful::class::zip_code($professional->zip_code);
@@ -89,13 +90,13 @@ class ProfessionalController extends Controller
             $professional->whatsapp = Useful::class::phone($professional->whatsapp);
             $professional->telegram = Useful::class::phone($professional->telegram);
             $professionalDocuments =  ProfessionalDocument::whereIn('professional_id', [$id])->get();
-
-
             foreach ($professionalDocuments as $professionalDocument){
                 $professionalDocument->document_type = ImageExtension::class::imageextesion($professionalDocument->document_type);
             }
-
-
+            $professionalCertificates =  ProfessionalCertificate::whereIn('professional_id', [$id])->get();
+            foreach ($professionalCertificates as $professionalCertificate){
+                $professionalCertificate->document_type = ImageExtension::class::imageextesion($professionalCertificate->document_type);
+            }
             $title =  __('Professional show');
             $userAuth = Auth()->User();
             $professionalPaymentInformation = ProfessionalPaymentInformation::find($id);
@@ -145,11 +146,8 @@ class ProfessionalController extends Controller
                         $professionalPaymentInformation->pix_key_type = __('Random');
                         break;
                 }
-            } else {
-                dd($professional);
             }
-
-            return view('professionals.show', compact('title', 'userAuth', 'professional', 'professionalPaymentInformation', 'professionalDocuments'));
+            return view('professionals.show', compact('title', 'userAuth', 'professional', 'professionalPaymentInformation', 'professionalDocuments', 'professionalCertificates'));
         }
         return redirect()->route('tenants.index');
     }

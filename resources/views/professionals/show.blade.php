@@ -46,13 +46,13 @@
                                     @if ($professional->suspension_date !== null)
                                         <div class="alert alert-danger alert-dismissible">
                                             <h5><i class="icon fas fa-ban"></i> {{ __('Alert') }}!</h5>
-                                            {{ __('User suspended in') }}
+                                            {{ __('Professional suspended in') }}
                                             {{ date('d/m/Y', strtotime($professional->suspension_date)) }}
                                         </div>
                                     @else
                                         <div class="alert alert-success alert-dismissible">
                                             <h5><i class="icon fas fa-check"></i> {{ __('Alert') }}!</h5>
-                                            {{ __('User active') }}
+                                            {{ __('Professional active') }}
                                         </div>
                                     @endif
                                 </div>
@@ -132,7 +132,6 @@
                                                 {{ $professionalPaymentInformation->maintenance_payment_type }} <br>
                                                 $ {{ $professionalPaymentInformation->maintenance_payment_amount }}
                                             </p>
-
                                             <strong><i class="fa-solid fa-house-chimney-medical"></i> {{ __('Clinical') }}</strong>
                                             <p class="text-muted">
                                                 {{ $professionalPaymentInformation->clinical_payment_type }} <br>
@@ -155,27 +154,26 @@
                                                 {{ __('PIX key type') }} {{ $professionalPaymentInformation->pix_key_type }} <br>
                                                 {{ __('key') }} {{ $professionalPaymentInformation->pix_key }}
                                             </p>
-
-
                                         </div>
                                         <div class="tab-pane" id="documents">
                                             <div class="row">
                                                 <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
                                                     <ul class="list-unstyled">
-
                                                         <table class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Description</th>
-                                                                    <th>File Name</th>
-                                                                    <th></th>
+                                                                    <th>#</th>
+                                                                    <th>{{ __('Description') }}</th>
+                                                                    <th>{{ __('File Name') }}</th>
+                                                                    <th>{{ __('Action') }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 @foreach ($professionalDocuments as $professionalDocument)
                                                                     <tr>
+                                                                        <td>{{ $professionalDocument->id }}</td>
                                                                         <td>{{ $professionalDocument->description }}</td>
-                                                                        <td><i class="{{@strtolower($professionalDocument->document_type)}}"></i> {{ $professionalDocument->document }}</td>
+                                                                        <td><i class="{{ @strtolower($professionalDocument->document_type) }}"></i> {{ $professionalDocument->document }}</td>
                                                                         <td class="text-right py-0 align-middle">
                                                                             <div class="btn-group btn-group-sm">
                                                                                 <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
@@ -186,7 +184,6 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-
                                                     </ul>
                                                 </div>
                                             </div>
@@ -195,86 +192,37 @@
                                             <div class="row">
                                                 <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
                                                     <ul class="list-unstyled">
-                                                        @foreach ($professional->professionalCertificates as $professionalCertificate)
-                                                            <li>
-                                                                <a href="" class="btn-link text-secondary">
-                                                                    @switch ($professionalCertificate->document_type)
-                                                                        @case ('PDF')
-                                                                            <i class="fas fa-fw fa-file-pdf"></i>
-                                                                        @break
-
-                                                                        @case ('DOC')
-                                                                            <i class="fas fa-fw fa-file-word"></i>
-                                                                        @break
-
-                                                                        @case ('DOCX')
-                                                                            <i class="fas fa-fw fa-file-word"></i>
-                                                                        @break
-
-                                                                        @case ('XLSX')
-                                                                            <i class="fas fa-fw fa-file-excel"></i>
-                                                                        @break
-
-                                                                        @case ('XLS')
-                                                                            <i class="fas fa-fw fa-file-excel"></i>
-                                                                        @break
-
-                                                                        @case ('PPT')
-                                                                            <i class="fas fa-fw fa-file-powerpoint"></i>
-                                                                        @break
-
-                                                                        @case ('BMP')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('PNG')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('GIF')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('JPG')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('JPEG')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('ZIP')
-                                                                            <i class="fas fa-fw fa-file-archive"></i>
-                                                                        @break
-
-                                                                        @case ('WAV')
-                                                                            <i class="fas fa-fw fa-file-audio"></i>
-                                                                        @break
-
-                                                                        @case ('MP3')
-                                                                            <i class="fas fa-fw fa-file-audio"></i>
-                                                                        @break
-
-                                                                        @case ('MOV')
-                                                                            <i class="fas fa-fw fa-file-video"></i>
-                                                                        @break
-
-                                                                        @case ('AVI')
-                                                                            <i class="fas fa-fw fa-file-video"></i>
-                                                                        @break
-                                                                    @endswitch
-                                                                    {{ $professionalCertificate->certificate }} {{ __('Finished in') }}
-                                                                    {{ date('d/m/Y', strtotime($professionalCertificate->certification_date)) }} - {{ $professionalCertificate->certification_unit }}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>#</th>
+                                                                    <th>{{ __('Certificate') }}</th>
+                                                                    <th>{{ __('Certification unit') }}</th>
+                                                                    <th>{{ __('Certification date') }}</th>
+                                                                    <th>{{ __('File Name') }}</th>
+                                                                    <th>{{ __('Action') }}</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($professionalCertificates as $professionalCertificate)
+                                                                    <tr>
+                                                                        <td>{{ $professionalCertificate->id }}</td>
+                                                                        <td>{{ $professionalCertificate->certificate }}</td>
+                                                                        <td>{{ $professionalCertificate->certificate_unit }}</td>
+                                                                        <td>{{ date('d/m/Y', strtotime($professionalCertificate->certificate_date)) }}</td>
+                                                                        <td><i class="{{ @strtolower($professionalCertificate->document_type) }}"></i> {{ $professionalCertificate->document }}</td>
+                                                                        <td class="text-right py-0 align-middle">
+                                                                            <div class="btn-group btn-group-sm">
+                                                                                <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                                                                <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
                                                     </ul>
                                                 </div>
-                                            </div>
-                                            <hr>
-                                            <div class="callout callout-info">
-                                                <h5><i class="icon fas fa-info"></i> {{ __('Information') }}!</h5>
-                                                <p>{{ __('Click on the document to view it, for a new document contact the administrator') }}</p>
                                             </div>
                                         </div>
                                     </div>

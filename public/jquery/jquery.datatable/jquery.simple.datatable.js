@@ -1,15 +1,15 @@
 $(document).ready(function () {
     $('#datatable').DataTable({
-//      order: [
-//          [1, 'asc']
-//      ],
-        columnDefs: [{
+        columnDefs: [
+            {
                 target: 0,
                 visible: false,
-            },
-          ],
-//      dom: 'Bfrtip',
-//      buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
+            }
+        ],
+        responsive: true,
+        autoWidth: false,
+        //      dom: 'Bfrtip',
+        //      buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
         "language": {
             "search": "Buscar",
             "lengthMenu": "Mostrando _MENU_ registros por página",

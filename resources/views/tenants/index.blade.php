@@ -1,7 +1,9 @@
 @extends('_Partials.index')
 @section('head-complement')
     <!-- dataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
 @endsection
 @section('content')
     <div class="card">
@@ -10,7 +12,7 @@
                 {{ __('New tenant') }}</a>
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-bordered table-striped">
+            <table id="datatable" class="table table-striped dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('Code') }}</th>
@@ -36,19 +38,19 @@
                                 </td>
                             @endif
                             <td class="text-right">
-                                <a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
+                                <a href="{{ route('tenants.show', $tenant->id) }}" class="btn btn-sm btn-primary "><i class="far fa-eye"></i> {{ __('View') }}</a>
                                 @if ($tenant->suspension_date == null)
-                                    <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-xs btn-info "><i class="fas fa-pencil-alt"></i>{{ __('Edit') }}</a>
+                                    <a href="{{ route('tenants.edit', $tenant->id) }}" class="btn btn-sm btn-info "><i class="fas fa-pencil-alt"></i>{{ __('Edit') }}</a>
                                     <form action="{{ route('tenants.suspend', $tenant->id) }}" class="d-inline formsuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-warning"> <i class="fas fa-lock"></i> {{ __('Suspend') }}</button>
+                                        <button type="submit" class="btn btn-sm btn-warning"> <i class="fas fa-lock"></i> {{ __('Suspend') }}</button>
                                     </form>
                                 @else
                                     <form action="{{ route('tenants.suspend', $tenant->id) }}" class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-success"><i class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
+                                        <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                 @endif
                             </td>
@@ -60,7 +62,10 @@
     </div>
 @endsection;
 @section('java-complement')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+<script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
 @endsection;

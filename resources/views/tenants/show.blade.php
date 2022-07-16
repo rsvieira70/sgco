@@ -1,4 +1,10 @@
 @extends('_Partials.index')
+@section('head-complement')
+    <!-- dataTables -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
+@endsection
 @section('content')
     <section class="content">
         <div class="card">
@@ -7,7 +13,28 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-edit"></i>
+                                        {{ __('Information') }}
+                                    </h3>
+                                </div>
                                 <div class="card-body box-profile">
+                                    @if ($tenant->suspension_date !== null)
+                                        <div class="ribbon-wrapper ribbon-lg">
+                                            <div class="ribbon bg-danger">
+                                                {{ __('Tenant suspended in') }}
+                                                {{ date('d/m/Y', strtotime($tenant->suspension_date)) }}
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="ribbon-wrapper ribbon-xl">
+                                            <div class="ribbon bg-success">
+                                                {{ __('Tenant active') }}
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <b> {{ __('Social reason') }}:</b> {{ $tenant->social_reason }}<br>
                                     <b> {{ __('Fancy name') }}:</b> {{ $tenant->fancy_name }} <br>
                                     <b>{{ __('Opening date') }}:</b>
@@ -16,85 +43,73 @@
                                     {{ $tenant->employer_identification_number }}<br>
                                     <b>{{ __('State registration') }}:</b> {{ $tenant->state_registration }}<br>
                                     <b>{{ __('Municipal registration') }}:</b> {{ $tenant->municipal_registration }}
-                                    <ul class="list-group list-group-unbordered mb-3">
-                                        <li class="list-group-item">
-                                            <b>{{ __('Website') }}:</b> {{ $tenant->website }}<br>
-                                            <b>{{ __('Email') }}:</b> {{ $tenant->email }}
-                                        </li>
-                                    </ul>
-                                    @if ($tenant->suspension_date !== null)
-                                        <div class="alert alert-danger alert-dismissible">
-                                            <h5><i class="icon fas fa-ban"></i> {{ __('Alert') }}!</h5>
-                                            {{ __('Tenant suspended in') }}
-                                            {{ date('d/m/Y', strtotime($tenant->suspension_date)) }}
-                                        </div>
-                                    @else
-                                        <div class="alert alert-success alert-dismissible">
-                                            <h5><i class="icon fas fa-check"></i> {{ __('Alert') }}!</h5>
-                                            {{ __('Tenant active') }}
-                                        </div>
-                                    @endif
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header p-2">
-                                    <ul class="nav nav-pills">
-                                        <li class="nav-item"><a class="nav-link active" href="#information" data-toggle="tab">{{ __('Informations') }}</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#responsible" data-toggle="tab">{{ __('Responsible') }}</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#documents" data-toggle="tab">{{ __('Documents') }}</a></li>
-                                    </ul>
-                                </div>
-                                <div class="card-body">
-                                    <div class="tab-content">
-                                        <div class="active tab-pane" id="information">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h4>
-                                                        <i class="fas fa-globe"></i> {{ __('Correspondence') }}
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <div class="row invoice-info">
-                                                <div class="col-sm-4 invoice-col">
-                                                    <strong>{{ __('Address') }}</strong><br>
-                                                    {{ $tenant->address }} {{ $tenant->house_number }}
-                                                    {{ $tenant->complement }} <br>
-                                                    {{ $tenant->neighborhood }} <br>
-                                                    {{ $tenant->city }} {{ $tenant->state }}
-                                                    {{ $tenant->zip_code }}<br>
-                                                    <b>{{ __('DCEU') }}</b> {{ $tenant->dceu }}
-                                                </div>
-                                                <div class="col-sm-4 invoice-col">
-                                                    <strong>{{ __('Phones') }}</strong><br>
-                                                    <i class="fas fa-phone-square-alt"></i> {{ $tenant->telephone }}<br>
-                                                    <i class="fas fa-mobile-alt"></i> {{ $tenant->cell_phone }}<br>
-                                                    <i class="fab fa-whatsapp-square"></i> {{ $tenant->whatsapp }}<br>
-                                                    <i class="fab fa-telegram"></i> {{ $tenant->telegram }}<br>
-                                                </div>
-                                                <div class="col-sm-4 invoice-col">
-                                                    <strong>{{ __('Social media') }}</strong><br>
-                                                    <i class="fab fa-facebook-square"></i> {{ $tenant->facebook }}<br>
-                                                    <i class="fab fa-instagram-square"></i> {{ $tenant->instagram }}<br>
-                                                    <i class="fab fa-twitter-square"></i> {{ $tenant->twitter }}<br>
-                                                    <i class="fab fa-linkedin"></i> {{ $tenant->linkedin }}<br>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <h4>
-                                                        <i class="far fa-file-alt mr-1"></i> {{ __('Note') }}
-                                                    </h4>
-                                                </div>
-                                            </div>
-                                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                                                {{ $tenant->note }}
-                                            </p>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-edit"></i>
+                                                {{ __('Correspondence') }}
+                                            </h3>
                                         </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <div class="card-body">
+                                                <div class="col-md-12">
+                                                    <div class="row invoice-info">
+                                                        <div class="col-sm-4 invoice-col">
+                                                            <strong>{{ __('Address') }}</strong><br>
+                                                            {{ $tenant->address }} {{ $tenant->house_number }} {{ $tenant->complement }} <br>
+                                                            {{ $tenant->neighborhood }} <br>
+                                                            {{ $tenant->city }} {{ $tenant->state }}
+                                                            {{ $tenant->zip_code }}<br>
+                                                            <b>{{ __('DCEU') }}</b> {{ $tenant->dceu }}
+                                                        </div>
+                                                        <div class="col-sm-3 invoice-col">
+                                                            <strong>{{ __('Phones') }}</strong><br>
+                                                            <i class="fas fa-phone-square-alt"></i> {{ $tenant->telephone }}<br>
+                                                            <i class="fas fa-mobile-alt"></i> {{ $tenant->cell_phone }}<br>
+                                                            <i class="fab fa-whatsapp-square"></i> {{ $tenant->whatsapp }}<br>
+                                                            <i class="fab fa-telegram"></i> {{ $tenant->telegram }}<br>
+                                                        </div>
+                                                        <div class="col-sm-4 invoice-col">
+                                                            <strong>{{ __('Social media') }}</strong><br>
+                                                            <i class="fab fa-facebook-square"></i> {{ $tenant->facebook }}<br>
+                                                            <i class="fab fa-instagram-square"></i> {{ $tenant->instagram }}<br>
+                                                            <i class="fab fa-twitter-square"></i> {{ $tenant->twitter }}<br>
+                                                            <i class="fab fa-linkedin"></i> {{ $tenant->linkedin }}<br>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 invoice-col">
+                                                            <b>{{ __('Website') }}:</b> {{ $tenant->website }}
+                                                        </div>
+                                                        <div class="col-sm-4 invoice-col">
+                                                            <b>{{ __('Email') }}:</b> {{ $tenant->email }}
+                                                        </div>
 
-                                        <div class="tab-pane" id="responsible">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-edit"></i>
+                                                {{ __('Responsible') }}
+                                            </h3>
+                                        </div>
+                                        <div class="card-body pad table-responsive">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="card card-widget widget-user shadow">
@@ -162,7 +177,7 @@
                                                     <div class="card card-widget widget-user shadow">
                                                         <div class="widget-user-header bg-success">
                                                             @if ($professional !== null)
-                                                                <h3 class="widget-user-username">{{ $professional->patent->name}} {{ $professional->name }}</h3>
+                                                                <h3 class="widget-user-username">{{ $professional->patent->name }} {{ $professional->name }}</h3>
                                                             @else
                                                                 <h3 class="widget-user-username">{{ __('Undefined') }}</h3>
                                                             @endif
@@ -221,88 +236,70 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="tab-pane" id="documents">
-                                            <div class="row">
-                                                <div class="col-12 col-md-12 col-lg-12 order-1 order-md-2">
-                                                    <ul class="list-unstyled">
-                                                        @foreach ($tenant->tenantDocuments as $tenantDocument)
-                                                            <li>
-                                                                <a href="" class="btn-link text-secondary">
-                                                                    @switch ($tenantDocument->document_type)
-                                                                        @case ('PDF')
-                                                                            <i class="fas fa-fw fa-file-pdf"></i>
-                                                                        @break
-
-                                                                        @case ('DOC')
-                                                                            <i class="fas fa-fw fa-file-word"></i>
-                                                                        @break
-
-                                                                        @case ('DOCX')
-                                                                            <i class="fas fa-fw fa-file-word"></i>
-                                                                        @break
-
-                                                                        @case ('XLSX')
-                                                                            <i class="fas fa-fw fa-file-excel"></i>
-                                                                        @break
-
-                                                                        @case ('XLS')
-                                                                            <i class="fas fa-fw fa-file-excel"></i>
-                                                                        @break
-
-                                                                        @case ('PPT')
-                                                                            <i class="fas fa-fw fa-file-powerpoint"></i>
-                                                                        @break
-
-                                                                        @case ('BMP')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('PNG')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('GIF')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('JPG')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('JPEG')
-                                                                            <i class="fas fa-fw fa-file-image"></i>
-                                                                        @break
-
-                                                                        @case ('ZIP')
-                                                                            <i class="fas fa-fw fa-file-archive"></i>
-                                                                        @break
-
-                                                                        @case ('WAV')
-                                                                            <i class="fas fa-fw fa-file-audio"></i>
-                                                                        @break
-
-                                                                        @case ('MP3')
-                                                                            <i class="fas fa-fw fa-file-audio"></i>
-                                                                        @break
-
-                                                                        @case ('MOV')
-                                                                            <i class="fas fa-fw fa-file-video"></i>
-                                                                        @break
-
-                                                                        @case ('AVI')
-                                                                            <i class="fas fa-fw fa-file-video"></i>
-                                                                        @break
-                                                                    @endswitch
-                                                                    {{ $tenantDocument->description }}</a>
-                                                            </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-primary card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-edit"></i>
+                                                {{ __('Documents') }}
+                                            </h3>
+                                        </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <div class="card-body">
+                                                <table id="datatable" class="table table-striped dt-responsive nowrap" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center">#</th>
+                                                            <th class="text-left">{{ __('Description') }}</th>
+                                                            <th class="text-left">{{ __('File Name') }}</th>
+                                                            <th class="text-center">{{ __('Action') }}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($tenantDocuments as $tenantDocument)
+                                                            <tr>
+                                                                <td class="text-right">{{ $tenantDocument->id }}</td>
+                                                                <td class="text-left">{{ $tenantDocument->description }}</td>
+                                                                <td class="text-left"><i class="{{ @strtolower($tenantDocument->document_type) }}"></i> {{ $tenantDocument->document }}</td>
+                                                                <td class="text-right">
+                                                                    <a href="{{ route('professionals.show', $tenantDocument->id) }}" class="btn btn-sm btn-primary "><i class="far fa-eye"></i>
+                                                                        {{ __('View') }}</a>
+                                                                    <form action="{{ route('professionals.destroy', [$tenantDocument->id]) }}" class="d-inline formDelete" method="POST">
+                                                                        @method ('DELETE')
+                                                                        @csrf
+                                                                        <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>
+                                                                            {{ __('Delete') }}</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
                                                         @endforeach
-                                                    </ul>
-                                                </div>
+                                                    </tbody>
+                                                </table>
                                             </div>
-                                            <hr>
-                                            <div class="callout callout-info">
-                                                <h5><i class="icon fas fa-info"></i> {{ __('Information') }}!</h5>
-                                                <p>{{ __('Click on the document to view it, for a new document contact the administrator') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card card-danger card-outline">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                <i class="fas fa-edit"></i>
+                                                {{ __('Note') }}
+                                            </h3>
+                                        </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <div class="card-body">
+                                                <div class="col-md-12">
+                                                    <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                                                        {{ $tenant->note }}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -320,4 +317,12 @@
             </div>
         </div>
     </section>
+@endsection;
+@section('java-complement')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+<script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
 @endsection;

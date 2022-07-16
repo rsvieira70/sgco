@@ -1,7 +1,9 @@
 @extends('_Partials.index')
 @section('head-complement')
     <!-- dataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
 @endsection
 @section('content')
     <div class="card">
@@ -10,7 +12,7 @@
                 {{ __('New specialty') }}</a>
         </div>
         <div class="card-body">
-            <table id="datatable" class="table table-bordered table-striped">
+            <table id="datatable" class="table table-striped dt-responsive nowrap" style="width:100%">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('Code') }}</th>
@@ -41,7 +43,7 @@
                                         class="d-inline formSuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-warning"><i class="fas fa-lock"></i>
+                                        <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-lock"></i>
                                             {{ __('Suspend') }}</button>
                                     </form>
                                 @else
@@ -49,17 +51,17 @@
                                         class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-xs btn-success"><i
+                                        <button type="submit" class="btn btn-sm btn-success"><i
                                                 class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                 @endif
-                                <a href="{{ route('specialties.edit', [$specialty->id]) }}" class="btn btn-xs btn-info "><i
+                                <a href="{{ route('specialties.edit', [$specialty->id]) }}" class="btn btn-sm btn-info "><i
                                         class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
                                 <form action="{{ route('specialties.destroy', [$specialty->id]) }}"
                                     class="d-inline formDelete" method="POST">
                                     @method ('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-xs btn-danger"><i class="fas fa-trash"></i>
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>
                                         {{ __('Delete') }}</button>
                                 </form>
                             </td>
@@ -71,7 +73,10 @@
     </div>
 @endsection;
 @section('java-complement')
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+<script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
 @endsection

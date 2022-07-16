@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Class\Useful;
+use App\Class\ImageExtension;
 use App\Http\Requests\TenantRequest;
 use App\Models\Professional;
 use App\Models\Tenant;
+use App\Models\TenantDocument;
 use App\Models\User;
 use App\Notifications\SystemErrorAlert;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +55,7 @@ class TenantController extends Controller
 
     public function show($id)
     {
-        $tenant = Tenant::with(['tenantDocuments'])->find($id);
+        $tenant = Tenant::find($id);
         if ($tenant) {
             $tenant->employer_identification_number = Useful::class::ssn($tenant->employer_identification_number);
             $tenant->zip_code = Useful::class::zip_code($tenant->zip_code);
@@ -61,11 +63,15 @@ class TenantController extends Controller
             $tenant->cell_phone = Useful::class::phone($tenant->cell_phone);
             $tenant->whatsapp = Useful::class::phone($tenant->whatsapp);
             $tenant->telegram = Useful::class::phone($tenant->telegram);
+            $tenantDocuments =  TenantDocument::whereIn('tenant_id', [$id])->get();
+            foreach ($tenantDocuments as $tenantDocument){
+                $tenantDocument->document_type = ImageExtension::class::imageextesion($tenantDocument->document_type);
+            }
             $title =  __('Tenant show');
             $userAuth = Auth()->User();
             $administrative = User::whereIn('administrative_responsible', ['true'])->with(['Department', 'Position'])->get()->first();
             $professional = Professional::whereIn('responsible_dentist', ['true'])->with(['Patent','Specialty','Council', 'State'])->get()->first();
-            return view('tenants.show', compact('title', 'userAuth', 'administrative', 'professional', 'tenant'));
+            return view('tenants.show', compact('title', 'userAuth', 'administrative', 'professional', 'tenant', 'tenantDocuments'));
         }
         return redirect()->route('tenants.index');
     }
