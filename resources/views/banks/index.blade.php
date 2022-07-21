@@ -1,7 +1,7 @@
 @extends('_Partials.index')
 @section('head-complement')
     <!-- dataTables -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
 @endsection
@@ -40,31 +40,24 @@
                                     <span class="badge badge-success"><i class="fas fa-check"></i>
                                         {{ __('Active') }}</span>
                                 </td>
-                               
-
                             @endif
                             <td class="text-right">
                                 @if ($bank->suspended == null)
-                                    <form action="{{ route('banks.suspend', [$bank->id]) }}"
-                                        class="d-inline formSuspend" method="POST">
+                                    <form action="{{ route('banks.suspend', [$bank->id]) }}" class="d-inline formSuspend" method="POST">
                                         @method ('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-warning btn-sm"><i class="fas fa-lock"></i>
                                             {{ __('Suspend') }}</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('banks.suspend', [$bank->id]) }}"
-                                        class="d-inline formReactivate" method="POST">
+                                    <form action="{{ route('banks.suspend', [$bank->id]) }}" class="d-inline formReactivate" method="POST">
                                         @method ('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-success"><i
-                                                class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
+                                        <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-lock-open"></i> {{ __('Reactivate') }}</button>
                                     </form>
                                 @endif
-                                <a href="{{ route('banks.edit', [$bank->id]) }}" class="btn btn-sm btn-info "><i
-                                        class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
-                                <form action="{{ route('banks.destroy', [$bank->id]) }}"
-                                    class="d-inline formDelete" method="POST">
+                                <a href="{{ route('banks.edit', [$bank->id]) }}" class="btn btn-sm btn-info "><i class="fas fa-pencil-alt"></i> {{ __('Edit') }}</a>
+                                <form action="{{ route('banks.destroy', [$bank->id]) }}" class="d-inline formDelete" method="POST">
                                     @method ('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i>

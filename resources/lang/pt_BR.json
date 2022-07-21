@@ -932,6 +932,7 @@
     "User Image": "Imagem do Usuário",
     "Choose a file only if you want to include or change your profile picture": "Escolha um arquivo apenas se quiser incluir ou alterar sua foto de perfil",
     "Choose a file only if you want to include or change photo": "Escolha um arquivo apenas se quiser incluir ou alterar a foto",
+    "New document": "Novo documento",
     "New tenant": "Nova Filial",
     "Social reason": "Razão social",
     "Fancy name": "Nome fantasia",
@@ -942,6 +943,7 @@
     "Opening date": "Data de abertura",
     "New tenant registration": "Cadastro de nova filial",
     "List of tenants": "Lista das filiais",
+    "List of tenant documents": "Lista de documentos da filial",
     "Tenant update" : "Alteração da filial",
     "Tenant show": "Exibição da filial",
     "Login successfully!": "Login efetuado com sucesso!", 
@@ -958,7 +960,7 @@
     "document": "documento",
     "Documents": "Documentos",
     "documents": "documentos",
-    "Manage documents": "Gerenciar documentos",
+    "New document registration": "Cadastro de novo documento",
     "Information": "Informação",
     "Click on the document to view it, for a new document contact the administrator": "Clique no documento para visualizá-lo, para um novo documento entre em contato com o administrador",
     "Pays commission to the professional for this bank slip type": "Paga comissão ao profissional para esse tipo de duplicata",
@@ -998,8 +1000,9 @@
     "Council": "Conselho",
     "Council number": "Número do conselho",
     "Council state": "Estado do conselho",
-    "Random": "Aleatória"
-
+    "Random": "Aleatória",
+    "Description": "Descrição",
+    "File name": "Nome do arquivo"
 
 
 

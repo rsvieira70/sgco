@@ -1,7 +1,7 @@
 @extends('_Partials.index')
 @section('head-complement')
     <!-- dataTables -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap5.min.css">
 @endsection
@@ -65,13 +65,13 @@
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-warning"> <i class="fas fa-user-lock"></i> {{ __('Suspend') }}</button>
                                     </form>
-                                    @else
-                                        <a href="{{ route('professionals.show', $professional->id) }}" class="btn btn-sm btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
-                                        <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formReactivate" method="POST">
-                                            @method ('PATCH')
-                                            @csrf
-                                            <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
-                                        </form>
+                                @else
+                                    <a href="{{ route('professionals.show', $professional->id) }}" class="btn btn-sm btn-primary "><i class="far fa-eye"></i>{{ __('View') }}</a>
+                                    <form action="{{ route('professionals.suspend', $professional->id) }}" class="d-inline formReactivate" method="POST">
+                                        @method ('PATCH')
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success"><i class="fas fa-user-check"></i> {{ __('Reactivate') }}</button>
+                                    </form>
                                 @endif
                             </td>
                         </tr>
@@ -82,10 +82,10 @@
     </div>
 @endsection;
 @section('java-complement')
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
-<script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap5.min.js"></script>
+    <script src="{{ asset('jquery/jquery.datatable/jquery.simple.datatable.js') }}"></script>
 @endsection;
